@@ -110,6 +110,17 @@ kbd{background:var(--paper);border:1px solid var(--line);border-radius:4px;paddi
 .pop .row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .pop .x{float:right;border:0;background:none;font-size:18px;padding:0 4px;line-height:1}
 
+.topbar .inst{background:#2e7d4f}
+.instcard{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#e5f3ea;border:1px solid #b9dcc5;border-radius:14px;padding:14px 16px;margin-bottom:16px}
+.offst{margin-top:6px;color:var(--ok);font-weight:600}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px}
+.mbox{background:#fff;border-radius:14px;max-width:440px;width:100%;padding:20px;position:relative;max-height:90vh;overflow:auto}
+.mbox h3{margin:0 0 10px}
+.mbox .mx{position:absolute;right:10px;top:8px;border:0;background:none;font-size:24px;cursor:pointer;color:#666}
+.mbox a.btn{text-decoration:none;display:inline-block}
+.ishare{display:inline-block;border:1px solid #888;border-radius:4px;padding:0 5px;font-size:13px}
+@media(max-width:420px){.topbar .devsw{padding:7px 8px;font-size:12px}.topbar .back{padding:7px 9px}}
+
 </style>
 </head>
 <body>
@@ -185,9 +196,9 @@ function route(){
   modulePage(mod);
 }
 function topbar(title,sub,back){
-  return `<div class="topbar">${back?`<button class="back" onclick="go('${back}')">← Назад</button>`:''}<div class="ttl">${title}<small>${sub||''}</small></div><button class="devsw" id="devsw" title="Смени вида на инструкциите">${device==='phone'?'Телефон':'Компютър'}</button></div>`;
+  return `<div class="topbar">${back!=null?`<button class="back" onclick="go('${back}')">← Назад</button>`:''}<div class="ttl">${title}<small>${sub||''}</small></div>${back==null&&showInstall()?'<button class="devsw inst" id="instbtn" title="Инсталиране на приложението">⬇ Инсталирай</button>':''}<button class="devsw" id="devsw" title="Смени вида на инструкциите">${device==='phone'?'Телефон':'Компютър'}</button></div>`;
 }
-function wireDev(){const b=$('#devsw');if(b)b.onclick=()=>{setDevice(device==='phone'?'pc':'phone')}}
+function wireDev(){const b=$('#devsw');if(b)b.onclick=()=>{setDevice(device==='phone'?'pc':'phone')};const i=$('#instbtn');if(i)i.onclick=install;$$('.instbig').forEach(x=>x.onclick=install)}
 function setDevice(d){device=d;store.set('device',d);if(current&&current.redrawSteps){current.redrawSteps();const b=$('#devsw');if(b)b.textContent=device==='phone'?'Телефон':'Компютър'}else route()}
 function modDone(m){return m.lessons.filter(l=>progress[l.id]).length}
 
@@ -198,12 +209,13 @@ function home(){
   root.innerHTML=topbar('Офис програми','Административни и офис дейности')+`<main>
     <div class="hero"><h1>Научете офис програмите стъпка по стъпка</h1>
     <p>Всеки урок има кратко обяснение, указания за телефон и компютър и упражнение, което се проверява веднага.</p></div>
+    ${showInstall()?`<div class="instcard"><div><b>Инсталирайте приложението</b><div class="small">Ще се появи като икона на телефона или компютъра и ще работи и без интернет.</div></div><button class="btn primary instbig">⬇ Инсталирай</button></div>`:''}
     <div class="mods">${MODS.map(m=>`<button class="modcard" onclick="go('${m.id}')">
       <div class="row"><div class="applogo" style="background:${m.color}">${m.letter}</div><div><h2>${m.name}</h2><div class="sub">${m.sub}</div></div></div>
       <div class="bar"><i style="width:${Math.round(modDone(m)/m.lessons.length*100)}%"></i></div>
       <div class="small">${modDone(m)} от ${m.lessons.length} урока</div></button>`).join('')}</div>
     <div class="note">Общо изпълнени: <b>${done} от ${total}</b> упражнения. Напредъкът се пази на това устройство.
-    Приложението работи и без интернет, след като веднъж е отворено. В Chrome изберете „Инсталиране“ или „Добавяне към началния екран“.
+    <div id="offst" class="offst">${offlineText()}</div>
     <div class="actions"><button class="btn ghost" id="resetall">Изчисти напредъка</button></div></div>
   </main>`;
   wireDev();
@@ -265,6 +277,49 @@ function lesson(m,i){
   };
   scrollTo(0,0);
 }
+
+/* ===== Инсталиране и работа без интернет ===== */
+let installEvt=null,offReady=false;
+const UA=navigator.userAgent;
+const isIOS=/iPhone|iPad|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isAndroid=/Android/i.test(UA);
+const inAppBrowser=/FBAN|FBAV|FB_IAB|Instagram|Viber|Line\/|MicroMessenger|Telegram|; wv\)/i.test(UA);
+const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let inFrame=false;try{inFrame=window.top!==window.self}catch(e){inFrame=true}
+const canSW=()=>'serviceWorker' in navigator&&window.isSecureContext&&!inFrame&&location.protocol!=='file:';
+function showInstall(){return !isStandalone()}
+function offlineText(){
+  if(isStandalone()&&offReady)return '✓ Инсталирано и готово за работа без интернет.';
+  if(offReady)return '✓ Готово за работа без интернет на това устройство.';
+  if(!canSW())return 'Работата без интернет и инсталирането са достъпни, когато приложението е отворено от адреса му в интернет (GitHub).';
+  return 'Подготовка за работа без интернет…';
+}
+function refreshOff(){const o=$('#offst');if(o)o.textContent=offlineText()}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e});
+window.addEventListener('appinstalled',()=>{installEvt=null;toast('Приложението е инсталирано. Ще го намерите като икона „Офис програми“.',4000);route()});
+function modal(html){
+  const m=el(`<div class="modal"><div class="mbox"><button class="mx" aria-label="Затвори">×</button>${html}</div></div>`);
+  document.body.appendChild(m);m.onclick=e=>{if(e.target===m||e.target.classList.contains('mx')||e.target.closest('[data-close]'))m.remove()};return m;
+}
+function chromeIntent(){return `intent://${location.host}${location.pathname}${location.hash}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${encodeURIComponent(location.href)};end`}
+async function install(){
+  if(installEvt){const e=installEvt;installEvt=null;try{await e.prompt();const r=await e.userChoice;if(r&&r.outcome==='accepted'){toast('Инсталира се…');return}}catch(err){}return}
+  if(!canSW()){modal(`<h3>Инсталиране</h3><p>От този преглед приложението не може да се инсталира. Отворете го от адреса му в GitHub (напр. <i>https://…github.io/…</i>) в Chrome или Safari и натиснете <b>Инсталирай</b> там.</p><div class="actions"><button class="btn primary" data-close>Разбрах</button></div>`);return}
+  if(isAndroid&&inAppBrowser){modal(`<h3>Отворете в Chrome</h3><p>Този вграден браузър (Viber, Facebook и др.) не може да инсталира приложения. Отворете страницата в <b>Chrome</b> и натиснете пак <b>Инсталирай</b>.</p><div class="actions"><a class="btn primary" href="${chromeIntent()}">Отвори в Chrome</a><button class="btn ghost" data-close>Затвори</button></div><p class="small">Ако бутонът не работи: менюто ⋮ горе вдясно → „Отваряне в браузър“.</p>`);return}
+  if(isIOS){const safari=/Safari/.test(UA)&&!/CriOS|FxiOS|EdgiOS/.test(UA)&&!inAppBrowser;
+    modal(`<h3>Инсталиране на iPhone / iPad</h3>${safari?'':'<p><b>Първо отворете страницата в Safari</b> (копирайте адреса и го поставете в Safari).</p>'}<ol class="steps" style="font-size:15px"><li>Натиснете бутона <b>Сподели</b> <span class="ishare">⬆</span> (долу в средата или горе вдясно).</li><li>Превъртете и изберете <b>„Добави към начален екран“</b>.</li><li>Натиснете <b>„Добави“</b>. Иконата „Офис програми“ ще се появи на началния екран.</li></ol><div class="actions"><button class="btn primary" data-close>Разбрах</button></div>`);return}
+  modal(`<h3>Инсталиране</h3><ol class="steps" style="font-size:15px">${isAndroid?'<li>Отворете менюто <b>⋮</b> горе вдясно в Chrome.</li><li>Изберете <b>„Инсталиране на приложението“</b> или <b>„Добавяне към началния екран“</b>.</li><li>Потвърдете с <b>„Инсталиране“</b>.</li>':'<li>В Chrome или Edge натиснете иконата за инсталиране <b>⊕</b> в края на адресната лента<br>или менюто <b>⋮</b> → <b>„Предаване, запазване и споделяне“</b> → <b>„Инсталиране на страницата като приложение“</b>.</li><li>Потвърдете с <b>„Инсталиране“</b>.</li>'}</ol><p class="small">Ако не виждате тази възможност, презаредете страницата и изчакайте няколко секунди.</p><div class="actions"><button class="btn primary" data-close>Разбрах</button></div>`);
+}
+// Вграден браузър на Android → предлагаме Chrome веднъж
+if(isAndroid&&inAppBrowser&&canSW()&&!store.get('chromeAsked',false)){store.set('chromeAsked',true);setTimeout(()=>modal(`<h3>По-добре в Chrome</h3><p>Отворихте приложението във вграден браузър. В <b>Chrome</b> то може да се инсталира и да работи без интернет.</p><div class="actions"><a class="btn primary" href="${chromeIntent()}">Отвори в Chrome</a><button class="btn ghost" data-close>Остани тук</button></div>`),400)}
+function registerSW(){
+  if(!canSW())return;
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)toast('Има нова версия – презаредете страницата.',4000)})});
+    return navigator.serviceWorker.ready;
+  }).then(()=>caches.keys()).then(k=>{offReady=k.some(x=>x.startsWith('aod-soft-'));refreshOff()}).catch(()=>{});
+}
+window.addEventListener('online',refreshOff);window.addEventListener('offline',()=>toast('Няма интернет – приложението продължава да работи.'));
 
 /* ===== Модул: Windows и File Explorer ===== */
 const WIN_CSS=`
@@ -1519,7 +1574,7 @@ addModule({id:'ppt',name:'PowerPoint',sub:'Презентации',letter:'P',co
  ]});
 
 route();
-if('serviceWorker' in navigator&&location.protocol==='https:'){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+registerSW();
 </script>
 </body>
 </html>
