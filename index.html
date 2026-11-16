@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1f2a35">
+<meta name="description" content="Уроци и упражнения по Windows, File Explorer, Word, Excel и PowerPoint – курс „Административни и офис дейности“">
+<title>Офис програми – упражнения</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f3efe6;--ink:#1f2a35;--blue:#2b6a8a;--orange:#b5501f;--ok:#2e7d4f;--line:#d9d2c3;--muted:#6b6457;--mc:#2b6a8a}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font-family:inherit}
+h1,h2,h3{font-family:Montserrat,Inter,system-ui,sans-serif}
+.topbar{background:var(--ink);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50}
+.topbar .back{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:8px;padding:8px 12px;font-weight:600;cursor:pointer;font-size:14px}
+.topbar .ttl{font:700 16px Montserrat,sans-serif;line-height:1.2;flex:1;min-width:0}
+.topbar .ttl small{display:block;font:400 12px Inter,sans-serif;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .devsw{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:8px;padding:8px 10px;font-size:13px;cursor:pointer;white-space:nowrap}
+main{max-width:1200px;margin:0 auto;padding:16px}
+.applogo{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;color:#fff;font:700 22px Montserrat,sans-serif;flex:0 0 auto}
+/* начало */
+.hero{padding:8px 0 16px}
+.hero h1{font-size:24px;margin:0 0 6px}
+.hero p{margin:0;color:var(--muted)}
+.mods{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.modcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left;color:inherit;transition:transform .1s}
+.modcard:hover{transform:translateY(-2px)}
+.modcard .row{display:flex;gap:12px;align-items:center}
+.modcard h2{margin:0;font-size:18px}
+.modcard .sub{color:var(--muted);font-size:14px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok)}
+.small{font-size:13px;color:var(--muted)}
+.note{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:14px;color:var(--muted)}
+/* модул */
+.lessons{display:grid;gap:10px}
+.lrow{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;width:100%;color:inherit;font-size:15px}
+.lrow .n{width:32px;height:32px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-weight:700;flex:0 0 auto}
+.lrow.done .n{background:var(--ok);color:#fff}
+.lrow .t{flex:1}
+.lrow .t b{display:block}
+.lrow .t span{font-size:12px;color:var(--muted)}
+/* урок */
+.crumb{font-size:13px;color:var(--muted);margin-bottom:4px}
+.crumb a{color:var(--blue);text-decoration:none}
+.lhead h1{font-size:22px;margin:0 0 4px}
+.plan{display:inline-block;font-size:12px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 10px;color:var(--muted);margin-bottom:12px}
+.layout{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.layout>*{min-width:0}
+@media(min-width:980px){.layout{grid-template-columns:360px minmax(0,1fr);align-items:start}.taskcol{position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto}}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.theory summary{font:700 15px Montserrat,sans-serif;cursor:pointer;color:var(--blue)}
+.theory ul{padding-left:20px;margin:8px 0 0}
+.theory li{margin:4px 0}
+.goal{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.goal .k{font:700 12px Montserrat,sans-serif;color:var(--orange);text-transform:uppercase;letter-spacing:.05em}
+.goal p{margin:4px 0 0}
+.goal ul{margin:6px 0 0;padding-left:20px}
+.howto{margin-top:12px}
+.howto h4{margin:0 0 6px;font-size:14px}
+.dev{display:flex;background:var(--paper);border-radius:8px;padding:3px;margin-bottom:8px}
+.dev button{flex:1;border:0;background:none;padding:7px;border-radius:6px;font-weight:600;font-size:13px;color:var(--ink);cursor:pointer}
+.dev button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+ol.steps{margin:0;padding-left:20px;font-size:14px}
+ol.steps li{margin:3px 0}
+kbd{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:0 5px;font:600 12px Inter,sans-serif;white-space:nowrap}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{border:0;border-radius:8px;padding:11px 16px;font-weight:600;font-size:15px;cursor:pointer}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.ghost{background:var(--paper);color:var(--ink)}
+.btn.next{background:var(--ok);color:#fff}
+.feedback{margin-top:12px;padding:12px 14px;border-radius:8px;display:none;font-size:15px}
+.feedback.ok{display:block;background:#e5f3ea;color:#1d5a37}
+.feedback.bad{display:block;background:#fbeee6;color:#7a3412}
+.feedback ul{margin:4px 0 0;padding-left:20px}
+.jump{display:none;text-decoration:none}
+@media(max-width:979px){.jump{display:inline-block}}
+.simlabel{font-size:13px;color:var(--muted);margin:0 0 6px}
+.lnav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.on{opacity:1}
+
+/* ---------- общи за симулаторите ---------- */
+.app{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative}
+.rtabs{display:flex;gap:2px;padding:6px 8px 0;color:#fff;overflow-x:auto;scrollbar-width:none}
+.rtabs button{background:none;border:0;color:#fff;opacity:.75;padding:6px 10px 8px;font-size:14px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+.rtabs button.on{opacity:1;font-weight:600;border-bottom-color:#fff}
+.rtabs .fname{margin-left:auto;opacity:.8;font-size:13px;padding:6px 8px;white-space:nowrap}
+.tbar{display:flex;gap:3px;padding:6px;background:#f6f6f6;border-bottom:1px solid #ddd;overflow-x:auto;align-items:center;min-height:56px}
+.tbar button{flex:0 0 auto;min-width:40px;height:42px;border:1px solid transparent;background:none;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;color:#222;padding:0 8px;font-size:13px}
+.tbar button:hover{background:#e6e6e6}
+.tbar button.on{background:#dfe7f3;border-color:#b6c7e2}
+.tbar .sep{width:1px;background:#ccc;align-self:stretch;margin:6px 3px;flex:0 0 1px}
+.tbar svg{width:20px;height:20px;flex:0 0 auto}
+.tbar .t{font:700 18px Georgia,serif}
+.pop{position:absolute;z-index:30;background:#fff;border:1px solid #bbb;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.2);padding:10px;font-size:14px;max-width:calc(100% - 16px)}
+.pop h5{margin:0 0 8px;font-size:14px}
+.pop .grid{display:grid;gap:4px}
+.pop button{border:1px solid #ccc;background:#fafafa;border-radius:6px;padding:7px 10px;cursor:pointer;font-size:14px}
+.pop button:hover{background:#eef3fb}
+.pop input,.pop select,.pop textarea{font:inherit;padding:6px 8px;border:1px solid #bbb;border-radius:6px;width:100%}
+.pop label{display:block;margin:6px 0 2px;font-size:13px;color:#444}
+.pop .row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.pop .x{float:right;border:0;background:none;font-size:18px;padding:0 4px;line-height:1}
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+/* ===== Ядро: навигация, прогрес, уроци ===== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+function el(html){const t=document.createElement('template');t.innerHTML=html.trim();return t.content.firstElementChild}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={
+  get(k,d){try{const v=localStorage.getItem('aodsoft:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('aodsoft:'+k,JSON.stringify(v))}catch(e){}}
+};
+const MODS=[];
+function addModule(m){MODS.push(m)}
+let progress=store.get('progress',{});
+let device=store.get('device',null)||((matchMedia('(pointer:coarse)').matches||innerWidth<700)?'phone':'pc');
+let current=null; // {mod, idx, api}
+
+function toast(msg,ms=2200){let t=$('.toast');if(!t){t=el('<div class="toast"></div>');document.body.appendChild(t)}t.textContent=msg;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),ms)}
+
+// Затваря изскачащи прозорци при щракване другаде
+document.addEventListener('pointerdown',e=>{$$('.pop').forEach(p=>{if(!p.contains(e.target)&&!(p._owner&&p._owner.contains(e.target)))p.remove()})},true);
+// Показва изскачащ прозорец под бутон, вътре в контейнер
+function popup(owner,container,html){
+  $$('.pop',container).forEach(p=>p.remove());
+  const p=el(`<div class="pop">${html}</div>`);p._owner=owner;container.appendChild(p);
+  const cr=container.getBoundingClientRect(),br=owner.getBoundingClientRect();
+  let left=br.left-cr.left;const top=br.bottom-cr.top+4;
+  p.style.top=top+'px';p.style.left='8px';
+  const w=p.offsetWidth;left=Math.max(8,Math.min(left,cr.width-w-8));p.style.left=left+'px';
+  p.querySelectorAll('button').forEach(b=>{b.addEventListener('mousedown',e=>e.preventDefault())});
+  const x=p.querySelector('.x');if(x)x.onclick=()=>p.remove();
+  return p;
+}
+// Лента с раздели (като в Office). tabs: [{name, tools:[{id,html,title,run}]}]
+function ribbon(app,color,tabs,fname,startTab){
+  const head=el(`<div class="rtabs" style="background:${color}"></div>`);
+  const bar=el('<div class="tbar"></div>');
+  let cur=startTab!=null?startTab:tabs.findIndex(t=>t.tools.length);
+  tabs.forEach((t,i)=>{const b=el(`<button>${t.name}</button>`);b.onclick=()=>{cur=i;draw()};head.appendChild(b)});
+  if(fname)head.appendChild(el(`<span class="fname">${esc(fname)}</span>`));
+  function draw(){
+    $$('button',head).forEach((b,i)=>b.classList.toggle('on',i===cur));
+    bar.innerHTML='';
+    const tools=tabs[cur].tools;
+    if(!tools.length)bar.appendChild(el('<span class="small" style="padding:0 8px">В този раздел няма нужни инструменти за задачата.</span>'));
+    tools.forEach(t=>{
+      if(t==='|'){bar.appendChild(el('<span class="sep"></span>'));return}
+      const b=el(`<button title="${esc(t.title||'')}" data-tool="${t.id}">${t.html}</button>`);
+      b.addEventListener('pointerdown',e=>{if(!t.focusable)e.preventDefault()});
+      b.addEventListener('mousedown',e=>{if(!t.focusable)e.preventDefault()});
+      b.onclick=e=>t.run(b,e);
+      if(t.active)b._active=t.active;
+      bar.appendChild(b);
+    });
+    refresh();
+  }
+  function refresh(){$$('button',bar).forEach(b=>{if(b._active)b.classList.toggle('on',!!b._active())})}
+  app.appendChild(head);app.appendChild(bar);draw();
+  return {refresh,select(name){const i=tabs.findIndex(t=>t.name===name);if(i>=0){cur=i;draw()}}};
+}
+
+/* ---------- маршрути ---------- */
+function go(hash){if(location.hash==='#'+hash||(!hash&&!location.hash))route();else location.hash=hash}
+window.addEventListener('hashchange',route);
+function route(){
+  const h=location.hash.slice(1);
+  const m=h.match(/^([a-z]+)(?:-(\d+))?$/);
+  const mod=m&&MODS.find(x=>x.id===m[1]);
+  if(!mod)return home();
+  if(m[2]){const i=+m[2]-1;if(mod.lessons[i])return lesson(mod,i)}
+  modulePage(mod);
+}
+function topbar(title,sub,back){
+  return `<div class="topbar">${back?`<button class="back" onclick="go('${back}')">← Назад</button>`:''}<div class="ttl">${title}<small>${sub||''}</small></div><button class="devsw" id="devsw" title="Смени вида на инструкциите">${device==='phone'?'Телефон':'Компютър'}</button></div>`;
+}
+function wireDev(){const b=$('#devsw');if(b)b.onclick=()=>{setDevice(device==='phone'?'pc':'phone')}}
+function setDevice(d){device=d;store.set('device',d);if(current&&current.redrawSteps){current.redrawSteps();const b=$('#devsw');if(b)b.textContent=device==='phone'?'Телефон':'Компютър'}else route()}
+function modDone(m){return m.lessons.filter(l=>progress[l.id]).length}
+
+function home(){
+  current=null;
+  const root=$('#root');
+  const total=MODS.reduce((a,m)=>a+m.lessons.length,0),done=MODS.reduce((a,m)=>a+modDone(m),0);
+  root.innerHTML=topbar('Офис програми','Административни и офис дейности')+`<main>
+    <div class="hero"><h1>Научете офис програмите стъпка по стъпка</h1>
+    <p>Всеки урок има кратко обяснение, указания за телефон и компютър и упражнение, което се проверява веднага.</p></div>
+    <div class="mods">${MODS.map(m=>`<button class="modcard" onclick="go('${m.id}')">
+      <div class="row"><div class="applogo" style="background:${m.color}">${m.letter}</div><div><h2>${m.name}</h2><div class="sub">${m.sub}</div></div></div>
+      <div class="bar"><i style="width:${Math.round(modDone(m)/m.lessons.length*100)}%"></i></div>
+      <div class="small">${modDone(m)} от ${m.lessons.length} урока</div></button>`).join('')}</div>
+    <div class="note">Общо изпълнени: <b>${done} от ${total}</b> упражнения. Напредъкът се пази на това устройство.
+    Приложението работи и без интернет, след като веднъж е отворено. В Chrome изберете „Инсталиране“ или „Добавяне към началния екран“.
+    <div class="actions"><button class="btn ghost" id="resetall">Изчисти напредъка</button></div></div>
+  </main>`;
+  wireDev();
+  $('#resetall').onclick=e=>{if(e.target.dataset.sure){progress={};store.set('progress',progress);home()}else{e.target.dataset.sure=1;e.target.textContent='Натиснете пак за потвърждение'}};
+  scrollTo(0,0);
+}
+function modulePage(m){
+  current=null;
+  $('#root').innerHTML=topbar(m.name,m.sub,'')+`<main>
+   <div class="hero"><div style="display:flex;gap:12px;align-items:center"><div class="applogo" style="background:${m.color}">${m.letter}</div><div><h1 style="margin:0">${m.name}</h1><p>${m.intro}</p></div></div></div>
+   <div class="lessons">${m.lessons.map((l,i)=>`<button class="lrow ${progress[l.id]?'done':''}" onclick="go('${m.id}-${i+1}')"><span class="n">${progress[l.id]?'✓':i+1}</span><span class="t"><b>${l.title}</b><span>${l.plan}</span></span><span>›</span></button>`).join('')}</div>
+  </main>`;
+  wireDev();scrollTo(0,0);
+}
+function lesson(m,i){
+  const L=m.lessons[i];
+  $('#root').innerHTML=topbar(m.name,`Урок ${i+1} от ${m.lessons.length}: ${L.title}`,m.id)+`<main>
+   <div class="lhead"><div class="crumb"><a href="#">Начало</a> › <a href="#${m.id}">${m.name}</a> › Урок ${i+1}</div><h1>${L.title}</h1><span class="plan">По учебния план: ${L.plan}</span></div>
+   <div class="layout">
+    <div class="taskcol"><div class="card">
+      <details class="theory" ${device==='pc'?'open':''}><summary>Какво трябва да знаете</summary>${L.theory}</details>
+      <div class="goal"><div class="k">Задача</div>${L.goal}</div>
+      <div class="howto"><h4>Как става в истинската програма</h4>
+        <div class="dev"><button data-d="phone">На телефон</button><button data-d="pc">На компютър</button></div>
+        <ol class="steps" id="steps"></ol></div>
+      <div class="actions"><button class="btn primary" id="check">Провери</button><button class="btn ghost" id="reset">Отначало</button><a class="btn ghost jump" href="javascript:void(0)" id="jump">Към упражнението ↓</a></div>
+      <div class="feedback" id="fb"></div>
+    </div></div>
+    <div><p class="simlabel" id="simtop">Упражнение – работете тук:</p><div id="sim"></div>
+      <div class="lnav">${i>0?`<button class="btn ghost" onclick="go('${m.id}-${i}')">← Предишен</button>`:'<span></span>'}${i<m.lessons.length-1?`<button class="btn ghost" onclick="go('${m.id}-${i+2}')">Следващ →</button>`:`<button class="btn ghost" onclick="go('${m.id}')">Към уроците</button>`}</div>
+    </div>
+   </div></main>`;
+  wireDev();
+  const redrawSteps=()=>{
+    $$('.dev button').forEach(b=>b.classList.toggle('on',b.dataset.d===device));
+    const st=device==='phone'?(L.phone||m.phoneNote):L.pc;
+    $('#steps').innerHTML=(Array.isArray(st)?st:[st]).map(s=>`<li>${s}</li>`).join('');
+  };
+  $$('.dev button').forEach(b=>b.onclick=()=>setDevice(b.dataset.d));
+  const start=()=>{const host=$('#sim');host.innerHTML='';$('#fb').className='feedback';current.api=L.sim(host)||{}};
+  current={mod:m,idx:i,redrawSteps,api:null};
+  redrawSteps();start();
+  $('#reset').onclick=start;
+  $('#jump').onclick=()=>$('#simtop').scrollIntoView({behavior:'smooth'});
+  $('#check').onclick=()=>{
+    const fb=$('#fb');let errs;
+    try{errs=L.check(current.api)}catch(e){console.error(e);errs=['Нещо не е наред с проверката. Опитайте „Отначало“.']}
+    if(!errs.length){
+      progress[L.id]=true;store.set('progress',progress);
+      fb.className='feedback ok';
+      const last=i===m.lessons.length-1;
+      fb.innerHTML=`<b>${['Точно така!','Браво!','Отлично!','Чудесно!'][i%4]}</b> Задачата е изпълнена.${L.after?`<div style="margin-top:6px">${L.after}</div>`:''}<div class="actions"><button class="btn next" id="nx">${last?'Към уроците':'Следващ урок →'}</button></div>`;
+      $('#nx').onclick=()=>go(last?m.id:`${m.id}-${i+2}`);
+    }else{
+      fb.className='feedback bad';
+      fb.innerHTML='<b>Още малко:</b><ul>'+errs.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+    }
+    if(innerWidth<980)fb.scrollIntoView({behavior:'smooth',block:'nearest'});
+  };
+  scrollTo(0,0);
+}
+
+/* ===== Модул: Windows и File Explorer ===== */
+const WIN_CSS=`
+.desk{position:relative;height:560px;background:linear-gradient(135deg,#1d4e89,#3a7bd5 55%,#7fb2e5);border-radius:12px;overflow:hidden;user-select:none;-webkit-user-select:none;font-size:14px}
+@media(max-width:600px){.desk{height:600px}}
+.dicons{position:absolute;left:8px;top:8px;display:grid;gap:6px}
+.dicon{width:76px;text-align:center;color:#fff;font-size:12px;padding:4px;border-radius:6px;cursor:pointer;text-shadow:0 1px 2px #000;background:none;border:0}
+.dicon:hover{background:rgba(255,255,255,.18)}
+.dicon svg{width:40px;height:40px;display:block;margin:0 auto 2px}
+.taskbar{position:absolute;left:0;right:0;bottom:0;height:48px;background:rgba(243,243,243,.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;gap:4px;border-top:1px solid #ccc}
+.taskbar .tb{width:42px;height:40px;border:0;background:none;border-radius:6px;cursor:pointer;display:grid;place-items:center;position:relative}
+.taskbar .tb:hover{background:rgba(0,0,0,.07)}
+.taskbar .tb svg{width:26px;height:26px}
+.taskbar .tb.run:after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:6px;height:3px;border-radius:2px;background:#888}
+.taskbar .tb.act:after{width:16px;background:#0067c0}
+.taskbar .clock{position:absolute;right:10px;font-size:11px;text-align:right;line-height:1.3;color:#222}
+.startm{position:absolute;bottom:56px;left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 16px));background:rgba(248,248,248,.97);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.35);padding:16px;z-index:40}
+.startm input{width:100%;padding:9px 12px;border-radius:20px;border:1px solid #ccc;font:inherit;margin-bottom:12px}
+.startm h6{margin:4px 0 8px;font-size:13px}
+.startm .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.startm .apps button{border:0;background:none;border-radius:6px;padding:8px 2px;cursor:pointer;font-size:11px;color:#222}
+.startm .apps button:hover{background:rgba(0,0,0,.06)}
+.startm .apps svg{width:32px;height:32px;display:block;margin:0 auto 4px}
+.startm .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ddd;margin-top:12px;padding-top:10px;font-size:13px}
+.wwin{position:absolute;background:#fff;border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.4);display:flex;flex-direction:column;overflow:hidden;z-index:10}
+.wwin.max{left:0!important;top:0!important;right:0!important;bottom:48px!important;width:auto!important;height:auto!important;border-radius:0}
+.wwin.min{display:none}
+.wtitle{height:36px;display:flex;align-items:center;background:#f3f3f3;border-bottom:1px solid #e3e3e3;padding-left:10px;gap:8px;font-size:13px;flex:0 0 auto}
+.wtitle svg{width:18px;height:18px}
+.wtitle .nm{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wtitle .wb{width:46px;height:36px;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.wtitle .wb:hover{background:#e0e0e0}
+.wtitle .wb.cl:hover{background:#c42b1c;color:#fff}
+.wbody{flex:1;overflow:auto;position:relative}
+/* Explorer */
+.xp{display:flex;flex-direction:column;height:100%;font-size:13px;position:relative}
+.xp .addr{display:flex;gap:4px;padding:6px;align-items:center;border-bottom:1px solid #eee}
+.xp .addr button.nav{width:30px;height:30px;border:0;background:none;border-radius:4px;cursor:pointer;font-size:15px}
+.xp .addr button.nav:hover{background:#eee}
+.xp .crumbs{flex:1;border:1px solid #ccc;border-radius:4px;padding:5px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.xp .crumbs span{cursor:pointer}.xp .crumbs span:hover{text-decoration:underline}
+.xp .search{width:150px;border:1px solid #ccc;border-radius:4px;padding:5px 8px;font:inherit;min-width:0}
+.xp .cmd{display:flex;gap:2px;padding:4px 6px;border-bottom:1px solid #eee;overflow-x:auto;flex:0 0 auto}
+.xp .cmd button{border:0;background:none;border-radius:4px;padding:6px 8px;cursor:pointer;font-size:12px;white-space:nowrap;display:flex;align-items:center;gap:4px;color:#222}
+.xp .cmd button:hover{background:#eee}
+.xp .cmd button:disabled{opacity:.35;cursor:default;background:none}
+.xp .cmd svg{width:16px;height:16px}
+.xp .main{flex:1;display:flex;min-height:0}
+.xp .navp{width:150px;border-right:1px solid #eee;padding:6px 4px;overflow:auto;flex:0 0 auto}
+.xp .navp button{display:flex;align-items:center;gap:6px;width:100%;border:0;background:none;padding:5px 6px;border-radius:4px;cursor:pointer;font-size:12px;text-align:left}
+.xp .navp button:hover,.xp .navp button.on{background:#e5f0fb}
+.xp .navp svg{width:16px;height:16px;flex:0 0 auto}
+.xp .list{flex:1;overflow:auto;min-width:0}
+.xp .row{display:flex;align-items:center;gap:8px;padding:5px 8px;cursor:default;border:1px solid transparent}
+.xp .row:hover{background:#f2f7fd}
+.xp .row.sel{background:#cce4f7;border-color:#99c9ef}
+.xp .row.drop{outline:2px dashed #0067c0}
+.xp .row input[type=checkbox]{margin:0;width:16px;height:16px}
+.xp .row svg{width:20px;height:20px;flex:0 0 auto}
+.xp .row .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xp .row .ty,.xp .row .dt{width:110px;color:#666;font-size:12px;white-space:nowrap;overflow:hidden}
+.xp .row .ren{flex:1;font:inherit;padding:2px 4px;border:1px solid #0067c0}
+.xp .hdr{display:flex;gap:8px;padding:4px 8px 4px 32px;color:#666;font-size:12px;border-bottom:1px solid #eee}
+.xp .hdr .nm{flex:1}.xp .hdr .ty,.xp .hdr .dt{width:110px}
+.xp .status{font-size:12px;color:#555;padding:4px 8px;border-top:1px solid #eee}
+.xp .empty{padding:20px;color:#888;text-align:center}
+.xp .navchips{display:none;gap:4px;padding:6px;overflow-x:auto;border-bottom:1px solid #eee;flex:0 0 auto}
+.xp .navchips button{border:1px solid #ccc;background:#fafafa;border-radius:14px;padding:4px 10px;font-size:12px;white-space:nowrap;cursor:pointer}
+.xp .navchips button.on{background:#e5f0fb;border-color:#0067c0}
+.xp .msg{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);background:#fff;border:1px solid #bbb;box-shadow:0 6px 20px rgba(0,0,0,.25);padding:14px;border-radius:8px;max-width:90%;z-index:5;font-size:13px}
+@media(max-width:640px){.xp .navp{display:none}.xp .navchips{display:flex}.xp .row .ty,.xp .row .dt,.xp .hdr .ty,.xp .hdr .dt{display:none}.xp .search{width:90px}}
+.appdoc{padding:20px;background:#e9e9e9;height:100%}
+.appdoc .pg{background:#fff;max-width:520px;margin:0 auto;height:100%;min-height:200px;box-shadow:0 1px 4px rgba(0,0,0,.15);padding:24px;font-family:'Times New Roman',serif;color:#444}
+`;
+document.head.appendChild(Object.assign(document.createElement('style'),{textContent:WIN_CSS}));
+
+const WICON={
+  dir:'<svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h5l2 2h9a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z" fill="#f8c444"/><path d="M2 9h20v9a2 2 0 01-2 2H4a2 2 0 01-2-2z" fill="#ffd866"/></svg>',
+  file:(c,l)=>`<svg viewBox="0 0 24 24"><path d="M5 2h10l5 5v15H5z" fill="#fff" stroke="#999"/><path d="M15 2v5h5" fill="#eee" stroke="#999"/><rect x="2" y="11" width="13" height="9" rx="1.5" fill="${c}"/><text x="8.5" y="18.3" font-size="7" font-family="Arial" font-weight="700" fill="#fff" text-anchor="middle">${l}</text></svg>`,
+  bin:'<svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7z" fill="#dfe8f1" stroke="#7a8a9a"/><path d="M4 7h16M9 7V4h6v3" stroke="#7a8a9a" stroke-width="1.5" fill="none"/></svg>',
+  pc:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1" fill="#3b82c4"/><rect x="4.5" y="5.5" width="15" height="9" fill="#9fd0ff"/><path d="M9 20h6M12 16v4" stroke="#555" stroke-width="2"/></svg>',
+  cloud:'<svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 01-.6-9.96A6 6 0 0118 9a4.5 4.5 0 01-.5 9z" fill="#2b88d8"/></svg>',
+  start:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="8.5" height="8.5" fill="#0078d4"/><rect x="12.5" y="3" width="8.5" height="8.5" fill="#0078d4"/><rect x="3" y="12.5" width="8.5" height="8.5" fill="#0078d4"/><rect x="12.5" y="12.5" width="8.5" height="8.5" fill="#0078d4"/></svg>',
+  chrome:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#db4437"/><path d="M12 12L3.3 7A10 10 0 0012 22z" fill="#0f9d58"/><path d="M12 12l8.7-5A10 10 0 0112 22z" fill="#ffcd40"/><circle cx="12" cy="12" r="4.3" fill="#4285f4" stroke="#fff" stroke-width="1.5"/></svg>',
+  gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#6b7280"/><circle cx="12" cy="12" r="3.5" fill="#fff"/></svg>',
+  calc:'<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" fill="#444"/><rect x="7" y="4" width="10" height="4" fill="#9fd0ff"/><g fill="#ddd"><rect x="7" y="10" width="3" height="3"/><rect x="11" y="10" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><rect x="11" y="14" width="3" height="3"/></g><rect x="15" y="10" width="2" height="7" fill="#f59e0b"/></svg>',
+  note:'<svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z" fill="#cde6ff" stroke="#2b6a8a"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#2b6a8a"/></svg>',
+  cut:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 16L18 3M16 16L6 3"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><rect x="8" y="8" width="12" height="13" rx="1"/><path d="M16 8V4H4v13h4"/></svg>',
+  paste:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><rect x="5" y="4" width="14" height="17" rx="1"/><rect x="9" y="2" width="6" height="4" fill="#fff"/></svg>',
+  ren:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M14 4v16M12 4h4M12 20h4"/></svg>',
+  del:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><path d="M5 7h14l-1 14H6zM3 7h18M9 7V4h6v3"/></svg>',
+  zip:'<svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h5l2 2h9a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z" fill="#f8c444"/><path d="M11 6v14" stroke="#555" stroke-width="2" stroke-dasharray="2 2"/></svg>',
+  newf:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0067c0"/><path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2"/></svg>',
+  open:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><path d="M4 20V6h6l2 2h8v12zM9 14h7M13 11l3 3-3 3"/></svg>',
+  restore:'<svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6"><path d="M4 12a8 8 0 108-8H7M7 1v3h3"/></svg>',
+};
+const FT={docx:['#2b579a','W','Документ на Microsoft Word'],xlsx:['#217346','X','Работен лист на Microsoft Excel'],pptx:['#c43e1c','P','Презентация на PowerPoint'],pdf:['#d32f2f','PDF','PDF документ'],jpg:['#7b4fb8','JPG','JPG файл'],png:['#7b4fb8','PNG','PNG файл'],zip:['#6b7280','ZIP','Компресирана (zip) папка'],txt:['#555','TXT','Текстов документ']};
+function iconFor(n){if(n.t==='dir')return WICON.dir;if(n.t==='zip')return WICON.zip;const f=FT[n.t]||['#888','?'];return WICON.file(f[0],f[1])}
+function typeName(n){return n.t==='dir'?'Папка с файлове':(FT[n.t]||[,,'Файл'])[2]}
+const APPS={
+  word:{name:'Word',icon:WICON.file('#2b579a','W'),title:'Документ1 – Word'},
+  excel:{name:'Excel',icon:WICON.file('#217346','X'),title:'Книга1 – Excel'},
+  ppt:{name:'PowerPoint',icon:WICON.file('#c43e1c','P'),title:'Презентация1 – PowerPoint'},
+  explorer:{name:'File Explorer',icon:WICON.dir,title:'File Explorer'},
+  chrome:{name:'Chrome',icon:WICON.chrome,title:'Нов раздел – Google Chrome'},
+  settings:{name:'Настройки',icon:WICON.gear,title:'Настройки'},
+  calc:{name:'Калкулатор',icon:WICON.calc,title:'Калкулатор'},
+  notepad:{name:'Бележник',icon:WICON.note,title:'Неозаглавен – Бележник'},
+};
+// Създава файлова система от кратко описание: {'Документи':{'a.docx':0,'Папка':{...}}}
+function mkfs(o){const c=[];for(const k in o){const v=o[k];if(v&&typeof v==='object')c.push({n:k,t:'dir',c:mkfs(v)});else c.push({n:k,t:(k.split('.').pop()||'').toLowerCase()})}return c}
+const ROOTS=['Работен плот','Документи','Изтегляния','Снимки','OneDrive','Кошче'];
+function baseFs(extra){
+  const o={'Работен плот':{},'Документи':{},'Изтегляния':{},'Снимки':{},'OneDrive':{},'Кошче':{}};
+  for(const k in extra)o[k]=extra[k];
+  return {n:'Този компютър',t:'dir',c:mkfs(o)};
+}
+const BAD=/[\\/:*?"<>|]/;
+
+function winSim(host,cfg){
+  const st={fs:baseFs(cfg.fs||{}),launched:{},startOpened:false,flags:{},opened:[],wins:[]};
+  const desk=el(`<div class="desk"><div class="dicons"></div><div class="taskbar"></div></div>`);
+  host.appendChild(desk);
+  const dicons=$('.dicons',desk),tb=$('.taskbar',desk);
+  [['Този компютър',WICON.pc,()=>launch('explorer',[])],['Кошче',WICON.bin,()=>launch('explorer',['Кошче'])],['Документи',WICON.dir,()=>launch('explorer',['Документи'])]].forEach(([n,ic,fn])=>{
+    const b=el(`<button class="dicon">${ic}${n}</button>`);let last=0;
+    b.onclick=()=>{const t=Date.now();if(t-last<450||device==='phone'){fn()}last=t};dicons.appendChild(b);
+  });
+  function find(path){let n=st.fs;for(const p of path){n=(n.c||[]).find(x=>x.n===p);if(!n)return null}return n}
+  st.find=find;
+  function drawTaskbar(){
+    tb.innerHTML='';
+    const sb=el(`<button class="tb" title="Старт">${WICON.start}</button>`);sb.onclick=toggleStart;tb.appendChild(sb);
+    ['explorer','word','excel','chrome'].forEach(a=>{
+      const w=st.wins.filter(x=>x.app===a);
+      const b=el(`<button class="tb ${w.length?'run':''} ${w.some(x=>!x.min&&x===top())?'act':''}" title="${APPS[a].name}">${APPS[a].icon}</button>`);
+      b.onclick=()=>{if(!w.length)return launch(a,a==='explorer'?['Документи']:null);const x=w[0];if(x.min){x.min=false;st.flags.restored=true}else if(x===top()){x.min=true;st.flags.minimized=true}focusWin(x);drawWins()};
+      tb.appendChild(b);
+    });
+    const d=new Date();tb.appendChild(el(`<div class="clock">${d.toLocaleTimeString('bg-BG',{hour:'2-digit',minute:'2-digit'})}<br>${d.toLocaleDateString('bg-BG')}</div>`));
+  }
+  function top(){const v=st.wins.filter(w=>!w.min);return v[v.length-1]}
+  function toggleStart(){
+    const old=$('.startm',desk);if(old){old.remove();return}
+    st.startOpened=true;
+    const m=el(`<div class="startm"><input placeholder="Въведете тук, за да търсите"><h6>Закачени</h6><div class="apps"></div><div class="foot"><span>Курсист</span><span title="Захранване">⏻</span></div></div>`);
+    const apps=$('.apps',m);
+    const fill=q=>{apps.innerHTML='';Object.entries(APPS).filter(([k,a])=>!q||a.name.toLowerCase().includes(q.toLowerCase())).forEach(([k,a])=>{const b=el(`<button>${a.icon}${a.name}</button>`);b.onclick=()=>{m.remove();launch(k,k==='explorer'?['Документи']:null)};apps.appendChild(b)})};
+    fill('');$('input',m).oninput=e=>fill(e.target.value);
+    desk.appendChild(m);
+  }
+  desk.addEventListener('pointerdown',e=>{const m=$('.startm',desk);if(m&&!m.contains(e.target)&&!tb.contains(e.target))m.remove()});
+  function launch(app,path){
+    st.launched[app]=true;
+    const narrow=desk.clientWidth<640;
+    const w={id:Math.random(),app,min:false,max:narrow||!!cfg.maxed,path:path||[],x:30+st.wins.length*24,y:20+st.wins.length*20};
+    st.wins.push(w);drawWins();return w;
+  }
+  st.launch=launch;
+  function focusWin(w){st.wins=st.wins.filter(x=>x!==w);st.wins.push(w)}
+  function drawWins(){
+    $$('.wwin',desk).forEach(x=>x.remove());
+    st.wins.forEach((w,i)=>{
+      const a=APPS[w.app];
+      const W=el(`<div class="wwin ${w.max?'max':''} ${w.min?'min':''}" style="left:${w.x}px;top:${w.y}px;width:min(720px,calc(100% - ${w.x+10}px));height:calc(100% - ${w.y+70}px);z-index:${10+i}">
+        <div class="wtitle">${a.icon}<span class="nm">${w.app==='explorer'?esc(w.path[w.path.length-1]||'Този компютър'):a.title}</span>
+        <button class="wb" data-a="min" title="Минимизиране">—</button><button class="wb" data-a="max" title="${w.max?'Възстановяване':'Максимизиране'}">${w.max?'❐':'☐'}</button><button class="wb cl" data-a="close" title="Затваряне">✕</button></div>
+        <div class="wbody"></div></div>`);
+      W.addEventListener('pointerdown',()=>{if(top()!==w){focusWin(w);drawWins()}});
+      $$('.wb',W).forEach(b=>b.onclick=e=>{e.stopPropagation();const act=b.dataset.a;
+        if(act==='min'){w.min=true;st.flags.minimized=true}
+        if(act==='max'){w.max=!w.max;st.flags[w.max?'maximized':'unmaximized']=true}
+        if(act==='close'){st.wins=st.wins.filter(x=>x!==w);st.flags.closed=st.flags.closed||{};st.flags.closed[w.app]=true}
+        drawWins()});
+      // влачене на прозореца
+      const tt=$('.wtitle',W);tt.addEventListener('pointerdown',e=>{if(w.max||e.target.closest('.wb'))return;const sx=e.clientX-w.x,sy=e.clientY-w.y;tt.setPointerCapture(e.pointerId);
+        tt.onpointermove=ev=>{w.x=Math.max(0,ev.clientX-sx);w.y=Math.max(0,ev.clientY-sy);W.style.left=w.x+'px';W.style.top=w.y+'px'};tt.onpointerup=()=>{tt.onpointermove=null}});
+      tt.ondblclick=()=>{w.max=!w.max;st.flags[w.max?'maximized':'unmaximized']=true;drawWins()};
+      const body=$('.wbody',W);
+      if(w.app==='explorer')explorer(body,w);
+      else body.innerHTML=`<div class="appdoc"><div class="pg">${a.name==='Word'?'Тук пишете текста на документа…':'Приложението „'+a.name+'“ е отворено.'}</div></div>`;
+      desk.insertBefore(W,tb);
+    });
+    drawTaskbar();
+  }
+  // ---------- File Explorer ----------
+  let clip=null;
+  function explorer(body,w){
+    w.sel=w.sel||[];w.hist=w.hist||[];w.fwd=w.fwd||[];
+    const X=el(`<div class="xp">
+      <div class="addr"><button class="nav" data-n="back" title="Назад">←</button><button class="nav" data-n="fwd" title="Напред">→</button><button class="nav" data-n="up" title="Нагоре">↑</button><div class="crumbs"></div><input class="search" placeholder="Търсене"></div>
+      <div class="cmd"></div><div class="navchips"></div>
+      <div class="main"><div class="navp"></div><div class="list"></div></div><div class="status"></div></div>`);
+    body.appendChild(X);
+    const list=$('.list',X),cmd=$('.cmd',X),srch=$('.search',X);
+    srch.value=w.q||'';
+    const nav=p=>{w.hist.push(w.path);w.fwd=[];w.path=p;w.sel=[];w.q='';drawWins()};
+    $$('.nav',X).forEach(b=>b.onclick=()=>{const n=b.dataset.n;
+      if(n==='back'&&w.hist.length){w.fwd.push(w.path);w.path=w.hist.pop()}
+      else if(n==='fwd'&&w.fwd.length){w.hist.push(w.path);w.path=w.fwd.pop()}
+      else if(n==='up'&&w.path.length){w.hist.push(w.path);w.path=w.path.slice(0,-1)}
+      w.sel=[];w.q='';drawWins()});
+    // адресна лента
+    const cr=$('.crumbs',X);const parts=['Този компютър',...w.path];
+    cr.innerHTML=parts.map((p,i)=>`<span data-i="${i}">${esc(p)}</span>`).join(' › ');
+    $$('span',cr).forEach(s=>s.onclick=()=>nav(w.path.slice(0,+s.dataset.i)));
+    // навигационен панел
+    const np=$('.navp',X),nc=$('.navchips',X);
+    ROOTS.forEach(r=>{const ic=r==='Кошче'?WICON.bin:r==='OneDrive'?WICON.cloud:WICON.dir;
+      const on=w.path[0]===r&&w.path.length===1;
+      const b=el(`<button class="${on?'on':''}">${ic}${r}</button>`);b.onclick=()=>nav([r]);dropTarget(b,[r]);np.appendChild(b);
+      const c=el(`<button class="${on?'on':''}">${r}</button>`);c.onclick=()=>nav([r]);nc.appendChild(c)});
+    const here=find(w.path);
+    const inBin=w.path[0]==='Кошче';
+    // съдържание (или резултати от търсене)
+    let items;
+    if(w.q){items=[];(function walk(n,p){(n.c||[]).forEach(ch=>{if(ch.n.toLowerCase().includes(w.q.toLowerCase()))items.push({node:ch,path:p});if(ch.t==='dir')walk(ch,[...p,ch.n])})})(here,w.path);st.flags.searched=true}
+    else items=(here.c||[]).map(n=>({node:n,path:w.path}));
+    items.sort((a,b)=>(a.node.t==='dir'?0:1)-(b.node.t==='dir'?0:1)||a.node.n.localeCompare(b.node.n,'bg'));
+    list.innerHTML=`<div class="hdr"><span class="nm">Име</span><span class="dt">${w.q?'Папка':'Дата на промяна'}</span><span class="ty">Тип</span></div>`;
+    if(!items.length)list.appendChild(el(`<div class="empty">${w.q?'Няма намерени елементи.':'Тази папка е празна.'}</div>`));
+    items.forEach(({node,path})=>{
+      const key=[...path,node.n].join('/');
+      const r=el(`<div class="row ${w.sel.includes(key)?'sel':''}" draggable="${!w.q&&!inBin}"><input type="checkbox" ${w.sel.includes(key)?'checked':''}>${iconFor(node)}<span class="nm">${esc(node.n)}</span><span class="dt">${w.q?esc(path.join(' › ')):(node.d||'12.11.2026 г. 10:24')}</span><span class="ty">${typeName(node)}</span></div>`);
+      let last=0;
+      r.onclick=e=>{
+        if(e.target.type==='checkbox'){w.sel=e.target.checked?[...w.sel,key]:w.sel.filter(k=>k!==key);drawWins();return}
+        const t=Date.now();
+        if(t-last<450&&w.sel.length===1&&w.sel[0]===key){openItem(node,path);return}
+        last=t;
+        if(e.ctrlKey||e.metaKey)w.sel=w.sel.includes(key)?w.sel.filter(k=>k!==key):[...w.sel,key];else w.sel=[key];
+        // запазваме времето през прерисуването
+        const keep=last;drawWins();const nr=$$('.wwin .row',desk).find(x=>x.querySelector('.nm')&&x.querySelector('.nm').textContent===node.n);if(nr)nr._last=keep;
+      };
+      if(r._last)last=r._last;
+      Object.defineProperty(r,'_last',{set(v){last=v},get(){return last}});
+      r.addEventListener('dragstart',e=>{if(!w.sel.includes(key))w.sel=[key];e.dataTransfer.setData('text/plain','x');st.drag={w,keys:[...w.sel]}});
+      if(node.t==='dir'&&!w.q)dropTarget(r,[...path,node.n]);
+      list.appendChild(r);
+    });
+    function dropTarget(elm,target){
+      elm.addEventListener('dragover',e=>{if(st.drag){e.preventDefault();elm.classList.add('drop')}});
+      elm.addEventListener('dragleave',()=>elm.classList.remove('drop'));
+      elm.addEventListener('drop',e=>{e.preventDefault();elm.classList.remove('drop');if(!st.drag)return;
+        const nodes=st.drag.keys.map(k=>k.split('/'));transfer(nodes,target,e.ctrlKey?'copy':'move');st.drag=null;st.drag=null;drawWins()});
+    }
+    const selNodes=()=>w.sel.map(k=>{const p=k.split('/');return {path:p.slice(0,-1),name:p[p.length-1],node:find(p)}}).filter(x=>x.node);
+    // команди
+    const C=[];
+    if(inBin)C.push(['restore','Възстанови',WICON.restore,()=>{selNodes().forEach(s=>{const bin=find(['Кошче']);bin.c=bin.c.filter(x=>x!==s.node);const dest=find(s.node.from||['Документи'])||find(['Документи']);delete s.node.from;dest.c.push(s.node);st.flags.restored=st.flags.restored||[];st.flags.restored.push(s.node.n)});w.sel=[];drawWins();toast('Елементът е възстановен на старото си място.')},()=>w.sel.length]);
+    else C.push(['new','Нов',WICON.newf,b=>{const p=popup(b,X,`<div class="grid"><button data-k="dir">Папка</button><button data-k="docx">Документ на Microsoft Word</button><button data-k="xlsx">Работен лист на Microsoft Excel</button></div>`);
+      $$('button',p).forEach(x=>x.onclick=()=>{p.remove();const k=x.dataset.k;let base=k==='dir'?'Нова папка':k==='docx'?'Нов документ на Microsoft Word.docx':'Нов работен лист на Microsoft Excel.xlsx';let nm=base,i=2;while(here.c.some(c=>c.n===nm))nm=k==='dir'?`${base} (${i++})`:base.replace(/(\.\w+)$/,` (${i++})$1`);
+        here.c.push(k==='dir'?{n:nm,t:'dir',c:[]}:{n:nm,t:k});w.sel=[[...w.path,nm].join('/')];w.renaming=nm;drawWins()})},()=>!w.q]);
+    C.push(['open','Отвори',WICON.open,()=>{const s=selNodes()[0];if(s)openItem(s.node,s.path)},()=>w.sel.length===1&&!inBin]);
+    C.push(['cut','Изрежи',WICON.cut,()=>{clip={mode:'move',items:w.sel.map(k=>k.split('/'))};toast('Изрязано. Отидете в друга папка и натиснете „Постави“.')},()=>w.sel.length&&!inBin]);
+    C.push(['copy','Копирай',WICON.copy,()=>{clip={mode:'copy',items:w.sel.map(k=>k.split('/'))};toast('Копирано. Отидете в друга папка и натиснете „Постави“.')},()=>w.sel.length&&!inBin]);
+    C.push(['paste','Постави',WICON.paste,()=>{transfer(clip.items,w.path,clip.mode);if(clip.mode==='move')clip=null;drawWins()},()=>clip&&!inBin&&!w.q]);
+    C.push(['ren','Преименувай',WICON.ren,()=>{w.renaming=selNodes()[0].name;drawWins()},()=>w.sel.length===1&&!inBin&&!w.q]);
+    C.push(['del','Изтрий',WICON.del,()=>{
+      if(inBin){const bin=find(['Кошче']);selNodes().forEach(s=>bin.c=bin.c.filter(x=>x!==s.node));toast('Изтрито завинаги.')}
+      else selNodes().forEach(s=>{const par=find(s.path);par.c=par.c.filter(x=>x!==s.node);s.node.from=s.path;find(['Кошче']).c.push(s.node);st.flags.deleted=st.flags.deleted||[];st.flags.deleted.push(s.node.n)});
+      w.sel=[];drawWins()},()=>w.sel.length]);
+    C.push(['zip','Компресирай в ZIP',WICON.zip,()=>{const s=selNodes();const par=find(s[0].path);const nm=s[0].name.replace(/\.\w+$/,'')+'.zip';
+      if(par.c.some(c=>c.n===nm)){toast('Вече има файл „'+nm+'“.');return}
+      par.c.push({n:nm,t:'zip',c:JSON.parse(JSON.stringify(s.map(x=>x.node)))});w.sel=[[...s[0].path,nm].join('/')];w.renaming=null;st.flags.zipped=nm;drawWins();toast('Създаден е архивът „'+nm+'“.')},()=>w.sel.length&&!inBin&&!w.q]);
+    C.forEach(([id,label,ic,fn,en])=>{const b=el(`<button data-c="${id}">${ic}<span>${label}</span></button>`);b.disabled=!en();b.onclick=()=>fn(b);cmd.appendChild(b)});
+    // преименуване на място
+    if(w.renaming){
+      const row=$$('.row',list).find(r=>$('.nm',r).textContent===w.renaming);
+      if(row){const old=w.renaming;const inp=el(`<input class="ren">`);inp.value=old;$('.nm',row).replaceWith(inp);
+        setTimeout(()=>{inp.focus();const dot=old.lastIndexOf('.');const nd=find([...w.path,old]);inp.setSelectionRange(0,nd&&nd.t!=='dir'&&dot>0?dot:old.length)},0);
+        let doneR=false;
+        const commit=()=>{if(doneR)return;doneR=true;let v=inp.value.trim();w.renaming=null;
+          if(!v||v===old){drawWins();return}
+          if(BAD.test(v)){showMsg('Името на файл не може да съдържа следните знаци:<br><b style="font-size:16px">\\ / : * ? " &lt; &gt; |</b>');return}
+          if(here.c.some(c=>c.n.toLowerCase()===v.toLowerCase())){showMsg('В тази папка вече има елемент с име „'+esc(v)+'“.');return}
+          const nd=find([...w.path,old]);const oe=old.includes('.')&&nd.t!=='dir'?old.split('.').pop():null;
+          if(oe&&!v.toLowerCase().endsWith('.'+oe.toLowerCase())){v=v+'.'+oe;toast('Разширението .'+oe+' е запазено, за да може файлът да се отваря.')}
+          nd.n=v;w.sel=[[...w.path,v].join('/')];st.flags.renamed=true;drawWins()};
+        inp.onkeydown=e=>{if(e.key==='Enter')commit();if(e.key==='Escape'){doneR=true;w.renaming=null;drawWins()}};
+        inp.onblur=commit;inp.onclick=e=>e.stopPropagation();
+      }
+    }
+    function showMsg(h){const m=el(`<div class="msg">${h}<div style="text-align:right;margin-top:10px"><button class="btn primary" style="padding:6px 14px">OK</button></div></div>`);X.appendChild(m);$('button',m).onclick=()=>{m.remove();w.renaming=null;drawWins()}}
+    $('.status',X).textContent=`${items.length} елемента${w.sel.length?` | избрани: ${w.sel.length}`:''}`;
+    srch.oninput=()=>{w.q=srch.value;w.sel=[];const pos=srch.selectionStart;drawWins();const ns=$$('.wwin .search',desk).pop();if(ns){ns.focus();ns.setSelectionRange(pos,pos)}};
+    function openItem(node,path){
+      if(node.t==='dir'){nav([...path,node.n]);return}
+      st.opened.push([...path,node.n].join('/'));toast('Отворен е файлът „'+node.n+'“.');
+    }
+  }
+  function transfer(paths,target,mode){
+    const dest=find(target);let n=0;
+    paths.forEach(p=>{
+      const node=find(p);if(!node)return;const from=p.slice(0,-1);
+      if(from.join('/')===target.join('/')&&mode==='move')return;
+      if([...target].join('/').startsWith(p.join('/'))){toast('Не може папка да се премести в самата себе си.');return}
+      let copy=mode==='copy'?JSON.parse(JSON.stringify(node)):node;
+      let nm=copy.n;if(dest.c.some(c=>c.n===nm)){if(mode==='move'){toast('В целевата папка вече има „'+nm+'“.');return}nm=nm.replace(/(\.\w+)?$/,' – Копие$1');copy.n=nm}
+      if(mode==='move'){const par=find(from);par.c=par.c.filter(x=>x!==node)}
+      dest.c.push(copy);n++;
+    });
+    if(n)toast((mode==='move'?'Преместени':'Копирани')+' елементи: '+n);
+    st.wins.forEach(w=>w.sel=[]);
+  }
+  (cfg.open||[]).forEach(o=>launch(o.app,o.path));
+  if(!(cfg.open||[]).length)drawWins();
+  return st;
+}
+const has=(st,path)=>!!st.find(path);
+
+addModule({id:'win',name:'Windows и File Explorer',sub:'Работен плот, прозорци, файлове и папки',letter:'⊞',color:'#0067c0',
+ intro:'Основи на Windows: меню „Старт“, прозорци, папки, файлове, архиви и облак.',
+ phoneNote:['Windows и File Explorer са програми за компютър. На телефона упражнявайте в симулатора отдясно/долу – той изглежда като на компютър.','На телефон с Android подобна програма е „Файлове“ (Files), а на iPhone – „Файлове“.'],
+ lessons:[
+ {id:'win1',title:'Работен плот и меню „Старт“',plan:'Б2 1.1 – Елементи на работното пространство в Windows',
+  theory:`<ul><li><b>Работен плот</b> – основният екран с икони (Кошче, Този компютър).</li><li><b>Лента на задачите</b> – долу; там са бутонът „Старт“, закачените програми и часовникът.</li><li><b>Меню „Старт“</b> – от него се стартират програмите. Може и да търсите програма, като пишете името ѝ.</li><li>Клавишът <kbd>⊞ Win</kbd> също отваря менюто „Старт“.</li></ul>`,
+  goal:`<p>Отворете менюто <b>„Старт“</b> и стартирайте <b>Word</b>, а след това <b>Excel</b>.</p>`,
+  pc:['Натиснете бутона <b>Старт</b> (четирите квадратчета) в лентата на задачите или клавиша <kbd>⊞ Win</kbd>.','Щракнете върху <b>Word</b> в „Закачени“.','Отворете пак „Старт“, напишете <b>excel</b> в полето за търсене и щракнете върху резултата.'],
+  sim:h=>winSim(h,{}),
+  check:s=>{const e=[];if(!s.startOpened)e.push('Не сте отворили менюто „Старт“.');if(!s.launched.word)e.push('Word още не е стартиран.');if(!s.launched.excel)e.push('Excel още не е стартиран.');return e}},
+ {id:'win2',title:'Работа с прозорци',plan:'Б2 1.1 – Работен прозорец',
+  theory:`<ul><li>Всяка програма се отваря в <b>прозорец</b>. Горе е заглавната лента с името.</li><li><b>—</b> Минимизиране – прозорецът се скрива в лентата на задачите.</li><li><b>☐</b> Максимизиране – прозорецът заема целия екран. <b>❐</b> го връща в нормален размер.</li><li><b>✕</b> Затваряне – програмата се затваря.</li><li>Скрит прозорец се връща, като щракнете иконата му в лентата на задачите.</li></ul>`,
+  goal:`<p>С отворения прозорец на Word направете по ред:</p><ul><li>минимизирайте го;</li><li>върнете го от лентата на задачите;</li><li>максимизирайте го;</li><li>затворете го.</li></ul>`,
+  pc:['Натиснете <b>—</b> горе вдясно на прозореца.','Щракнете иконата на Word в лентата на задачите.','Натиснете <b>☐</b> (или щракнете два пъти върху заглавната лента).','Натиснете <b>✕</b>.'],
+  sim:h=>winSim(h,{open:[{app:'word'}]}),
+  check:s=>{const f=s.flags,e=[];if(!f.minimized)e.push('Прозорецът не е минимизиран.');if(!f.restored)e.push('Прозорецът не е върнат от лентата на задачите.');if(!f.maximized)e.push('Прозорецът не е максимизиран.');if(!(f.closed&&f.closed.word))e.push('Word още не е затворен.');return e}},
+ {id:'win3',title:'File Explorer и файловата система',plan:'Б2 1.1 – Файлова система, Windows Explorer',
+  theory:`<ul><li><b>File Explorer</b> (Проводник) показва папките и файловете на компютъра.</li><li><b>Папка</b> е като папка в шкаф – в нея има файлове и други папки.</li><li><b>Пътят</b> показва къде сте, напр. <i>Документи › Курс › Графици</i>.</li><li>Типът на файла личи по <b>разширението</b>: .docx – Word, .xlsx – Excel, .pptx – PowerPoint, .pdf – PDF.</li><li>Двойно щракване отваря папка или файл. Стрелката <b>↑</b> връща една папка нагоре.</li></ul>`,
+  goal:`<p>Намерете и отворете файла <b>График на курса.xlsx</b>. Той е в <i>Документи › Курс АОД › Графици</i>.</p>`,
+  pc:['Отворете File Explorer от лентата на задачите (жълтата папка).','Вляво щракнете <b>Документи</b>.','Щракнете два пъти върху <b>Курс АОД</b>, после върху <b>Графици</b>.','Щракнете два пъти върху <b>График на курса.xlsx</b>.'],
+  sim:h=>winSim(h,{fs:{'Документи':{'Курс АОД':{'Графици':{'График на курса.xlsx':0,'Почивни дни.docx':0},'Учебен план.pdf':0},'Лични':{'Снимка.jpg':0}}}}),
+  check:s=>s.opened.includes('Документи/Курс АОД/Графици/График на курса.xlsx')?[]:['Файлът „График на курса.xlsx“ още не е отворен. Отворете го с двойно щракване или с бутона „Отвори“.']},
+ {id:'win4',title:'Създаване на папки',plan:'А3 1.3.2 – Създаване на папки',
+  theory:`<ul><li>Подредените папки пестят време – всеки документ има своето място.</li><li>Нова папка: <b>Нов → Папка</b> или <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>.</li><li>Веднага напишете името и натиснете <kbd>Enter</kbd>.</li><li>Добре е имената да са ясни: <i>„Заявления 2026“</i>, а не <i>„Нова папка (3)“</i>.</li></ul>`,
+  goal:`<p>В папка <b>Документи</b> създайте папка <b>Курс АОД 2026</b>, а в нея – папка <b>Заявления</b>.</p>`,
+  pc:['В File Explorer отворете <b>Документи</b>.','Натиснете <b>Нов → Папка</b>.','Напишете <b>Курс АОД 2026</b> и натиснете <kbd>Enter</kbd>.','Отворете новата папка и по същия начин създайте <b>Заявления</b>.'],
+  sim:h=>winSim(h,{fs:{'Документи':{'Лични':{}}},open:[{app:'explorer',path:['Документи']}]}),
+  check:s=>{const e=[];if(!has(s,['Документи','Курс АОД 2026']))e.push('В „Документи“ няма папка „Курс АОД 2026“. Проверете дали името е написано точно.');else if(!has(s,['Документи','Курс АОД 2026','Заявления']))e.push('В „Курс АОД 2026“ още няма папка „Заявления“.');return e}},
+ {id:'win5',title:'Именуване и преименуване на файлове',plan:'А3 1.3.2 – Именуване на файлове',
+  theory:`<ul><li>Името трябва да казва какво има във файла: <i>Заявление_Мария_Петрова.docx</i>.</li><li>Не можете да използвате знаците <b>\\ / : * ? " &lt; &gt; |</b>.</li><li>Не сменяйте <b>разширението</b> (.docx, .xlsx) – иначе файлът може да не се отваря.</li><li>Преименуване: изберете файла и натиснете <b>Преименувай</b> или <kbd>F2</kbd>.</li></ul>`,
+  goal:`<p>В папка <b>Документи</b> преименувайте <b>Документ1.docx</b> на <b>Заявление_Мария_Петрова.docx</b> и <b>Книга1.xlsx</b> на <b>Присъствие_ноември.xlsx</b>.</p>`,
+  pc:['Щракнете веднъж върху файла, за да го изберете.','Натиснете <b>Преименувай</b> или <kbd>F2</kbd>.','Напишете новото име (разширението остава) и натиснете <kbd>Enter</kbd>.'],
+  sim:h=>winSim(h,{fs:{'Документи':{'Документ1.docx':0,'Книга1.xlsx':0,'Протокол.docx':0}},open:[{app:'explorer',path:['Документи']}]}),
+  check:s=>{const e=[];if(!has(s,['Документи','Заявление_Мария_Петрова.docx']))e.push('Няма файл „Заявление_Мария_Петрова.docx“.');if(!has(s,['Документи','Присъствие_ноември.xlsx']))e.push('Няма файл „Присъствие_ноември.xlsx“.');return e}},
+ {id:'win6',title:'Копиране и преместване',plan:'А3 1.3.2 – Организиране на информация',
+  theory:`<ul><li><b>Преместване</b> (Изрежи → Постави): файлът отива на новото място и изчезва от старото.</li><li><b>Копиране</b> (Копирай → Постави): получавате два еднакви файла.</li><li>Клавиши: <kbd>Ctrl</kbd>+<kbd>X</kbd> изрязване, <kbd>Ctrl</kbd>+<kbd>C</kbd> копиране, <kbd>Ctrl</kbd>+<kbd>V</kbd> поставяне.</li><li>Няколко файла избирате с <kbd>Ctrl</kbd>+щракване или с отметките.</li><li>Може и да ги провлачите с мишката върху папката.</li></ul>`,
+  goal:`<p>Преместете трите файла <b>Заявление_1.docx</b>, <b>Заявление_2.docx</b> и <b>Заявление_3.docx</b> от <b>Изтегляния</b> в <b>Документи › Заявления</b>. Файлът <b>Инструкция.pdf</b> копирайте там (да остане и в Изтегляния).</p>`,
+  pc:['Отворете <b>Изтегляния</b>. Изберете трите заявления с отметките или с <kbd>Ctrl</kbd>+щракване.','Натиснете <b>Изрежи</b>.','Отворете <b>Документи › Заявления</b> и натиснете <b>Постави</b>.','Върнете се в Изтегляния, изберете <b>Инструкция.pdf</b> → <b>Копирай</b> → в Заявления → <b>Постави</b>.'],
+  sim:h=>winSim(h,{fs:{'Изтегляния':{'Заявление_1.docx':0,'Заявление_2.docx':0,'Заявление_3.docx':0,'Инструкция.pdf':0,'снимка_телефон.jpg':0},'Документи':{'Заявления':{}}},open:[{app:'explorer',path:['Изтегляния']}]}),
+  check:s=>{const e=[];[1,2,3].forEach(i=>{const n='Заявление_'+i+'.docx';if(!has(s,['Документи','Заявления',n]))e.push(`„${n}“ не е в Документи › Заявления.`);else if(has(s,['Изтегляния',n]))e.push(`„${n}“ още е и в Изтегляния – трябва да се премести, не да се копира.`)});
+    if(!has(s,['Документи','Заявления','Инструкция.pdf']))e.push('„Инструкция.pdf“ не е копиран в Заявления.');else if(!has(s,['Изтегляния','Инструкция.pdf']))e.push('„Инструкция.pdf“ трябваше да остане и в Изтегляния (копиране, не преместване).');return e}},
+ {id:'win7',title:'Изтриване и Кошче',plan:'А3 1.3.2 – Организиране на информация',
+  theory:`<ul><li>Изтритите файлове отиват в <b>Кошчето</b>. Оттам могат да се <b>възстановят</b>.</li><li>Ако изтриете файл от Кошчето, той се губи завинаги.</li><li>Клавиш за изтриване: <kbd>Delete</kbd>.</li></ul>`,
+  goal:`<p>В <b>Документи</b> изтрийте <b>стар_списък.docx</b>. След това отворете <b>Кошчето</b> и възстановете <b>Важен_договор.pdf</b>, който е изтрит по погрешка.</p>`,
+  pc:['Изберете <b>стар_списък.docx</b> и натиснете <b>Изтрий</b>.','Вляво отворете <b>Кошче</b>.','Изберете <b>Важен_договор.pdf</b> и натиснете <b>Възстанови</b>.'],
+  sim:h=>{const s=winSim(h,{fs:{'Документи':{'стар_списък.docx':0,'Отчет.xlsx':0}},open:[{app:'explorer',path:['Документи']}]});const bin=s.find(['Кошче']);bin.c.push({n:'Важен_договор.pdf',t:'pdf',from:['Документи']},{n:'чернова.txt',t:'txt',from:['Документи']});return s},
+  check:s=>{const e=[];if(has(s,['Документи','стар_списък.docx']))e.push('„стар_списък.docx“ още е в Документи.');if(!has(s,['Документи','Важен_договор.pdf']))e.push('„Важен_договор.pdf“ не е възстановен в Документи.');if(has(s,['Документи','Отчет.xlsx'])===false)e.push('Изтрили сте и „Отчет.xlsx“ – върнете го от Кошчето.');return e}},
+ {id:'win8',title:'Архивиране (ZIP) и съхранение в облак',plan:'А3 1.3.2 – Архивиране, съхранение в облак',
+  theory:`<ul><li><b>ZIP архивът</b> събира много файлове в един и ги смалява. Удобно е за изпращане по имейл.</li><li>Създаване: изберете папката → <b>Компресирай в ZIP</b> (десен бутон → „Компресиране до ZIP файл“).</li><li><b>Облак</b> (OneDrive, Google Drive) – файловете се пазят в интернет и се отварят от всяко устройство.</li><li>Копие в облака пази документите, ако компютърът се повреди.</li></ul>`,
+  goal:`<p>В <b>Документи</b> създайте архив <b>Снимки от курса.zip</b> от папката „Снимки от курса“. После <b>копирайте</b> архива в <b>OneDrive</b>.</p>`,
+  pc:['Изберете папката <b>Снимки от курса</b>.','Натиснете <b>Компресирай в ZIP</b>.','Изберете новия ZIP файл → <b>Копирай</b>.','Вляво отворете <b>OneDrive</b> → <b>Постави</b>.'],
+  sim:h=>winSim(h,{fs:{'Документи':{'Снимки от курса':{'ден1.jpg':0,'ден2.jpg':0,'група.jpg':0},'Отчет.xlsx':0}},open:[{app:'explorer',path:['Документи']}]}),
+  check:s=>{const e=[];if(!has(s,['Документи','Снимки от курса.zip']))e.push('В Документи няма „Снимки от курса.zip“.');if(!has(s,['OneDrive','Снимки от курса.zip']))e.push('Архивът не е копиран в OneDrive.');return e}},
+ {id:'win9',title:'Търсене на файлове',plan:'Б2 1.1, А3 1.3.2 – Търсене на информация',
+  theory:`<ul><li>Полето <b>Търсене</b> горе вдясно търси в текущата папка и всички папки в нея.</li><li>Достатъчна е част от името, напр. <i>протокол</i>.</li><li>Под резултатите се вижда в коя папка е всеки файл.</li></ul>`,
+  goal:`<p>Някъде в <b>Документи</b> има файл с „<b>12.11</b>“ в името – протоколът от срещата. Намерете го с търсене и го отворете.</p>`,
+  pc:['Отворете <b>Документи</b>.','Щракнете в полето <b>Търсене</b> и напишете <b>протокол</b>.','Отворете файла с датата 12.11.'],
+  sim:h=>winSim(h,{fs:{'Документи':{'2025':{'Протокол_05.06.docx':0,'Отчет.xlsx':0},'2026':{'Ноември':{'Срещи':{'Протокол_12.11.docx':0,'Покана.docx':0}},'Октомври':{'Протокол_20.10.docx':0}}}},open:[{app:'explorer',path:['Документи']}]}),
+  check:s=>{const e=[];if(!s.opened.some(p=>p.endsWith('Протокол_12.11.docx')))e.push('Файлът „Протокол_12.11.docx“ още не е отворен.');if(!s.flags.searched)e.push('Опитайте да го намерите с полето „Търсене“.');return e}},
+ ]});
+
+/* ===== Модул: Word ===== */
+document.head.appendChild(Object.assign(document.createElement('style'),{textContent:`
+.wpw{background:#e9e9e9;padding:16px;overflow:auto}
+.wpage{background:#fff;max-width:640px;min-height:360px;margin:0 auto;box-shadow:0 1px 4px rgba(0,0,0,.15);display:flex;flex-direction:column;font:16px/1.55 "Times New Roman",Times,serif;color:#111}
+.wpage.card{max-width:420px;min-height:240px;aspect-ratio:9/5}
+.wed{flex:1;padding:28px 36px;outline:none;min-height:200px}
+.wed:focus{box-shadow:inset 0 0 0 2px #2b579a33}
+.wed ul,.wed ol{margin:4px 0;padding-left:28px}
+.wed table{border-collapse:collapse;width:100%;margin:6px 0}
+.wed td,.wed th{border:1px solid #444;padding:4px 6px;min-width:40px;height:26px;vertical-align:top}
+.wed img{max-width:100%;vertical-align:middle}
+.whf{padding:8px 36px;min-height:34px;font-size:13px;color:#333;outline:none;border:1px dashed transparent}
+.whf.show{border-color:#9bb3d6}
+.whf.show:empty:before{content:attr(data-ph);color:#8aa}
+.whf:focus{border-color:#2b579a;background:#f6f9ff}
+.wf{background:#e7eefb;border-radius:3px;padding:0 2px;color:#1e4b8f;white-space:nowrap}
+.wph{background:#fff3b0}
+.wmerged{max-width:640px;margin:12px auto 0;display:grid;gap:10px}
+.wmerged .m{background:#fff;padding:14px 20px;box-shadow:0 1px 3px rgba(0,0,0,.15);font:14px/1.5 "Times New Roman",serif}
+.wmerged h6{margin:0 0 6px;font:600 12px Inter,sans-serif;color:#2b579a}
+.wrec{max-width:640px;margin:0 auto 10px;background:#fff;border:1px solid #ccc;border-radius:6px;font-size:13px;overflow:auto}
+.wrec table{border-collapse:collapse;width:100%}.wrec td,.wrec th{border:1px solid #ddd;padding:4px 6px;text-align:left}
+.wrec th{background:#f1f5fb}
+.wstat{font-size:12px;color:#555;background:#f3f3f3;border-top:1px solid #ddd;padding:3px 10px}
+@media(max-width:600px){.wpw{padding:8px}.wed{padding:18px 14px;font-size:15px}.whf{padding:6px 14px}}
+.env{max-width:560px;margin:0 auto;aspect-ratio:22/11;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.2);position:relative;font:14px/1.4 "Times New Roman",serif}
+.env .from{position:absolute;left:5%;top:8%;white-space:pre-line;font-size:12px}
+.env .to{position:absolute;left:45%;top:48%;white-space:pre-line}
+.env .stamp{position:absolute;right:4%;top:8%;width:50px;height:60px;border:2px dashed #bbb;font-size:10px;color:#aaa;display:grid;place-items:center}
+.envform{display:grid;gap:10px;max-width:560px;margin:0 auto 14px;background:#fff;border:1px solid #ccc;border-radius:8px;padding:12px}
+.envform label{font-size:13px;font-weight:600}
+.envform textarea{font:14px Inter,sans-serif;width:100%;padding:6px;border:1px solid #bbb;border-radius:6px}
+`}));
+
+const WI={
+  left:'<svg viewBox="0 0 20 20"><path d="M3 4h14M3 8h9M3 12h14M3 16h9" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+  center:'<svg viewBox="0 0 20 20"><path d="M3 4h14M6 8h8M3 12h14M6 16h8" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+  right:'<svg viewBox="0 0 20 20"><path d="M3 4h14M8 8h9M3 12h14M8 16h9" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+  justify:'<svg viewBox="0 0 20 20"><path d="M3 4h14M3 8h14M3 12h14M3 16h14" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+  ul:'<svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1.6" fill="currentColor"/><circle cx="4" cy="10" r="1.6" fill="currentColor"/><circle cx="4" cy="15" r="1.6" fill="currentColor"/><path d="M8 5h9M8 10h9M8 15h9" stroke="currentColor" stroke-width="2"/></svg>',
+  ol:'<svg viewBox="0 0 20 20"><text x="1" y="7" font-size="6" fill="currentColor">1.</text><text x="1" y="12" font-size="6" fill="currentColor">2.</text><text x="1" y="17" font-size="6" fill="currentColor">3.</text><path d="M8 5h9M8 10h9M8 15h9" stroke="currentColor" stroke-width="2"/></svg>',
+  undo:'<svg viewBox="0 0 20 20"><path d="M7 5L3 9l4 4M3 9h9a5 5 0 010 10h-2" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+  redo:'<svg viewBox="0 0 20 20"><path d="M13 5l4 4-4 4M17 9H8a5 5 0 000 10h2" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+  table:'<svg viewBox="0 0 20 20"><rect x="2" y="3" width="16" height="14" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2 8h16M2 12.5h16M7.5 3v14M12.5 3v14" stroke="currentColor" stroke-width="1.2"/></svg>',
+  pic:'<svg viewBox="0 0 20 20"><rect x="2" y="3" width="16" height="14" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="8" r="1.8" fill="currentColor"/><path d="M3 16l5-5 3 3 3-4 4 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
+  find:'<svg viewBox="0 0 20 20"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 12l5 5" stroke="currentColor" stroke-width="2"/></svg>',
+  cols:'<svg viewBox="0 0 20 20"><path d="M2 4h7M2 8h7M2 12h7M2 16h7M11 4h7M11 8h7M11 12h7M11 16h7" stroke="currentColor" stroke-width="1.8"/></svg>',
+  hdr:'<svg viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="5" y="4" width="10" height="3" fill="currentColor"/></svg>',
+  ftr:'<svg viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="5" y="13" width="10" height="3" fill="currentColor"/></svg>',
+  textbox:'<svg viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 1.5"/><path d="M7 7h6M10 7v6" stroke="currentColor" stroke-width="1.6"/></svg>',
+};
+// Картинки за вмъкване (вградени, без интернет)
+const WPICS={
+  'Лого':'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><path d="M5 50L30 15l15 20 12-14 25 29z" fill="#2b6a8a"/><circle cx="90" cy="18" r="8" fill="#e8a33d"/><text x="60" y="58" font-family="Arial" font-size="9" fill="#1f2a35" text-anchor="middle">РОДОПИ ООД</text></svg>'),
+  'Телефон':'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M6 2h5l1 5-3 2a12 12 0 006 6l2-3 5 1v5a2 2 0 01-2 2A19 19 0 014 4a2 2 0 012-2z" fill="#2b579a"/></svg>'),
+  'Цвете':'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 40 40"><g fill="#e57399"><circle cx="20" cy="10" r="6"/><circle cx="30" cy="18" r="6"/><circle cx="26" cy="29" r="6"/><circle cx="14" cy="29" r="6"/><circle cx="10" cy="18" r="6"/></g><circle cx="20" cy="20" r="5" fill="#f5c542"/></svg>'),
+};
+
+/* Общ симулатор на Word.
+   cfg: {doc, tools:[...], page:'card', hf:true, fields:[], records:[], fname} */
+function wordSim(host,cfg){
+  const T=new Set(cfg.tools||['b','i','u','align','undo']);
+  const app=el('<div class="app"></div>');host.appendChild(app);
+  const st={cols:1,merged:false,preview:false,rec:0,replaced:0,cfg};
+  let saved=null,lastEd=null;
+  const pw=el(`<div class="wpw">${cfg.records?'<div class="wrec"></div>':''}<div class="wpage ${cfg.page==='card'?'card':''}">
+     <div class="whf hdr ${cfg.hf?'show':''}" ${cfg.hf?'contenteditable="true"':''} data-ph="Горен колонтитул – щракнете тук"></div>
+     <div class="wed" contenteditable="true" spellcheck="false"></div>
+     <div class="whf ftr ${cfg.hf?'show':''}" ${cfg.hf?'contenteditable="true"':''} data-ph="Долен колонтитул – щракнете тук"></div></div><div class="wmerged"></div></div>`);
+  const ed=$('.wed',pw),hdr=$('.hdr',pw),ftr=$('.ftr',pw);
+  ed.innerHTML=cfg.doc;
+  st.ed=ed;st.hdr=hdr;st.ftr=ftr;st.page=$('.wpage',pw);
+  const edits=[ed,hdr,ftr];
+  document.addEventListener('selectionchange',()=>{const s=getSelection();if(!s.rangeCount)return;const t=edits.find(x=>x.contains(s.anchorNode));if(t){saved=s.getRangeAt(0).cloneRange();lastEd=t;rb&&rb.refresh()}});
+  function restore(){const t=lastEd||ed;t.focus();if(saved&&t.contains(saved.startContainer)){const s=getSelection();s.removeAllRanges();s.addRange(saved)}return t}
+  function exec(c,v){restore();document.execCommand(c,false,v==null?null:v)}
+  function insertHTML(h){const t=restore();if(!saved||!t.contains(saved.startContainer)){const r=document.createRange();r.selectNodeContents(ed);r.collapse(false);const s=getSelection();s.removeAllRanges();s.addRange(r)}document.execCommand('insertHTML',false,h)}
+  try{document.execCommand('defaultParagraphSeparator',false,'div')}catch(e){}
+  const q=c=>{try{return document.queryCommandState(c)}catch(e){return false}};
+  const tool=(id,html,title,run,active,extra)=>Object.assign({id,html,title,run,active},extra||{});
+  const home=[],ins=[],lay=[],mail=[];
+  if(T.has('b'))home.push(tool('b','<span class="t">B</span>','Удебелен (Ctrl+B)',()=>exec('bold'),()=>q('bold')),tool('i','<span class="t" style="font-style:italic">I</span>','Курсив (Ctrl+I)',()=>exec('italic'),()=>q('italic')),tool('u','<span class="t" style="text-decoration:underline">U</span>','Подчертан (Ctrl+U)',()=>exec('underline'),()=>q('underline')));
+  if(T.has('size'))home.push(tool('size','<span style="font-weight:600">Размер</span> ▾','Размер на шрифта',b=>{
+    const p=popup(b,app,`<h5>Размер на шрифта</h5><div class="grid" style="grid-template-columns:repeat(5,1fr)">${[8,10,11,12,14,16,18,20,24,28].map(s=>`<button data-s="${s}">${s}</button>`).join('')}</div>`);
+    $$('button',p).forEach(x=>x.onclick=()=>{p.remove();setSize(+x.dataset.s)})}));
+  if(home.length)home.push('|');
+  if(T.has('align'))home.push(tool('left',WI.left,'Подравняване вляво (Ctrl+L)',()=>exec('justifyLeft')),tool('center',WI.center,'Центриране (Ctrl+E)',()=>exec('justifyCenter')),tool('right',WI.right,'Подравняване вдясно (Ctrl+R)',()=>exec('justifyRight')),tool('justify',WI.justify,'Двустранно подравняване (Ctrl+J)',()=>exec('justifyFull')),'|');
+  if(T.has('lists'))home.push(tool('ul',WI.ul,'Водещи символи',()=>exec('insertUnorderedList'),()=>q('insertUnorderedList')),tool('ol',WI.ol,'Номериране',()=>exec('insertOrderedList'),()=>q('insertOrderedList')),'|');
+  if(T.has('find'))home.push(tool('find',WI.find+' Замести','Търсене и заместване (Ctrl+H)',b=>findDlg(b)),'|');
+  home.push(tool('undo',WI.undo,'Отмяна (Ctrl+Z)',()=>exec('undo')),tool('redo',WI.redo,'Връщане (Ctrl+Y)',()=>exec('redo')));
+  if(T.has('table'))ins.push(tool('table',WI.table+' Таблица','Вмъкване на таблица',b=>tableDlg(b)));
+  if(T.has('pic'))ins.push(tool('pic',WI.pic+' Картини','Вмъкване на картина',b=>{
+    const p=popup(b,app,`<h5>Вмъкване на картина</h5><div class="grid" style="grid-template-columns:repeat(3,1fr)">${Object.keys(WPICS).map(k=>`<button data-k="${k}"><img src="${WPICS[k]}" style="height:36px;display:block;margin:0 auto 4px">${k}</button>`).join('')}</div>`);
+    $$('button',p).forEach(x=>x.onclick=()=>{p.remove();insertHTML(`<img src="${WPICS[x.dataset.k]}" alt="${x.dataset.k}">`)})}));
+  if(T.has('textbox'))ins.push(tool('textbox',WI.textbox+' Текстово поле','Вмъкване на текстово поле',()=>insertHTML('<div style="border:1.5px solid #2b579a;padding:6px 10px;margin:6px 0;display:inline-block;min-width:160px">Текст в поле</div><div><br></div>')));
+  if(T.has('symbol'))ins.push(tool('symbol','<span style="font:700 17px Georgia">Ω</span> Символ','Вмъкване на символ',b=>{
+    const p=popup(b,app,`<h5>Символ</h5><div class="grid" style="grid-template-columns:repeat(6,1fr)">${['№','©','®','™','€','§','„','“','–','—','•','°','½','±','×','→'].map(s=>`<button data-s="${s}" style="font-size:18px">${s}</button>`).join('')}</div>`);
+    $$('button',p).forEach(x=>x.onclick=()=>{p.remove();restore();document.execCommand('insertText',false,x.dataset.s)})}));
+  if(T.has('hf'))ins.push('|',tool('hdr',WI.hdr+' Горен колонтитул','Горен колонтитул',()=>{hdr.focus();lastEd=hdr}),tool('ftr',WI.ftr+' Долен колонтитул','Долен колонтитул',()=>{ftr.focus();lastEd=ftr}),tool('pnum','<b>#</b> Номер на страница','Номер на страница (в долния колонтитул)',()=>{ftr.focus();lastEd=ftr;const r=document.createRange();r.selectNodeContents(ftr);r.collapse(false);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('insertHTML',false,'<span class="pnum">1</span>');st.pnum=true}));
+  if(T.has('cols'))lay.push(tool('cols',WI.cols+' Колони ▾','Колони',b=>{
+    const p=popup(b,app,`<h5>Колони</h5><div class="grid">${[['1','Една'],['2','Две'],['3','Три']].map(([n,t])=>`<button data-n="${n}">${t}</button>`).join('')}</div>`);
+    $$('button',p).forEach(x=>x.onclick=()=>{p.remove();st.cols=+x.dataset.n;ed.style.columnCount=st.cols>1?st.cols:'';ed.style.columnGap='28px'})}));
+  if(T.has('merge')){
+    mail.push(tool('field','Вмъкни поле ▾','Вмъкване на поле за сливане',b=>{
+      const p=popup(b,app,`<h5>Поле за сливане</h5><div class="grid">${cfg.fields.map(f=>`<button data-f="${f}">${f}</button>`).join('')}</div>`);
+      $$('button',p).forEach(x=>x.onclick=()=>{p.remove();insertHTML(`<span class="wf" contenteditable="false" data-f="${x.dataset.f}">«${x.dataset.f}»</span>&nbsp;`)})}),
+    tool('prev','Преглед на резултатите','Преглед на резултатите',()=>{st.preview=!st.preview;showFields()},()=>st.preview),
+    tool('pr','◀','Предишен запис',()=>{st.rec=Math.max(0,st.rec-1);showFields()}),tool('nx','▶','Следващ запис',()=>{st.rec=Math.min(cfg.records.length-1,st.rec+1);showFields()}),'|',
+    tool('fin','Завърши и слей','Завършване и сливане – отделен документ за всеки запис',()=>finish()));
+    const rec=$('.wrec',pw);
+    rec.innerHTML=`<div style="padding:4px 8px;font-weight:600">Списък с получатели (източник на данни)</div><table><tr>${cfg.fields.map(f=>`<th>${f}</th>`).join('')}</tr>${cfg.records.map(r=>`<tr>${cfg.fields.map(f=>`<td>${esc(r[f])}</td>`).join('')}</tr>`).join('')}</table>`;
+  }
+  const tabs=[{name:'Файл',tools:[]},{name:'Начало',tools:home},{name:'Вмъкване',tools:ins},{name:'Оформление',tools:lay}];
+  if(T.has('merge'))tabs.push({name:'Пощенски списъци',tools:mail});
+  tabs.push({name:'Преглед',tools:[]});
+  const rb=ribbon(app,'#2b579a',tabs,cfg.fname||'Документ1.docx',1);
+  app.appendChild(pw);
+  app.appendChild(el('<div class="wstat">Страница 1 от 1 · Български</div>'));
+  function setSize(pt){
+    restore();document.execCommand('fontSize',false,'7');
+    $$('font[size="7"]',lastEd||ed).forEach(f=>{const s=document.createElement('span');s.style.fontSize=pt+'pt';s.innerHTML=f.innerHTML;f.replaceWith(s)});
+  }
+  function findDlg(b){
+    const p=popup(b,app,`<button class="x">×</button><h5>Търсене и заместване</h5><label>Търси:</label><input id="ff"><label>Замести с:</label><input id="fr"><div class="row"><button id="fn">Намери следващия</button><button id="fa">Замести всички</button></div><div id="fm" style="margin-top:8px;color:#2b579a"></div>`);
+    $('#ff',p).focus();
+    $('#fn',p).onclick=()=>{const f=$('#ff',p).value;if(!f)return;const w=document.createTreeWalker(ed,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const i=n.nodeValue.indexOf(f);if(i>=0){const r=document.createRange();r.setStart(n,i);r.setEnd(n,i+f.length);const s=getSelection();s.removeAllRanges();s.addRange(r);$('#fm',p).textContent='Намерено.';return}}$('#fm',p).textContent='Не е намерено.'};
+    $('#fa',p).onclick=()=>{const f=$('#ff',p).value,r=$('#fr',p).value;if(!f)return;let c=0;const w=document.createTreeWalker(ed,NodeFilter.SHOW_TEXT);const ns=[];let n;while(n=w.nextNode())ns.push(n);ns.forEach(n=>{const parts=n.nodeValue.split(f);if(parts.length>1){c+=parts.length-1;n.nodeValue=parts.join(r)}});st.replaced+=c;$('#fm',p).textContent=c?`Готово. Направени са ${c} замествания.`:'Не е намерено.'};
+  }
+  function tableDlg(b){
+    const p=popup(b,app,`<button class="x">×</button><h5>Вмъкване на таблица</h5><label>Брой колони:</label><input id="tc" type="number" min="1" max="8" value="3"><label>Брой редове:</label><input id="tr" type="number" min="1" max="12" value="3"><div class="row"><button id="ti">Вмъкни</button></div>`);
+    $('#ti',p).onclick=()=>{const c=Math.max(1,Math.min(8,+$('#tc',p).value||1)),r=Math.max(1,Math.min(12,+$('#tr',p).value||1));p.remove();
+      insertHTML('<table>'+Array.from({length:r},()=>'<tr>'+'<td><br></td>'.repeat(c)+'</tr>').join('')+'</table><div><br></div>')};
+  }
+  function showFields(){$$('.wf',ed).forEach(f=>{const k=f.dataset.f;f.textContent=st.preview?cfg.records[st.rec][k]:'«'+k+'»'});rb.refresh()}
+  function finish(){
+    const out=$('.wmerged',pw);const tpl=ed.cloneNode(true);
+    if(!$$('.wf',ed).length){toast('Първо вмъкнете полета от „Вмъкни поле“.');return}
+    out.innerHTML=cfg.records.map((r,i)=>{const c=tpl.cloneNode(true);$$('.wf',c).forEach(f=>f.replaceWith(document.createTextNode(r[f.dataset.f])));return `<div class="m"><h6>Писмо ${i+1} от ${cfg.records.length}</h6>${c.innerHTML}</div>`}).join('');
+    st.merged=true;toast(`Създадени са ${cfg.records.length} писма – вижте под документа.`);
+  }
+  ed.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey))return;const m={e:'justifyCenter',r:'justifyRight',l:'justifyLeft',j:'justifyFull'}[e.key.toLowerCase()];if(m){e.preventDefault();document.execCommand(m)}if(e.key.toLowerCase()==='h'&&T.has('find')){e.preventDefault();rb.select('Начало');findDlg($('[data-tool=find]',app))}});
+  return st;
+}
+/* ----- помощни проверки ----- */
+function wText(ed){return ed.innerText.replace(/ /g,' ')}
+function wRange(ed,word){
+  const w=document.createTreeWalker(ed,NodeFilter.SHOW_TEXT);let nodes=[],full='',n;
+  while(n=w.nextNode()){nodes.push([n,full.length]);full+=n.nodeValue}
+  const s=full.indexOf(word);if(s<0)return null;const e=s+word.length;
+  return nodes.filter(([node,pos])=>!(pos+node.nodeValue.length<=s||pos>=e)).map(x=>x[0].parentElement);
+}
+function wAll(ed,word,test){const r=wRange(ed,word);return !!r&&r.length>0&&r.every(test)}
+const isBold=e=>parseInt(getComputedStyle(e).fontWeight,10)>=600;
+const isItalic=e=>getComputedStyle(e).fontStyle==='italic';
+const isUnder=e=>{for(let x=e;x&&!x.classList.contains('wed');x=x.parentElement){if(/underline/.test(getComputedStyle(x).textDecorationLine))return true}return false};
+const alignOf=e=>{const a=getComputedStyle(e).textAlign;return a==='start'?'left':a==='end'?'right':a};
+const ptOf=e=>parseFloat(getComputedStyle(e).fontSize)*0.75;
+function W(errs,cond,msg){if(!cond)errs.push(msg)}
+
+addModule({id:'word',name:'Word',sub:'Текстообработка и документи',letter:'W',color:'#2b579a',
+ intro:'Създаване и оформяне на писма, заявления, протоколи, таблици, визитки и пликове.',
+ lessons:[
+ {id:'word1',title:'Въвеждане и форматиране на текст',plan:'Б2 2.1 · А3 1.3.5',
+  theory:`<ul><li>Текстът се пише непрекъснато – Word сам минава на нов ред. <kbd>Enter</kbd> се натиска само за нов абзац.</li><li>Преди форматиране текстът се <b>маркира</b>: двойно щракване – дума, тройно – абзац.</li><li><b>B</b> удебелен, <i>I</i> курсив, <u>U</u> подчертан.</li><li>Размерът на шрифта се мери в точки: основен текст 12, заглавия 14–16.</li><li>В официалните документи шрифтът е един и същ (напр. Times New Roman).</li></ul>`,
+  goal:`<p>Оформете заявлението:</p><ul><li>думата <b>ЗАЯВЛЕНИЕ</b> – удебелена, размер <b>16</b>;</li><li>името <b>Мария Иванова Петрова</b> – курсив;</li><li>думата <b>служебна бележка</b> – подчертана.</li></ul>`,
+  phone:['Докоснете два пъти думата, за да я маркирате (плъзнете дръжките за повече думи).','Отворете лентата с иконата <b>А с молив</b> → <b>Начало</b>.','Натиснете <b>B</b>, <b>I</b> или <b>U</b>. За размера докоснете полето с числото (напр. 11) и изберете <b>16</b>.'],
+  pc:['Маркирайте думата с двойно щракване.','В раздел <b>Начало</b> натиснете <b>B</b> (<kbd>Ctrl</kbd>+<kbd>B</kbd>), <b>I</b> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) или <b>U</b> (<kbd>Ctrl</kbd>+<kbd>U</kbd>).','За размера отворете списъка с числото до шрифта и изберете <b>16</b>.'],
+  sim:h=>wordSim(h,{tools:['b','size'],fname:'Заявление.docx',doc:`<div>До Директора на ЦПО</div><div><br></div><div style="text-align:center">ЗАЯВЛЕНИЕ</div><div><br></div><div>от Мария Иванова Петрова, с. Чепинци</div><div><br></div><div>Уважаеми господин Директор,</div><div>Моля да ми бъде издадена служебна бележка, че съм курсист в курса „Административни и офис дейности“.</div>`}),
+  check:s=>{const e=[],d=s.ed;W(e,wAll(d,'ЗАЯВЛЕНИЕ',isBold),'„ЗАЯВЛЕНИЕ“ не е удебелено.');W(e,wAll(d,'ЗАЯВЛЕНИЕ',x=>Math.round(ptOf(x))===16),'„ЗАЯВЛЕНИЕ“ не е с размер 16.');W(e,wAll(d,'Мария Иванова Петрова',isItalic),'Името не е в курсив.');W(e,wAll(d,'служебна бележка',isUnder),'„служебна бележка“ не е подчертано.');return e}},
+ {id:'word2',title:'Подравняване на абзаци',plan:'Б2 2.1 · А3 1.3.5',
+  theory:`<ul><li><b>Вляво</b> – обичайно за текст.</li><li><b>Центрирано</b> – за заглавия.</li><li><b>Вдясно</b> – за дата, подпис, адресат („До Директора“).</li><li><b>Двустранно</b> – текстът е изравнен от двете страни; използва се в официални писма и доклади.</li><li>Подравняването важи за целия абзац – достатъчно е курсорът да е в него.</li></ul>`,
+  goal:`<ul><li>Редовете <b>До Кмета</b> и <b>на община Рудозем</b> – вдясно;</li><li><b>ДОКЛАД</b> – центриран;</li><li>основният абзац (започва с „През месец октомври“) – двустранно;</li><li><b>Дата</b> и <b>Изготвил</b> – вдясно.</li></ul>`,
+  phone:['Докоснете в абзаца (или маркирайте няколко реда).','<b>Начало</b> → бутоните за подравняване (вляво, центрирано, вдясно, двустранно).'],
+  pc:['Щракнете в абзаца или маркирайте няколко реда.','<b>Начало</b> → <b>Абзац</b>: вляво <kbd>Ctrl</kbd>+<kbd>L</kbd>, центриране <kbd>Ctrl</kbd>+<kbd>E</kbd>, вдясно <kbd>Ctrl</kbd>+<kbd>R</kbd>, двустранно <kbd>Ctrl</kbd>+<kbd>J</kbd>.'],
+  sim:h=>wordSim(h,{tools:['b','align'],fname:'Доклад.docx',doc:`<div>До Кмета</div><div>на община Рудозем</div><div><br></div><div><b>ДОКЛАД</b></div><div><br></div><div>През месец октомври в читалището в с. Чепинци бяха проведени три обучения за младежи. В тях участваха общо 42 души, а 35 от тях получиха удостоверение за завършен курс. Предлагаме обученията да продължат и през следващата година.</div><div><br></div><div>Дата: 16.11.2026 г.</div><div>Изготвил: ...........</div>`}),
+  check:s=>{const e=[],d=s.ed,R=x=>alignOf(x)==='right';W(e,wAll(d,'До Кмета',R)&&wAll(d,'на община Рудозем',R),'„До Кмета / на община Рудозем“ не са вдясно.');W(e,wAll(d,'ДОКЛАД',x=>alignOf(x)==='center'),'„ДОКЛАД“ не е центриран.');W(e,wAll(d,'През месец октомври',x=>alignOf(x)==='justify'),'Основният абзац не е двустранно подравнен.');W(e,wAll(d,'Дата:',R)&&wAll(d,'Изготвил:',R),'„Дата“ и „Изготвил“ не са вдясно.');return e}},
+ {id:'word3',title:'Списъци с водещи символи и номериране',plan:'Б2 2.2 – Създаване на списъци',
+  theory:`<ul><li><b>Водещи символи</b> (точки) – когато редът няма значение.</li><li><b>Номериране</b> (1, 2, 3) – когато има ред или стъпки.</li><li>Маркирайте редовете и натиснете бутона – всеки абзац става отделна точка.</li><li><kbd>Enter</kbd> два пъти подред спира списъка.</li></ul>`,
+  goal:`<ul><li>Трите документа под „Прилагам:“ – <b>списък с водещи символи</b>;</li><li>трите стъпки под „Ред за подаване:“ – <b>номериран списък</b>.</li></ul>`,
+  phone:['Маркирайте редовете.','<b>Начало</b> → <b>Водещи символи</b> или <b>Номериране</b>.'],
+  pc:['Маркирайте редовете с мишката.','<b>Начало</b> → <b>Абзац</b> → <b>Водещи символи</b> или <b>Номериране</b>.'],
+  sim:h=>wordSim(h,{tools:['b','lists'],fname:'Документи.docx',doc:`<div>Прилагам:</div><div>Копие от лична карта</div><div>Диплома за завършено образование</div><div>Медицинско свидетелство</div><div><br></div><div>Ред за подаване:</div><div>Попълнете заявлението</div><div>Приложете документите</div><div>Подайте ги в деловодството</div>`}),
+  check:s=>{const e=[],d=s.ed;const ul=$$('ul li',d).map(x=>x.textContent),ol=$$('ol li',d).map(x=>x.textContent);
+    ['Копие','Диплома','Медицинско'].forEach(t=>W(e,ul.some(x=>x.includes(t)),`„${t}…“ не е в списък с водещи символи.`));
+    ['Попълнете','Приложете','Подайте'].forEach(t=>W(e,ol.some(x=>x.includes(t)),`„${t}…“ не е в номериран списък.`));
+    W(e,![...ul,...ol].some(x=>/Прилагам|Ред за/.test(x)),'Заглавните редове („Прилагам:“, „Ред за подаване:“) не трябва да са в списъка.');return e}},
+ {id:'word4',title:'Специални символи и колони',plan:'Б2 2.2 – Символи (Insert / Symbol), текст в колони',
+  theory:`<ul><li>Знаци, които ги няма на клавиатурата (№, €, ©, §, „ “), се вмъкват от <b>Вмъкване → Символ</b>.</li><li>В документите се пише „Заповед <b>№</b> 15“, а не „No 15“.</li><li><b>Оформление → Колони</b> разделя текста като във вестник – удобно за обяви и листовки.</li></ul>`,
+  goal:`<ul><li>Пред числото <b>15</b> в първия ред вмъкнете символа <b>№</b> (да стане „Заповед № 15“);</li><li>след „Цена: 25“ вмъкнете знака <b>€</b>;</li><li>направете целия документ на <b>две колони</b>.</li></ul>`,
+  phone:['Докоснете мястото, където ще е символът.','<b>Вмъкване</b> → <b>Символ</b> и изберете знака.','Колони: <b>Оформление</b> → <b>Колони</b> → <b>Две</b>.'],
+  pc:['Щракнете на мястото за символа.','<b>Вмъкване</b> → <b>Символ</b> → изберете знака (ако го няма – <b>Още символи</b>).','<b>Оформление</b> → <b>Колони</b> → <b>Две</b>.'],
+  sim:h=>wordSim(h,{tools:['b','align','symbol','cols'],fname:'Обява.docx',doc:`<div>Заповед 15 / 16.11.2026 г.</div><div><br></div><div>Курс „Административни и офис дейности“ в с. Чепинци продължава до януари. Занятията са в читалището от 8:30 ч. Участниците се обучават на работа с документи, Word, Excel и PowerPoint.</div><div><br></div><div>Цена: 25</div><div>Записване в читалището или по телефона. Местата са ограничени, затова побързайте. Ще получите удостоверение след успешен изпит.</div>`}),
+  check:s=>{const e=[],t=wText(s.ed);W(e,/№\s?15/.test(t),'Няма „№ 15“ в първия ред.');W(e,/25\s?€/.test(t),'Няма „25 €“.');W(e,s.cols===2,'Документът не е на две колони.');return e}},
+ {id:'word5',title:'Търсене и заместване',plan:'Б2 2.3 – Търсене и заместване на текст',
+  theory:`<ul><li><b>Търсене</b> (<kbd>Ctrl</kbd>+<kbd>F</kbd>) намира дума в дълъг документ.</li><li><b>Заместване</b> (<kbd>Ctrl</kbd>+<kbd>H</kbd>) сменя дума навсякъде наведнъж – без пропуснати места.</li><li>Пример: документ от миналата година – сменяте „2025“ с „2026“.</li><li><b>Отмяна</b> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) връща последното действие.</li></ul>`,
+  goal:`<p>Документът е от миналата година. Заменете навсякъде <b>2025</b> с <b>2026</b> и името <b>Иванова</b> с <b>Георгиева</b>.</p>`,
+  phone:['Натиснете иконата с лупа горе.','Напишете търсената дума, после отворете настройките (⚙ или ⋯) → <b>Замести</b>.','Въведете новата дума и натиснете <b>Замести всички</b>.'],
+  pc:['<b>Начало</b> → <b>Замести</b> (или <kbd>Ctrl</kbd>+<kbd>H</kbd>).','В „Търси“ напишете <b>2025</b>, в „Замести с“ – <b>2026</b>.','Натиснете <b>Замести всички</b>. Повторете за името.'],
+  sim:h=>wordSim(h,{tools:['b','find'],fname:'Протокол.docx',doc:`<div style="text-align:center"><b>ПРОТОКОЛ № 3</b></div><div style="text-align:center">от 12.11.2025 г.</div><div><br></div><div>Днес, 12.11.2025 г., се проведе среща на екипа. Присъстваха: Мария Иванова, Петър Стоянов и Елена Димова.</div><div>Мария Иванова представи плана за 2025 г. Решено бе отчетът за 2025 г. да се изпрати до 20.11.2025 г.</div><div><br></div><div>Протоколчик: Мария Иванова</div>`}),
+  check:s=>{const e=[],t=wText(s.ed);W(e,!t.includes('2025'),'В текста все още има „2025“.');W(e,(t.match(/2026/g)||[]).length>=5,'Някои години не са сменени с „2026“.');W(e,!t.includes('Иванова'),'В текста все още има „Иванова“.');W(e,(t.match(/Георгиева/g)||[]).length>=3,'Името „Георгиева“ не е навсякъде.');return e}},
+ {id:'word6',title:'Горен и долен колонтитул',plan:'Б2 2.3 – Постоянни заглавия, колонтитули',
+  theory:`<ul><li><b>Колонтитулът</b> е текст, който се повтаря горе или долу на всяка страница.</li><li><b>Горен</b> – име на организацията, лого, заглавие на документа.</li><li><b>Долен</b> – номер на страница, адрес, телефон.</li><li>Пише се веднъж и се появява на всички страници.</li></ul>`,
+  goal:`<ul><li>В <b>горния колонтитул</b> напишете: <b>Младежи за развитие и вдъхновение</b>;</li><li>в <b>долния колонтитул</b> вмъкнете <b>номер на страница</b>.</li></ul>`,
+  phone:['<b>Вмъкване</b> → <b>Горен и долен колонтитул</b>.','Напишете текста в горната част.','За номер: <b>Вмъкване</b> → <b>Номера на страници</b>.'],
+  pc:['<b>Вмъкване</b> → <b>Горен колонтитул</b> (или двойно щракване в най-горната част на страницата).','Напишете текста.','<b>Вмъкване</b> → <b>Номер на страница</b> → <b>Долу на страницата</b>.'],
+  sim:h=>wordSim(h,{tools:['b','align','hf'],hf:true,fname:'Отчет.docx',doc:`<div style="text-align:center"><b>ОТЧЕТ ЗА ДЕЙНОСТТА</b></div><div><br></div><div>През годината сдружението организира обучения, срещи и доброволчески инициативи в общините Рудозем и Смолян.</div>`}),
+  check:s=>{const e=[];W(e,/Младежи за развитие и вдъхновение/i.test(s.hdr.innerText),'Горният колонтитул не съдържа „Младежи за развитие и вдъхновение“.');W(e,/\d/.test(s.ftr.innerText),'В долния колонтитул няма номер на страница.');return e}},
+ {id:'word7',title:'Картини, текстово поле и визитка',plan:'Б2 2.4 – Графични обекти · Б2 2.5 – Визитка',
+  theory:`<ul><li><b>Вмъкване → Картини</b> добавя изображение (лого, снимка).</li><li><b>Текстово поле</b> е рамка с текст, която може да се мести свободно.</li><li><b>Визитката</b> е малка карта: име, длъжност, телефон, имейл, лого. Размер 9 × 5 см.</li><li>На визитката името е най-едро и обикновено центрирано.</li></ul>`,
+  goal:`<p>Направете визитката:</p><ul><li>вмъкнете картината <b>Лого</b>;</li><li>името <b>Мария Петрова</b> – удебелено, центрирано, размер поне <b>16</b>;</li><li>вмъкнете картината <b>Телефон</b> пред телефонния номер.</li></ul>`,
+  phone:['Докоснете мястото. <b>Вмъкване</b> → <b>Картини</b> и изберете снимка.','Маркирайте името → <b>Начало</b> → <b>B</b>, размер и центриране.'],
+  pc:['Щракнете на мястото. <b>Вмъкване</b> → <b>Картини</b> → <b>Това устройство</b>.','Маркирайте името → <b>B</b>, <b>16</b>, <kbd>Ctrl</kbd>+<kbd>E</kbd>.'],
+  sim:h=>wordSim(h,{tools:['b','size','align','pic','textbox'],page:'card',fname:'Визитка.docx',doc:`<div><br></div><div>Мария Петрова</div><div style="text-align:center">Офис администратор</div><div style="text-align:center">0888 123 456</div><div style="text-align:center">maria@rodopi.bg</div>`}),
+  check:s=>{const e=[],d=s.ed,imgs=$$('img',d).map(i=>i.alt);W(e,imgs.includes('Лого'),'Няма вмъкната картина „Лого“.');W(e,imgs.includes('Телефон'),'Няма вмъкната картина „Телефон“.');W(e,wAll(d,'Мария Петрова',isBold),'Името не е удебелено.');W(e,wAll(d,'Мария Петрова',x=>alignOf(x)==='center'),'Името не е центрирано.');W(e,wAll(d,'Мария Петрова',x=>ptOf(x)>=15.9),'Името е с размер под 16.');return e}},
+ {id:'word8',title:'Таблици в Word',plan:'Б2 2.5 – Работа с таблици · А3 1.3.5',
+  theory:`<ul><li>Таблицата подрежда данни в <b>редове</b> и <b>колони</b>. Кутийката е <b>клетка</b>.</li><li><b>Вмъкване → Таблица</b> – избирате брой колони и редове.</li><li>Между клетките се минава с <kbd>Tab</kbd>. <kbd>Tab</kbd> в последната клетка добавя нов ред.</li><li>Първият ред е заглавен – обикновено удебелен.</li></ul>`,
+  goal:`<p>Под „Списък на участниците“ вмъкнете таблица с <b>3 колони</b> и <b>3 реда</b>. В първия ред напишете <b>№</b>, <b>Име</b>, <b>Телефон</b> и ги удебелете. Попълнете още поне един участник.</p>`,
+  phone:['Докоснете под заглавието. <b>Вмъкване</b> → <b>Таблица</b>.','Докоснете клетка и пишете. Таблицата се разширява от <b>Вмъкване</b> на ред/колона.'],
+  pc:['Щракнете под заглавието. <b>Вмъкване</b> → <b>Таблица</b> → маркирайте 3 × 3 квадратчета.','Пишете в клетките, минавайте с <kbd>Tab</kbd>.','Маркирайте първия ред → <kbd>Ctrl</kbd>+<kbd>B</kbd>.'],
+  sim:h=>wordSim(h,{tools:['b','align','table'],fname:'Участници.docx',doc:`<div style="text-align:center"><b>Списък на участниците</b></div><div><br></div>`}),
+  check:s=>{const e=[],t=$('table',s.ed);if(!t)return['Няма вмъкната таблица.'];const rows=$$('tr',t);W(e,rows.length>=3,'Таблицата има по-малко от 3 реда.');W(e,rows[0]&&rows[0].cells.length===3,'Таблицата не е с 3 колони.');
+    const h=rows[0]?[...rows[0].cells].map(c=>c.innerText.trim()):[];W(e,h[0]==='№'&&/^име$/i.test(h[1]||'')&&/^телефон$/i.test(h[2]||''),'Първият ред трябва да е: №, Име, Телефон.');
+    W(e,rows[0]&&[...rows[0].cells].every(c=>!c.innerText.trim()||wAll(c,c.innerText.trim(),isBold)),'Заглавният ред не е удебелен.');W(e,rows.slice(1).some(r=>[...r.cells].some(c=>c.innerText.trim())),'Попълнете поне един участник.');return e}},
+ {id:'word9',title:'Попълване на документ по шаблон',plan:'А3 1.3.8 – Попълване на документи по шаблон',
+  theory:`<ul><li><b>Шаблонът</b> е готов документ с празни места. Използва се за молби, заявления, служебни бележки.</li><li>Попълват се само полетата – не се мени останалият текст.</li><li>Маркирайте полето в скоби (напр. <i>[Име]</i>) и напишете върху него – старият текст се заменя.</li><li>Проверете датата, ЕГН и имената – грешка в тях прави документа невалиден.</li></ul>`,
+  goal:`<p>Попълнете служебната бележка: заменете всички полета в <span class="wph">[жълто]</span> с данни: име <b>Елена Димова Стоянова</b>, курс <b>Административни и офис дейности</b>, дата <b>16.11.2026</b>, място <b>с. Чепинци</b>.</p>`,
+  phone:['Докоснете два пъти полето, разширете маркирането до двете скоби.','Напишете новия текст – той замества маркирания.'],
+  pc:['Маркирайте полето заедно със скобите.','Напишете новия текст.','Минавайте към следващото поле.'],
+  sim:h=>wordSim(h,{tools:['b','align'],fname:'Служебна бележка.docx',doc:`<div style="text-align:center"><b>СЛУЖЕБНА БЕЛЕЖКА</b></div><div><br></div><div>Удостоверяваме, че <span class="wph">[Име, презиме, фамилия]</span> е курсист в курса „<span class="wph">[Име на курса]</span>“, който се провежда в <span class="wph">[Населено място]</span>.</div><div><br></div><div>Бележката се издава, за да послужи пред работодател.</div><div><br></div><div>Дата: <span class="wph">[дд.мм.гггг]</span></div><div style="text-align:right">Директор: ...........</div>`}),
+  check:s=>{const e=[],t=wText(s.ed);W(e,!/[\[\]]/.test(t),'Има непопълнени полета в квадратни скоби.');W(e,t.includes('Елена Димова Стоянова'),'Името „Елена Димова Стоянова“ липсва.');W(e,t.includes('Административни и офис дейности'),'Името на курса липсва.');W(e,t.includes('16.11.2026'),'Датата 16.11.2026 липсва.');W(e,/с\. ?Чепинци/.test(t),'Мястото „с. Чепинци“ липсва.');return e}},
+ {id:'word10',title:'Слети документи (циркулярни писма)',plan:'Б2 2.6 – Създаване на слети документи',
+  theory:`<ul><li><b>Сливането</b> прави много еднакви писма с различни имена и адреси – напр. 50 покани.</li><li>Три части: <b>главен документ</b> (текстът на писмото), <b>източник на данни</b> (списък – обикновено таблица в Excel) и <b>слят документ</b> (готовите писма).</li><li>В главния документ се вмъкват <b>полета</b> като «Име», «Адрес».</li><li><b>Преглед на резултатите</b> показва как изглежда всяко писмо преди края.</li><li>На телефон сливане няма – прави се на компютър.</li></ul>`,
+  goal:`<p>В поканата вмъкнете полетата: <b>«Обръщение»</b> и <b>«Име»</b> след „Уважаем(а)“, а <b>«Адрес»</b> на реда „Адрес:“. Прегледайте резултатите и натиснете <b>Завърши и слей</b>.</p>`,
+  phone:'Сливането на документи не се поддържа в мобилното приложение. Упражнявайте в симулатора, а на истинския компютър – с <b>Пощенски списъци</b>.',
+  pc:['<b>Пощенски списъци</b> → <b>Избор на получатели</b> → <b>Използване на съществуващ списък</b> (файл от Excel).','Щракнете на мястото и натиснете <b>Вмъкни поле за сливане</b> → изберете полето.','<b>Преглед на резултатите</b> – вижте писмата със стрелките.','<b>Завърши и слей</b> → <b>Редактиране на отделни документи</b>.'],
+  sim:h=>wordSim(h,{tools:['b','merge'],fname:'Покана.docx',fields:['Обръщение','Име','Адрес'],records:[{'Обръщение':'г-жо','Име':'Петрова','Адрес':'с. Чепинци, ул. „Родопи“ 5'},{'Обръщение':'г-н','Име':'Стоянов','Адрес':'гр. Рудозем, ул. „Вас. Левски“ 12'},{'Обръщение':'г-жо','Име':'Димова','Адрес':'с. Елховец, ул. „Здравец“ 3'}],
+    doc:`<div>Адрес: </div><div><br></div><div style="text-align:center"><b>ПОКАНА</b></div><div><br></div><div>Уважаем(а) </div><div>Каним Ви на церемонията по връчване на удостоверенията на 15.01.2027 г. от 11:00 ч. в читалището в с. Чепинци.</div><div style="text-align:right">Екипът на курса</div>`}),
+  check:s=>{const e=[],f=$$('.wf',s.ed).map(x=>x.dataset.f);['Обръщение','Име','Адрес'].forEach(k=>W(e,f.includes(k),`Не е вмъкнато полето «${k}».`));W(e,s.merged,'Не сте натиснали „Завърши и слей“ (или сте го натиснали преди да вмъкнете всички полета).');
+    if(s.merged&&!$$('.wmerged .m').every(m=>!/«/.test(m.textContent)))e.push('Има неслети полета.');if(s.merged){const last=$('.wmerged .m:last-child');if(f.length===3&&last&&!last.textContent.includes('Димова'))e.push('Натиснете отново „Завърши и слей“, след като вмъкнете всички полета.')}return e}},
+ {id:'word11',title:'Надписване на пликове',plan:'Б2 2.7 – Надписване на пликове',
+  theory:`<ul><li>На плика горе вляво е <b>подателят</b>, а долу вдясно – <b>получателят</b>.</li><li>Ред на адреса: име → улица и номер → пощенски код и населено място.</li><li>Пощенският код се пише <b>преди</b> населеното място: <i>4960 Рудозем</i>.</li><li>В Word: <b>Пощенски списъци</b> → <b>Пликове</b>.</li></ul>`,
+  goal:`<p>Надпишете плик:</p><ul><li><b>Получател:</b> Община Рудозем / пл. „Възраждане“ 1 / 4960 Рудозем</li><li><b>Подател:</b> Младежи за развитие и вдъхновение / с. Чепинци / 4964 Чепинци</li></ul><p>Всяка част на нов ред. После натиснете <b>Добави към документа</b>.</p>`,
+  phone:'Пликове се надписват от Word за компютър. Упражнявайте в симулатора.',
+  pc:['<b>Пощенски списъци</b> → <b>Пликове</b>.','Попълнете <b>Адрес за доставка</b> (получател) и <b>Адрес за връщане</b> (подател).','<b>Опции</b> – размер на плика (напр. DL). После <b>Добави към документа</b> или <b>Печат</b>.'],
+  sim:h=>{const st={};const app=el('<div class="app"></div>');h.appendChild(app);
+    ribbon(app,'#2b579a',[{name:'Файл',tools:[]},{name:'Начало',tools:[]},{name:'Вмъкване',tools:[]},{name:'Пощенски списъци',tools:[{id:'env',html:'✉ Пликове',title:'Пликове',run:()=>{}}]}],'Плик.docx',3);
+    const box=el(`<div class="wpw"><div class="envform"><b>Пликове и етикети</b><label>Адрес за доставка (получател):</label><textarea id="to" rows="3"></textarea><label>Адрес за връщане (подател):</label><textarea id="fr" rows="3"></textarea><div><button class="btn primary" id="add">Добави към документа</button></div></div><div class="env"><div class="stamp">марка</div><div class="from"></div><div class="to"></div></div></div>`);
+    app.appendChild(box);const up=()=>{$('.from',box).textContent=$('#fr',box).value;$('.to',box).textContent=$('#to',box).value};
+    $('#to',box).oninput=up;$('#fr',box).oninput=up;$('#add',box).onclick=()=>{st.added=true;st.to=$('#to',box).value;st.fr=$('#fr',box).value;toast('Пликът е добавен към документа.')};st.box=box;return st},
+  check:s=>{const e=[];if(!s.added)return['Натиснете „Добави към документа“.'];const to=s.to.split('\n').map(x=>x.trim()).filter(Boolean),fr=s.fr.split('\n').map(x=>x.trim()).filter(Boolean);
+    W(e,to.length>=3,'Адресът на получателя трябва да е на 3 реда.');W(e,/Община Рудозем/i.test(to[0]||''),'Първият ред на получателя трябва да е „Община Рудозем“.');W(e,/^4960\s+Рудозем/.test(to[to.length-1]||''),'Последният ред на получателя трябва да е „4960 Рудозем“ (кодът е преди града).');
+    W(e,fr.length>=3&&/Младежи/i.test(fr[0]),'Подателят трябва да започва с „Младежи за развитие и вдъхновение“ и да е на 3 реда.');W(e,/^4964\s+Чепинци/.test(fr[fr.length-1]||''),'Последният ред на подателя трябва да е „4964 Чепинци“.');
+    if(!e.length&&(s.to!==$('#to',s.box).value||s.fr!==$('#fr',s.box).value))e.push('Променили сте адреса след добавянето – натиснете пак „Добави към документа“.');return e}},
+ ]});
+
+/* ===== Модул: Excel ===== */
+document.head.appendChild(Object.assign(document.createElement('style'),{textContent:`
+.xfx{display:flex;gap:4px;padding:6px;border-bottom:1px solid #ddd;align-items:center;background:#fff}
+.xfx .nb{width:74px;font:13px Inter,sans-serif;padding:6px;border:1px solid #ccc;border-radius:4px;text-transform:uppercase}
+.xfx .fx{flex:1;min-width:0;font:15px Consolas,"Courier New",monospace;padding:6px 8px;border:1px solid #ccc;border-radius:4px}
+.xfx .fx:focus{border-color:#217346;outline:none;box-shadow:0 0 0 2px #21734633}
+.xfx button{border:1px solid #ccc;background:#f7f7f7;border-radius:4px;height:32px;min-width:34px;cursor:pointer;font-size:14px}
+.xfx button.on{background:#d7eadf;border-color:#217346}
+.xfx .fxl{font:italic 600 14px Georgia,serif;color:#666;padding:0 2px}
+.xgw{overflow:auto;max-height:470px;background:#fff;position:relative}
+.xg{border-collapse:collapse;font:14px Calibri,Inter,sans-serif;user-select:none;-webkit-user-select:none}
+.xg th{background:#f3f3f3;border:1px solid #d4d4d4;font-weight:400;color:#555;font-size:12px;padding:2px 4px;position:sticky;top:0;z-index:2}
+.xg th.rh{position:sticky;left:0;z-index:1;width:32px;text-align:center}
+.xg th.corner{left:0;z-index:3}
+.xg th.hl{background:#d7eadf;color:#185c37;font-weight:600}
+.xg td{border:1px solid #e1e1e1;height:26px;padding:0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:cell;position:relative;max-width:180px}
+.xg td.num{text-align:right}
+.xg td.b{font-weight:700}
+.xg td.in{background:#e8f2ec}
+.xg td.act{outline:2px solid #217346;outline-offset:-2px;background:#fff}
+.xg td.err{color:#c00}
+.xg td .fb{position:absolute;right:1px;top:3px;width:18px;height:18px;border:1px solid #aaa;background:#fff;border-radius:3px;font-size:10px;line-height:16px;text-align:center;cursor:pointer;padding:0}
+.xg td .fb.f{background:#217346;color:#fff;border-color:#217346}
+.xg td .hdl{position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;background:#217346;border:1px solid #fff;cursor:crosshair;touch-action:none;z-index:3}
+.xg tr.fh th.rh{color:#0b62c4}
+.xout{padding:10px;display:grid;gap:12px;background:#fafafa;border-top:1px solid #ddd}
+.xout:empty{display:none}
+.xchart{background:#fff;border:1px solid #ccc;border-radius:6px;padding:8px;max-width:520px}
+.xchart h6{margin:0 0 4px;font:600 13px Inter,sans-serif;text-align:center}
+.xpiv{background:#fff;border:1px solid #ccc;border-radius:6px;padding:8px;max-width:420px;font-size:14px}
+.xpiv table{border-collapse:collapse;width:100%}.xpiv td,.xpiv th{border:1px solid #c9d9ee;padding:3px 8px}.xpiv th{background:#dde8f6;text-align:left}.xpiv tr.tot td{font-weight:700;border-top:2px solid #6f8fbf}
+.xpiv td.n{text-align:right}
+.xsheets{display:flex;gap:2px;background:#f0f0f0;border-top:1px solid #ccc;padding:0 6px;font-size:12px}
+.xsheets span{padding:5px 12px;background:#fff;border-bottom:3px solid #217346;color:#217346;font-weight:600}
+.xprev{position:absolute;inset:0;background:rgba(60,60,60,.85);z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
+.xprev .pp{background:#fff;box-shadow:0 2px 10px #000;padding:16px;overflow:hidden;font-size:7px}
+.xprev .pp table{border-collapse:collapse}.xprev .pp td{border:1px solid #bbb;padding:1px 3px;white-space:nowrap}
+.xprev .xbar{color:#fff;font-size:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+`}));
+
+const XC='ABCDEFGHIJKL';
+const xref=(r,c)=>XC[c-1]+r;
+function xparse(ref){const m=/^\$?([A-L])\$?(\d+)$/i.exec(ref.trim());return m?{c:XC.indexOf(m[1].toUpperCase())+1,r:+m[2]}:null}
+function xnum(v){if(typeof v==='number')return v;const s=String(v).trim();if(/^-?\d+([.,]\d+)?%$/.test(s))return parseFloat(s.replace(',','.'))/100;if(/^-?\d+([.,]\d+)?$/.test(s))return parseFloat(s.replace(',','.'));return null}
+function xfmtNum(n,f){
+  const fx=(v,d)=>v.toLocaleString('bg-BG',{minimumFractionDigits:d,maximumFractionDigits:d});
+  if(f==='eur')return fx(n,2)+' €';if(f==='pct')return fx(n*100,Number.isInteger(Math.round(n*10000)/100)?0:2)+'%';if(f==='n2')return fx(n,2);
+  return (Math.round(n*1e9)/1e9).toLocaleString('bg-BG',{maximumFractionDigits:9,useGrouping:false});
+}
+// Измества относителните адреси във формула (при копиране/попълване)
+function xshift(f,dr,dc){return f.replace(/(\$?)([A-L])(\$?)(\d+)(?![\d(])/gi,(m,a,c,b,r,off)=>{if(/[A-Z]/i.test(f[off-1]||''))return m;const nc=a?c:XC[XC.indexOf(c.toUpperCase())+dc]||'#',nr=b?r:(+r+dr);return a+nc+b+(nr>0?nr:'#')})}
+
+/* ---- формули ---- */
+class XErr{constructor(e){this.e=e}}
+function xeval(src,get){
+  const toks=[];let s=src,m;
+  while(s.length){
+    if(m=/^\s+/.exec(s)){s=s.slice(m[0].length);continue}
+    if(m=/^"([^"]*)"/.exec(s))toks.push({t:'s',v:m[1]});
+    else if(m=/^\$?[A-L]\$?\d+(:\$?[A-L]\$?\d+)?(?![\w(])/i.exec(s))toks.push({t:'ref',v:m[0].toUpperCase()});
+    else if(m=/^[A-Z]+(?=\s*\()/i.exec(s))toks.push({t:'fn',v:m[0].toUpperCase()});
+    else if(m=/^\d+([.,]\d+)?/.exec(s))toks.push({t:'n',v:parseFloat(m[0].replace(',','.'))});
+    else if(m=/^(<=|>=|<>|[-+*/^();,%&=<>:])/.exec(s))toks.push({t:'op',v:m[0]});
+    else throw new XErr('#NAME?');
+    s=s.slice(m[0].length);
+  }
+  let i=0;const pk=()=>toks[i],nx=()=>toks[i++];
+  const isOp=v=>pk()&&pk().t==='op'&&pk().v===v;
+  const N=v=>{if(v instanceof XErr)throw v;if(Array.isArray(v))v=v[0];if(v===''||v==null)return 0;if(typeof v==='number')return v;if(typeof v==='boolean')return v?1:0;const n=xnum(v);if(n==null)throw new XErr('#VALUE!');return n};
+  function cmp(){let a=add();while(pk()&&pk().t==='op'&&['=','<>','<','>','<=','>='].includes(pk().v)){const o=nx().v,b=add();const x=Array.isArray(a)?a[0]:a,y=Array.isArray(b)?b[0]:b;
+    a=o==='='?x==y:o==='<>'?x!=y:o==='<'?N(x)<N(y):o==='>'?N(x)>N(y):o==='<='?N(x)<=N(y):N(x)>=N(y)}return a}
+  function add(){let a=mul();while(isOp('+')||isOp('-')||isOp('&')){const o=nx().v,b=mul();a=o==='&'?String(a)+String(b):o==='+'?N(a)+N(b):N(a)-N(b)}return a}
+  function mul(){let a=pow();while(isOp('*')||isOp('/')){const o=nx().v,b=pow();if(o==='/'&&N(b)===0)throw new XErr('#DIV/0!');a=o==='*'?N(a)*N(b):N(a)/N(b)}return a}
+  function pow(){let a=un();while(isOp('^')){nx();a=Math.pow(N(a),N(un()))}return a}
+  function un(){if(isOp('-')){nx();return -N(un())}if(isOp('+')){nx();return N(un())}let v=prim();if(isOp('%')){nx();v=N(v)/100}return v}
+  function prim(){const t=nx();if(!t)throw new XErr('#ГРЕШКА');
+    if(t.t==='n')return t.v;if(t.t==='s')return t.v;
+    if(t.t==='ref'){if(t.v.includes(':')){const [a,b]=t.v.split(':').map(xparse);const out=[];for(let r=Math.min(a.r,b.r);r<=Math.max(a.r,b.r);r++)for(let c=Math.min(a.c,b.c);c<=Math.max(a.c,b.c);c++)out.push(get(r,c));return out}const p=xparse(t.v);return get(p.r,p.c)}
+    if(t.t==='op'&&t.v==='('){const v=cmp();if(!isOp(')'))throw new XErr('#ГРЕШКА');nx();return v}
+    if(t.t==='fn'){nx();const args=[];if(!isOp(')')){do{args.push(cmp())}while((isOp(';')||isOp(','))&&nx())}if(!isOp(')'))throw new XErr('#ГРЕШКА');nx();return call(t.v,args)}
+    throw new XErr('#ГРЕШКА')}
+  function flat(args){const o=[];args.forEach(a=>{(Array.isArray(a)?a:[a]).forEach(v=>{if(v instanceof XErr)throw v;o.push(v)})});return o}
+  function nums(args){return flat(args).map(v=>typeof v==='number'?v:null).filter(v=>v!=null)}
+  function call(f,a){
+    switch(f){
+      case 'SUM':return nums(a).reduce((x,y)=>x+y,0);
+      case 'AVERAGE':{const n=nums(a);if(!n.length)throw new XErr('#DIV/0!');return n.reduce((x,y)=>x+y,0)/n.length}
+      case 'MAX':{const n=nums(a);return n.length?Math.max(...n):0}
+      case 'MIN':{const n=nums(a);return n.length?Math.min(...n):0}
+      case 'COUNT':return nums(a).length;
+      case 'COUNTA':return flat(a).filter(v=>v!==''&&v!=null).length;
+      case 'ROUND':{const k=Math.pow(10,N(a[1]||0));return Math.round(N(a[0])*k)/k}
+      case 'IF':return a[0]?(a.length>1?a[1]:true):(a.length>2?a[2]:false);
+      default:throw new XErr('#NAME?');
+    }
+  }
+  const v=cmp();if(i<toks.length)throw new XErr('#ГРЕШКА');return Array.isArray(v)?v[0]:v;
+}
+
+/* ---- симулатор ---- */
+function xlSim(host,cfg){
+  const R=cfg.rows||12,C=cfg.cols||6;
+  const st={cells:{},act:{r:1,c:1},sel:{r1:1,c1:1,r2:1,c2:1},filter:null,chart:null,pivot:null,pivotChart:false,orient:'portrait',previewed:false,sorted:null,cfg};
+  (cfg.data||[]).forEach((row,ri)=>row.forEach((v,ci)=>{if(v!==''&&v!=null)st.cells[xref(ri+1,ci+1)]={v:String(v)}}));
+  for(const k in (cfg.fmt||{}))Object.assign(st.cells[k]=st.cells[k]||{v:''},cfg.fmt[k]);
+  const cell=(r,c)=>st.cells[xref(r,c)];
+  const raw=(r,c)=>(cell(r,c)||{}).v||'';
+  let memo={};
+  function val(r,c,stack=[]){
+    const k=xref(r,c);if(k in memo)return memo[k];
+    const s=raw(r,c);let v;
+    if(s.startsWith('=')){if(stack.includes(k))return new XErr('#ЦИКЪЛ');try{v=xeval(s.slice(1),(rr,cc)=>{const x=val(rr,cc,[...stack,k]);if(x instanceof XErr)throw x;return x})}catch(e){v=e instanceof XErr?e:new XErr('#ГРЕШКА')}}
+    else{const n=xnum(s);v=n==null?s:n}
+    return memo[k]=v;
+  }
+  st.val=(ref)=>{memo={};const p=xparse(ref);return val(p.r,p.c)};
+  st.raw=ref=>{const p=xparse(ref);return raw(p.r,p.c)};
+  st.cell=ref=>st.cells[ref.toUpperCase()]||{};
+  function setRaw(r,c,v){const k=xref(r,c);if(!st.cells[k])st.cells[k]={v:''};st.cells[k].v=v;
+    if(/^\d+([.,]\d+)?%$/.test(v.trim())&&!st.cells[k].f)st.cells[k].f='pct'}
+
+  const app=el('<div class="app"></div>');host.appendChild(app);
+  const fmtMenu=b=>{const p=popup(b,app,`<h5>Числов формат</h5><div class="grid">${[['','Общ'],['n2','Число (2 знака след запетаята)'],['eur','Валута (€)'],['pct','Процент (%)']].map(([k,n])=>`<button data-k="${k}">${n}</button>`).join('')}</div>`);$$('button',p).forEach(x=>x.onclick=()=>{p.remove();eachSel((r,c)=>{const k=xref(r,c);st.cells[k]=st.cells[k]||{v:''};st.cells[k].f=x.dataset.k||undefined});draw()})};
+  const T=new Set(cfg.tools||[]);
+  const home=[{id:'b',html:'<span class="t">B</span>',title:'Удебелен (Ctrl+B)',run:()=>{const on=!(cell(st.act.r,st.act.c)||{}).b;eachSel((r,c)=>{const k=xref(r,c);st.cells[k]=st.cells[k]||{v:''};st.cells[k].b=on});draw()},active:()=>!!(cell(st.act.r,st.act.c)||{}).b},
+    {id:'fmt',html:'<b>0,00</b> Формат ▾',title:'Числов формат',run:fmtMenu},'|',
+    {id:'sum',html:'<b style="font-size:18px">Σ</b> АвтоСума',title:'АвтоСума',run:autoSum},
+    {id:'fill',html:'⇩ Попълни',title:'Попълни надолу (Ctrl+D)',run:()=>fillDown()},'|',
+    {id:'clr',html:'✕ Изчисти',title:'Изчисти съдържанието (Delete)',run:()=>{eachSel((r,c)=>{const k=xref(r,c);if(st.cells[k])st.cells[k].v=''});draw()}}];
+  const ins=[];
+  if(T.has('chart'))ins.push({id:'chart',html:'<svg viewBox="0 0 20 20"><rect x="3" y="9" width="3" height="8" fill="#217346"/><rect x="8.5" y="4" width="3" height="13" fill="#217346"/><rect x="14" y="11" width="3" height="6" fill="#217346"/></svg> Диаграма ▾',title:'Препоръчани диаграми',run:b=>{
+    const p=popup(b,app,`<h5>Вид диаграма</h5><div class="grid">${[['bar','Стълбовидна (колони)'],['line','Линейна'],['pie','Кръгова']].map(([k,n])=>`<button data-k="${k}">${n}</button>`).join('')}</div>`);$$('button',p).forEach(x=>x.onclick=()=>{p.remove();makeChart(x.dataset.k)})}});
+  if(T.has('pivot'))ins.push({id:'pivot',html:'<svg viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" fill="none" stroke="#217346" stroke-width="1.6"/><path d="M2 7h16M7 2v16" stroke="#217346" stroke-width="1.6"/></svg> Обобщена таблица',title:'Обобщена таблица (PivotTable)',run:b=>pivotDlg(b)});
+  const data=[];
+  if(T.has('sort'))data.push({id:'az',html:'А→Я',title:'Сортиране от А до Я (от най-малкото)',run:()=>sortBy(1)},{id:'za',html:'Я→А',title:'Сортиране от Я до А (от най-голямото)',run:()=>sortBy(-1)});
+  if(T.has('filter'))data.push({id:'filter',html:'<svg viewBox="0 0 20 20"><path d="M2 3h16l-6 7v6l-4 2v-8z" fill="none" stroke="#333" stroke-width="1.5"/></svg> Филтър',title:'Филтър (Ctrl+Shift+L)',run:toggleFilter,active:()=>!!st.filter});
+  const page=[];
+  if(T.has('print'))page.push({id:'orient',html:'Ориентация ▾',title:'Ориентация на страницата',run:b=>{const p=popup(b,app,`<h5>Ориентация</h5><div class="grid"><button data-k="portrait">Книжна (вертикална)</button><button data-k="landscape">Албумна (хоризонтална)</button></div>`);$$('button',p).forEach(x=>x.onclick=()=>{p.remove();st.orient=x.dataset.k;toast('Ориентация: '+x.textContent)})}},
+    {id:'prev',html:'🖶 Печат',title:'Печат и предпечатен преглед (Ctrl+P)',run:preview});
+  const rb=ribbon(app,'#217346',[{name:'Файл',tools:T.has('print')?[{id:'prev2',html:'🖶 Печат',title:'Печат',run:preview}]:[]},{name:'Начало',tools:home},{name:'Вмъкване',tools:ins},{name:'Оформление на страницата',tools:page},{name:'Формули',tools:[{id:'sum2',html:'<b style="font-size:18px">Σ</b> АвтоСума',title:'АвтоСума',run:autoSum}]},{name:'Данни',tools:data}],cfg.fname||'Книга1.xlsx',1);
+  const fxbar=el(`<div class="xfx"><input class="nb" aria-label="Поле за име"><button class="ext" title="Избор на област: докоснете първата и последната клетка">⬚</button><span class="fxl">fx</span><input class="fx" aria-label="Лента за формули" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="ok" title="Въвеждане">✓</button></div>`);
+  app.appendChild(fxbar);
+  const nb=$('.nb',fxbar),fx=$('.fx',fxbar),ext=$('.ext',fxbar);
+  const gw=el('<div class="xgw" tabindex="0"></div>');app.appendChild(gw);
+  const out=el('<div class="xout"></div>');app.appendChild(out);
+  app.appendChild(el('<div class="xsheets"><span>Лист1</span></div>'));
+  let extMode=false;ext.onclick=()=>{extMode=!extMode;ext.classList.toggle('on',extMode);toast(extMode?'Докоснете последната клетка на областта.':'Изборът на област е изключен.')};
+
+  function eachSel(fn){const s=norm();for(let r=s.r1;r<=s.r2;r++)for(let c=s.c1;c<=s.c2;c++)fn(r,c)}
+  function norm(){const s=st.sel;return {r1:Math.min(s.r1,s.r2),r2:Math.max(s.r1,s.r2),c1:Math.min(s.c1,s.c2),c2:Math.max(s.c1,s.c2)}}
+  function selRef(){const s=norm();return s.r1===s.r2&&s.c1===s.c2?xref(s.r1,s.c1):xref(s.r1,s.c1)+':'+xref(s.r2,s.c2)}
+  function hidden(r){if(!st.filter)return false;const f=st.filter;if(r<=f.r1||r>f.r2)return false;for(const c in f.crit){const v=val(r,+c);if(!f.crit[c].has(String(v instanceof XErr?v.e:v)))return true}return false}
+  function draw(){
+    memo={};const s=norm();
+    let h='<table class="xg"><tr><th class="corner rh"></th>';
+    for(let c=1;c<=C;c++)h+=`<th class="${c>=s.c1&&c<=s.c2?'hl':''}" style="min-width:${(cfg.w||[])[c-1]||74}px">${XC[c-1]}</th>`;h+='</tr>';
+    for(let r=1;r<=R;r++){
+      if(hidden(r))continue;
+      h+=`<tr class="${st.filter&&r>st.filter.r1&&r<=st.filter.r2?'fh':''}"><th class="rh ${r>=s.r1&&r<=s.r2?'hl':''}">${r}</th>`;
+      for(let c=1;c<=C;c++){
+        const ce=cell(r,c)||{},v=val(r,c);let txt,cls=[];
+        if(v instanceof XErr){txt=v.e;cls.push('err','num')}else if(typeof v==='number'){txt=xfmtNum(v,ce.f);cls.push('num')}else txt=esc(v);
+        if(ce.b)cls.push('b');if(r>=s.r1&&r<=s.r2&&c>=s.c1&&c<=s.c2&&(s.r1!==s.r2||s.c1!==s.c2))cls.push('in');if(r===st.act.r&&c===st.act.c)cls.push('act');
+        let extra='';
+        if(st.filter&&r===st.filter.r1&&c>=st.filter.c1&&c<=st.filter.c2)extra=`<button class="fb ${st.filter.crit[c]?'f':''}" data-fc="${c}">▾</button>`;
+        if(r===s.r2&&c===s.c2&&!st.filter)extra+='<span class="hdl" title="Плъзнете надолу, за да попълните"></span>';
+        h+=`<td data-r="${r}" data-c="${c}" class="${cls.join(' ')}" ${extra?`style="padding-right:${st.filter&&r===st.filter.r1?22:5}px"`:''}>${txt}${extra}</td>`;
+      }
+      h+='</tr>';
+    }
+    gw.innerHTML=h+'</table>';
+    nb.value=selRef();
+    if(document.activeElement!==fx)fx.value=raw(st.act.r,st.act.c);
+    rb.refresh();drawOut();
+  }
+  st.redraw=draw;
+  // ---- избор с мишка/пръст ----
+  let drag=null,refIns=null;
+  const tdAt=(x,y)=>{const t=document.elementFromPoint(x,y);return t&&t.closest&&t.closest('.xg td')};
+  const formulaMode=()=>document.activeElement===fx&&fx.value.startsWith('=');
+  gw.addEventListener('mousedown',e=>{if(formulaMode()&&e.target.closest('td'))e.preventDefault()});
+  gw.addEventListener('pointerdown',e=>{
+    const fb=e.target.closest('.fb');if(fb){e.preventDefault();filterDlg(fb,+fb.dataset.fc);return}
+    if(e.target.classList.contains('hdl')){startFill(e);return}
+    const td=e.target.closest('td');if(!td)return;
+    const r=+td.dataset.r,c=+td.dataset.c;
+    if(formulaMode()){
+      const p=fx.selectionStart;const before=fx.value.slice(0,p);
+      if(refIns&&refIns.end===p){fx.value=fx.value.slice(0,refIns.start)+fx.value.slice(refIns.end);fx.setSelectionRange(refIns.start,refIns.start)}
+      else if(!/[=(+\-*/^;,:<>&]$/.test(before)){commit();}
+      if(formulaMode()){const st0=fx.selectionStart;const ins=xref(r,c);fx.value=fx.value.slice(0,st0)+ins+fx.value.slice(st0);refIns={start:st0,end:st0+ins.length,r,c};fx.setSelectionRange(refIns.end,refIns.end);
+        st.sel={r1:r,c1:c,r2:r,c2:c};drawSelOnly();
+        if(e.pointerType==='mouse'){drag={mode:'ref'};}
+        return}
+    }
+    if(e.shiftKey||extMode){st.sel={r1:st.act.r,c1:st.act.c,r2:r,c2:c};if(extMode){extMode=false;ext.classList.remove('on')}draw();return}
+    st.act={r,c};st.sel={r1:r,c1:c,r2:r,c2:c};draw();
+    if(e.pointerType==='mouse')drag={mode:'sel'};
+  });
+  window.addEventListener('pointermove',e=>{if(!drag||drag.mode==='fill')return;const td=tdAt(e.clientX,e.clientY);if(!td||!gw.contains(td))return;const r=+td.dataset.r,c=+td.dataset.c;
+    if(drag.mode==='sel'){if(st.sel.r2!==r||st.sel.c2!==c){st.sel.r2=r;st.sel.c2=c;draw()}}
+    else if(drag.mode==='ref'&&refIns){const a=xref(refIns.r,refIns.c),b=xref(r,c);const ins=a===b?a:(xref(Math.min(refIns.r,r),Math.min(refIns.c,c))+':'+xref(Math.max(refIns.r,r),Math.max(refIns.c,c)));fx.value=fx.value.slice(0,refIns.start)+ins+fx.value.slice(refIns.end);refIns.end=refIns.start+ins.length;fx.setSelectionRange(refIns.end,refIns.end);st.sel={r1:refIns.r,c1:refIns.c,r2:r,c2:c};drawSelOnly()}});
+  window.addEventListener('pointerup',()=>{drag=null});
+  function drawSelOnly(){const s=norm();$$('td',gw).forEach(td=>{const r=+td.dataset.r,c=+td.dataset.c;td.classList.toggle('in',r>=s.r1&&r<=s.r2&&c>=s.c1&&c<=s.c2)})}
+  gw.addEventListener('dblclick',e=>{if(e.target.closest('td')){fx.focus();fx.setSelectionRange(fx.value.length,fx.value.length)}});
+  // ---- попълване с дръжката ----
+  function startFill(e){e.preventDefault();const s=norm();let to=s.r2;
+    const mv=ev=>{const td=tdAt(ev.clientX,ev.clientY);if(td){const r=+td.dataset.r;if(r>=s.r2&&r!==to){to=r;st.sel={r1:s.r1,c1:s.c1,r2:to,c2:s.c2};drawSelOnly()}}};
+    const up=()=>{window.removeEventListener('pointermove',mv);window.removeEventListener('pointerup',up);if(to>s.r2)fillDown({r1:s.r1,r2:to,c1:s.c1,c2:s.c2,srcRows:s.r2-s.r1+1});else draw()};
+    window.addEventListener('pointermove',mv);window.addEventListener('pointerup',up)}
+  function fillDown(area){
+    const s=area||norm();const n=s.srcRows||1;
+    if(s.r2===s.r1){toast('Първо маркирайте клетката с формулата и клетките под нея.');return}
+    for(let c=s.c1;c<=s.c2;c++)for(let r=s.r1+n;r<=s.r2;r++){const src=s.r1+((r-s.r1)%n);const sr=raw(src,c),sc=cell(src,c)||{};const k=xref(r,c);st.cells[k]={...sc,v:sr.startsWith('=')?xshift(sr,r-src,0):sr}}
+    st.sel={r1:s.r1,c1:s.c1,r2:s.r2,c2:s.c2};st.filled=true;draw();
+  }
+  // ---- въвеждане ----
+  function commit(move){
+    const v=fx.value;refIns=null;
+    setRaw(st.act.r,st.act.c,v);
+    if(move){st.act={r:Math.min(R,st.act.r+move),c:st.act.c}}
+    st.sel={r1:st.act.r,c1:st.act.c,r2:st.act.r,c2:st.act.c};
+    fx.blur();draw();
+  }
+  fx.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();commit(1);gw.focus({preventScroll:true})}else if(e.key==='Escape'){fx.value=raw(st.act.r,st.act.c);fx.blur();gw.focus()}else if(e.key==='Tab'){e.preventDefault();setRaw(st.act.r,st.act.c,fx.value);st.act.c=Math.min(C,st.act.c+1);st.sel={r1:st.act.r,c1:st.act.c,r2:st.act.r,c2:st.act.c};fx.blur();draw();gw.focus()}else refIns=null});
+  fx.addEventListener('input',()=>{refIns=null});
+  $('.ok',fxbar).onclick=()=>commit(0);
+  $('.ok',fxbar).addEventListener('mousedown',e=>e.preventDefault());
+  nb.addEventListener('keydown',e=>{if(e.key!=='Enter')return;e.preventDefault();const [a,b]=nb.value.toUpperCase().split(':').map(xparse);if(!a){toast('Невалиден адрес. Пример: A1 или A1:C5');return}st.act={r:a.r,c:a.c};st.sel={r1:a.r,c1:a.c,r2:(b||a).r,c2:(b||a).c};nb.blur();draw()});
+  gw.addEventListener('keydown',e=>{
+    if(document.activeElement===fx)return;
+    const k=e.key;const mv={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1],Enter:[1,0],Tab:[0,1]}[k];
+    if(mv){e.preventDefault();if(e.shiftKey&&k.startsWith('Arrow')){st.sel.r2=Math.max(1,Math.min(R,st.sel.r2+mv[0]));st.sel.c2=Math.max(1,Math.min(C,st.sel.c2+mv[1]))}else{st.act={r:Math.max(1,Math.min(R,st.act.r+mv[0])),c:Math.max(1,Math.min(C,st.act.c+mv[1]))};st.sel={r1:st.act.r,c1:st.act.c,r2:st.act.r,c2:st.act.c}}draw();return}
+    if(k==='Delete'||k==='Backspace'){e.preventDefault();eachSel((r,c)=>{const q=xref(r,c);if(st.cells[q])st.cells[q].v=''});draw();return}
+    if(k==='F2'){e.preventDefault();fx.focus();return}
+    if((e.ctrlKey||e.metaKey)&&k.toLowerCase()==='b'){e.preventDefault();home[0].run();return}
+    if((e.ctrlKey||e.metaKey)&&k.toLowerCase()==='d'){e.preventDefault();fillDown();return}
+    if(k.length===1&&!e.ctrlKey&&!e.metaKey&&!e.altKey){e.preventDefault();fx.value=k;fx.focus();fx.setSelectionRange(1,1)}
+  });
+  // ---- АвтоСума ----
+  function autoSum(){
+    const {r,c}=st.act;if(raw(r,c)){toast('Изберете празна клетка под (или вдясно от) числата.');return}
+    const isN=(rr,cc)=>typeof val(rr,cc)==='number';memo={};
+    let r0=r-1;while(r0>=1&&isN(r0,c))r0--;
+    if(r0<r-1){setRaw(r,c,`=SUM(${xref(r0+1,c)}:${xref(r-1,c)})`)}
+    else{let c0=c-1;while(c0>=1&&isN(r,c0))c0--;if(c0<c-1)setRaw(r,c,`=SUM(${xref(r,c0+1)}:${xref(r,c-1)})`);else{toast('Няма числа непосредствено над или вляво от клетката.');return}}
+    draw();toast('Вмъкната е формула '+raw(r,c));
+  }
+  // ---- област около активната клетка ----
+  function region(){
+    let {r,c}=st.act;let r1=r,r2=r,c1=c,c2=c;const ne=(rr,cc)=>rr>=1&&rr<=R&&cc>=1&&cc<=C&&raw(rr,cc)!=='';
+    let ch=true;while(ch){ch=false;
+      for(let cc=c1-1;cc<=c2+1;cc++){if(ne(r1-1,cc)){r1--;ch=true;break}}for(let cc=c1-1;cc<=c2+1;cc++){if(ne(r2+1,cc)){r2++;ch=true;break}}
+      for(let rr=r1-1;rr<=r2+1;rr++){if(ne(rr,c1-1)){c1--;ch=true;break}}for(let rr=r1-1;rr<=r2+1;rr++){if(ne(rr,c2+1)){c2++;ch=true;break}}}
+    return {r1,r2,c1,c2};
+  }
+  st.region=region;
+  // ---- сортиране ----
+  function sortBy(dir){
+    const g=region();if(g.r2-g.r1<1){toast('Щракнете в таблицата с данни.');return}
+    const col=st.act.c;memo={};
+    const rows=[];for(let r=g.r1+1;r<=g.r2;r++){const cs={};for(let c=g.c1;c<=g.c2;c++)cs[c]=cell(r,c)?{...cell(r,c)}:null;rows.push({r,cs,key:val(r,col)})}
+    rows.sort((a,b)=>{const x=a.key,y=b.key;if(typeof x==='number'&&typeof y==='number')return (x-y)*dir;return String(x).localeCompare(String(y),'bg')*dir});
+    rows.forEach((row,i)=>{const nr=g.r1+1+i;for(let c=g.c1;c<=g.c2;c++){const ce=row.cs[c];const k=xref(nr,c);if(!ce){delete st.cells[k];continue}if(ce.v&&ce.v.startsWith('='))ce.v=xshift(ce.v,nr-row.r,0);st.cells[k]=ce}});
+    st.sorted={col,dir};draw();toast(`Сортирано по колона ${XC[col-1]} ${dir>0?'от А до Я':'от Я до А'}.`);
+  }
+  // ---- филтър ----
+  function toggleFilter(){if(st.filter){st.filter=null;draw();return}const g=region();if(g.r2-g.r1<1){toast('Щракнете в таблицата с данни.');return}st.filter={...g,crit:{}};draw();toast('В заглавния ред се появиха бутони ▾.')}
+  function filterDlg(b,c){
+    const f=st.filter;memo={};const vals=[...new Set(Array.from({length:f.r2-f.r1},(_,i)=>String(val(f.r1+1+i,c))))].sort((a,b)=>a.localeCompare(b,'bg'));
+    const cur=f.crit[c];
+    const p=popup(b,app,`<button class="x">×</button><h5>Филтър: ${esc(String(val(f.r1,c)))}</h5><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="all" style="width:auto" ${!cur?'checked':''}> (Избери всички)</label><div style="max-height:200px;overflow:auto">${vals.map(v=>`<label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="${esc(v)}" ${!cur||cur.has(v)?'checked':''}> ${esc(v)}</label>`).join('')}</div><div class="row"><button id="fok">OK</button><button id="fcl">Изчисти филтъра</button></div>`);
+    const boxes=$$('input[value]',p);$('#all',p).onchange=e=>boxes.forEach(x=>x.checked=e.target.checked);
+    $('#fok',p).onclick=()=>{const s=new Set(boxes.filter(x=>x.checked).map(x=>x.value));if(s.size===vals.length)delete f.crit[c];else f.crit[c]=s;p.remove();draw()};
+    $('#fcl',p).onclick=()=>{delete f.crit[c];p.remove();draw()};
+  }
+  // ---- диаграми ----
+  function makeChart(type){
+    let s=norm();if(s.r1===s.r2&&s.c1===s.c2)s=region();memo={};
+    let lc=s.c1,vc=null;for(let c=s.c1;c<=s.c2;c++){if(typeof val(s.r1+1,c)==='number'){vc=c;break}}
+    if(vc==null||vc===lc){toast('Маркирайте колона с имена и колона с числа (със заглавията).');return}
+    const hasHdr=typeof val(s.r1,vc)!=='number';const start=hasHdr?s.r1+1:s.r1;
+    const labels=[],values=[];for(let r=start;r<=s.r2;r++){if(hidden(r))continue;const v=val(r,vc);if(typeof v!=='number')continue;labels.push(String(val(r,lc)));values.push(v)}
+    st.chart={type,labels,values,title:hasHdr?String(val(s.r1,vc)):'Диаграма'};drawOut();toast('Диаграмата е вмъкната под таблицата.');
+    setTimeout(()=>{const ch=$('.xchart',out);if(ch)ch.scrollIntoView({behavior:'smooth',block:'nearest'})},50);
+  }
+  function chartSVG(ch){
+    const W=480,H=240,P=36;const max=Math.max(...ch.values,0)||1;const n=ch.values.length;const cols=['#217346','#2b6a8a','#b5501f','#7b4fb8','#c49a1a','#c43e1c','#4b8bbe','#888'];
+    if(ch.type==='pie'){let a=-Math.PI/2;const tot=ch.values.reduce((x,y)=>x+y,0)||1;let s='';ch.values.forEach((v,i)=>{const a2=a+v/tot*Math.PI*2;const x1=120+90*Math.cos(a),y1=120+90*Math.sin(a),x2=120+90*Math.cos(a2),y2=120+90*Math.sin(a2);s+=`<path d="M120 120L${x1} ${y1}A90 90 0 ${a2-a>Math.PI?1:0} 1 ${x2} ${y2}z" fill="${cols[i%8]}" stroke="#fff"/>`;a=a2});
+      return `<svg viewBox="0 0 ${W} ${H}" width="100%">${s}${ch.labels.map((l,i)=>`<rect x="250" y="${20+i*22}" width="12" height="12" fill="${cols[i%8]}"/><text x="268" y="${30+i*22}" font-size="12">${esc(l)} – ${xfmtNum(ch.values[i])}</text>`).join('')}</svg>`}
+    const bw=(W-P-10)/n;let s=`<line x1="${P}" y1="${H-P}" x2="${W-5}" y2="${H-P}" stroke="#999"/>`;
+    for(let g=0;g<=4;g++){const y=H-P-(H-P-15)*g/4;s+=`<line x1="${P}" x2="${W-5}" y1="${y}" y2="${y}" stroke="#eee"/><text x="${P-4}" y="${y+4}" font-size="10" text-anchor="end" fill="#666">${xfmtNum(Math.round(max*g/4))}</text>`}
+    const pts=[];ch.values.forEach((v,i)=>{const h=(H-P-15)*v/max,x=P+i*bw;if(ch.type==='bar')s+=`<rect x="${x+bw*.18}" y="${H-P-h}" width="${bw*.64}" height="${h}" fill="#217346"/>`;pts.push([x+bw/2,H-P-h]);s+=`<text x="${x+bw/2}" y="${H-P+14}" font-size="11" text-anchor="middle">${esc(ch.labels[i].slice(0,10))}</text>`});
+    if(ch.type==='line')s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#217346" stroke-width="2.5"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#217346"/>`).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">${s}</svg>`;
+  }
+  // ---- обобщена таблица ----
+  function pivotDlg(b){
+    const g=region();if(g.r2-g.r1<1){toast('Щракнете в таблицата с данни.');return}memo={};
+    const hdr=[];for(let c=g.c1;c<=g.c2;c++)hdr.push({c,n:String(val(g.r1,c)),num:typeof val(g.r1+1,c)==='number'});
+    const p=popup(b,app,`<button class="x">×</button><h5>Създаване на обобщена таблица</h5><div class="small">Данни: ${xref(g.r1,g.c1)}:${xref(g.r2,g.c2)}</div><label>Редове (по какво да групира):</label><select id="pr">${hdr.filter(h=>!h.num).map(h=>`<option value="${h.c}">${esc(h.n)}</option>`).join('')}</select><label>Стойности (какво да пресметне):</label><select id="pv">${hdr.filter(h=>h.num).map(h=>`<option value="${h.c}">${esc(h.n)}</option>`).join('')}</select><label>Функция:</label><select id="pf"><option value="sum">Сума</option><option value="count">Брой</option><option value="avg">Средно</option></select><div class="row"><button id="pok">OK</button></div>`);
+    $('#pok',p).onclick=()=>{const rc=+$('#pr',p).value,vc=+$('#pv',p).value,fn=$('#pf',p).value;p.remove();const m=new Map();
+      for(let r=g.r1+1;r<=g.r2;r++){const k=String(val(r,rc));const v=val(r,vc);if(!m.has(k))m.set(k,[]);if(typeof v==='number')m.get(k).push(v)}
+      const agg=a=>fn==='sum'?a.reduce((x,y)=>x+y,0):fn==='count'?a.length:a.reduce((x,y)=>x+y,0)/(a.length||1);
+      const rows=[...m.entries()].sort((a,b)=>a[0].localeCompare(b[0],'bg')).map(([k,a])=>[k,agg(a)]);
+      const all=[];m.forEach(a=>all.push(...a));
+      st.pivot={row:String(val(g.r1,rc)),val:String(val(g.r1,vc)),fn,rows,total:agg(all)};st.pivotChart=false;drawOut();toast('Обобщената таблица е създадена под данните.')};
+  }
+  function drawOut(){
+    let h='';
+    if(st.chart)h+=`<div class="xchart"><h6>${esc(st.chart.title)}</h6>${chartSVG(st.chart)}</div>`;
+    if(st.pivot){const P=st.pivot,fnN={sum:'Сума',count:'Брой',avg:'Средно'}[P.fn];
+      h+=`<div class="xpiv"><b style="font-size:13px">Обобщена таблица</b><table><tr><th>${esc(P.row)}</th><th>${fnN} от ${esc(P.val)}</th></tr>${P.rows.map(r=>`<tr><td>${esc(r[0])}</td><td class="n">${xfmtNum(r[1])}</td></tr>`).join('')}<tr class="tot"><td>Общ сбор</td><td class="n">${xfmtNum(P.total)}</td></tr></table>
+      <div class="actions" style="margin-top:8px"><button class="btn ghost" id="pch" style="padding:6px 10px;font-size:13px">Обобщена диаграма</button></div>${st.pivotChart?`<div class="xchart" style="margin-top:8px;border:0"><h6>${fnN} от ${esc(P.val)} по ${esc(P.row)}</h6>${chartSVG({type:'bar',labels:P.rows.map(r=>r[0]),values:P.rows.map(r=>r[1])})}</div>`:''}</div>`}
+    out.innerHTML=h;const pc=$('#pch',out);if(pc)pc.onclick=()=>{st.pivotChart=true;drawOut()};
+  }
+  // ---- печат ----
+  function preview(){
+    st.previewed=true;st.previewedOrient=st.orient;memo={};const land=st.orient==='landscape';
+    let used=0;for(const k in st.cells)if(st.cells[k].v){const p=xparse(k);used=Math.max(used,p.c)}
+    let t='<table>';for(let r=1;r<=R;r++){let row='',any=false;for(let c=1;c<=Math.max(used,1);c++){const v=val(r,c);if(v!=='')any=true;row+=`<td>${typeof v==='number'?xfmtNum(v,(cell(r,c)||{}).f):esc(v instanceof XErr?v.e:v)}</td>`}if(any)t+='<tr>'+row+'</tr>'}t+='</table>';
+    const fits=land||used<=4;
+    const ov=el(`<div class="xprev"><div class="xbar"><b>Предпечатен преглед</b> · ${land?'Албумна':'Книжна'} ориентация</div><div class="pp" style="width:${land?300:212}px;height:${land?212:300}px">${t}${fits?'':'<div style="color:#c00;font-size:9px;margin-top:6px">Последните колони не се побират и ще излязат на отделна страница.</div>'}</div><div class="xbar"><span>Страници: ${fits?1:2}</span><button class="btn primary" style="padding:6px 14px">Затвори</button></div></div>`);
+    app.appendChild(ov);$('button',ov).onclick=()=>ov.remove();
+  }
+  draw();
+  return st;
+}
+/* помощни за проверки */
+const near=(a,b)=>typeof a==='number'&&Math.abs(a-b)<1e-6;
+const isF=(s,ref)=>s.raw(ref).startsWith('=');
+
+const XDATA_SHOP=[['Артикул','Количество','Ед. цена'],['Химикалка',50,'0,60'],['Папка',20,'1,50'],['Кламери (кутия)',10,'2,20']];
+addModule({id:'excel',name:'Excel',sub:'Електронни таблици и изчисления',letter:'X',color:'#217346',
+ intro:'Въвеждане на данни, формули и функции, сортиране и филтри, диаграми, обобщени таблици и печат.',
+ lessons:[
+ {id:'excel1',title:'Клетки и въвеждане на данни',plan:'Б2 2.8 – Работен прозорец, въвеждане и редактиране',
+  theory:`<ul><li>Таблицата е от <b>колони</b> (A, B, C…) и <b>редове</b> (1, 2, 3…). Пресечната точка е <b>клетка</b>, напр. <b>B3</b>.</li><li>Адресът на избраната клетка е в <b>полето за име</b> горе вляво, а съдържанието – в <b>лентата за формули</b> (fx).</li><li>Текстът застава вляво, числата – вдясно. Ако число застане вляво, Excel го смята за текст.</li><li>Десетичните числа се пишат със <b>запетая</b>: 1,20.</li><li><kbd>Enter</kbd> записва и слиза надолу, <kbd>Tab</kbd> – надясно. За поправка: изберете клетката и пишете отново (или <kbd>F2</kbd>).</li></ul>`,
+  goal:`<ul><li>В ред 5 въведете: <b>Тетрадка</b>, <b>30</b>, <b>1,20</b>.</li><li>Поправете цената на химикалката (C2) на <b>0,70</b>.</li><li>В A6 въведете <b>Скоч</b>, в B6 – <b>15</b>, в C6 – <b>2,50</b>.</li></ul>`,
+  phone:['Докоснете клетката.','Пишете в лентата горе (fx) и натиснете ✓ или <b>Enter</b> на клавиатурата.','Две бързи докосвания отварят клетката за поправка.'],
+  pc:['Щракнете клетката и пишете.','<kbd>Enter</kbd> слиза надолу, <kbd>Tab</kbd> минава вдясно.','За поправка: изберете клетката и пишете отново или натиснете <kbd>F2</kbd>.'],
+  sim:h=>xlSim(h,{data:XDATA_SHOP,fname:'Канцеларски материали.xlsx',w:[130,90,80],cols:5,rows:10,fmt:{A1:{b:true},B1:{b:true},C1:{b:true}}}),
+  check:s=>{const e=[];const T=(r,v)=>String(s.val(r)).trim().toLowerCase()===v.toLowerCase();
+    W(e,T('A5','Тетрадка')&&near(s.val('B5'),30)&&near(s.val('C5'),1.2),'Ред 5 трябва да е: Тетрадка | 30 | 1,20 (цената със запетая).');
+    W(e,near(s.val('C2'),0.7),'Цената в C2 трябва да е 0,70.');
+    W(e,T('A6','Скоч')&&near(s.val('B6'),15)&&near(s.val('C6'),2.5),'Ред 6 трябва да е: Скоч | 15 | 2,50.');return e}},
+ {id:'excel2',title:'Форматиране на клетки и таблици',plan:'Б2 2.9 – Форматиране на данните',
+  theory:`<ul><li>Форматирането не сменя числото, а само как изглежда.</li><li><b>Валута</b> – 1,50 € · <b>Процент</b> – 20% · <b>Число</b> – 2 знака след запетаята.</li><li>Заглавният ред се удебелява, за да се различава.</li><li>За няколко клетки наведнъж: маркирайте ги (плъзнете с мишката) и тогава изберете формат.</li><li><b>Начало → Форматирай като таблица</b> дава готови цветови стилове.</li></ul>`,
+  goal:`<ul><li>Удебелете заглавния ред <b>A1:D1</b>.</li><li>Цените <b>C2:C5</b> – формат <b>Валута (€)</b>.</li><li>Отстъпките <b>D2:D5</b> – формат <b>Процент</b>.</li></ul>`,
+  phone:['Докоснете първата клетка. Натиснете ⬚ в симулатора (в Excel – плъзнете кръгчето в ъгъла), после докоснете последната клетка.','Отворете лентата (иконата <b>А с молив</b>) → <b>Начало</b> → <b>B</b> или <b>Числов формат</b>.'],
+  pc:['Маркирайте клетките с плъзгане (или щракнете първата, <kbd>Shift</kbd>+щракнете последната).','<b>Начало</b> → <b>B</b>.','<b>Начало</b> → <b>Число</b> → списъка с формати → <b>Валута</b> / <b>Процент</b>.'],
+  sim:h=>xlSim(h,{data:[['Артикул','Количество','Ед. цена','Отстъпка'],['Химикалка',50,'0,6','0,05'],['Папка',20,'1,5','0,1'],['Кламери',10,'2,2','0'],['Тетрадка',30,'1,2','0,15']],fname:'Цени.xlsx',w:[110,90,90,90],cols:5,rows:9}),
+  check:s=>{const e=[];W(e,['A1','B1','C1','D1'].every(r=>s.cell(r).b),'Заглавният ред A1:D1 не е удебелен изцяло.');W(e,['C2','C3','C4','C5'].every(r=>s.cell(r).f==='eur'),'Цените C2:C5 не са във формат Валута (€).');W(e,['D2','D3','D4','D5'].every(r=>s.cell(r).f==='pct'),'Отстъпките D2:D5 не са във формат Процент.');return e}},
+ {id:'excel3',title:'Формули и копиране на формули',plan:'Б2 2.10 – Формули · А3 1.3.6',
+  theory:`<ul><li>Всяка формула започва със знака <b>=</b>.</li><li>Действия: <b>+</b> събиране, <b>-</b> изваждане, <b>*</b> умножение, <b>/</b> деление.</li><li>Пишете <b>адреси</b>, а не числа: <b>=B2*C2</b>. Ако числото се смени, резултатът се преизчислява сам.</li><li>Адрес може да се вмъкне и с щракване в клетката, докато пишете формулата.</li><li><b>Попълване надолу</b>: дръпнете малкото квадратче в ъгъла на клетката. Excel сам сменя адресите: B3*C3, B4*C4…</li></ul>`,
+  goal:`<p>В колона <b>D „Стойност“</b> пресметнете количество × цена: в D2 напишете формула <b>=B2*C2</b> и я копирайте надолу до <b>D5</b>. В <b>D6</b> съберете стойностите с формула <b>=D2+D3+D4+D5</b>.</p>`,
+  phone:['Докоснете D2, напишете <b>=B2*C2</b> в лентата fx и натиснете ✓.','Докоснете D2 → <b>Попълване</b> (в менюто) → плъзнете стрелката надолу до D5. В симулатора: маркирайте D2:D5 и натиснете <b>Попълни</b>.'],
+  pc:['Щракнете D2, напишете <b>=</b>, щракнете B2, напишете <b>*</b>, щракнете C2, натиснете <kbd>Enter</kbd>.','Изберете D2 и плъзнете зеленото квадратче в долния десен ъгъл до D5 (или маркирайте D2:D5 и <kbd>Ctrl</kbd>+<kbd>D</kbd>).'],
+  sim:h=>xlSim(h,{data:[['Артикул','Количество','Ед. цена','Стойност'],['Химикалка',50,'0,6'],['Папка',20,'1,5'],['Кламери',10,'2,2'],['Тетрадка',30,'1,2'],['','','Общо:']],fname:'Поръчка.xlsx',w:[110,90,80,90],cols:5,rows:9,fmt:{A1:{b:true},B1:{b:true},C1:{b:true},D1:{b:true},C6:{b:true}}}),
+  check:s=>{const e=[];[[2,30],[3,30],[4,22],[5,36]].forEach(([r,v])=>{const k='D'+r;if(!isF(s,k))e.push(`В ${k} няма формула (трябва да започва с =).`);else if(!near(s.val(k),v))e.push(`${k} не е B${r}*C${r}.`)});W(e,isF(s,'D6')&&near(s.val('D6'),118),'D6 трябва да е формула, която събира D2:D5 (резултат 118).');return e}},
+ {id:'excel4',title:'Функции SUM, AVERAGE, MAX, MIN',plan:'Б2 2.10 – Вградени функции',
+  theory:`<ul><li><b>=SUM(B2:B7)</b> – сбор. <b>B2:B7</b> е <b>област</b> – всички клетки от B2 до B7.</li><li><b>=AVERAGE(…)</b> – средна стойност.</li><li><b>=MAX(…)</b> – най-голямото число, <b>=MIN(…)</b> – най-малкото.</li><li>Бутонът <b>Σ АвтоСума</b> сам пише SUM за числата над клетката.</li><li>В българския Excel аргументите се разделят с <b>;</b>, напр. =ROUND(B8;2).</li></ul>`,
+  goal:`<p>За продажбите от юни до ноември пресметнете с функции:</p><ul><li><b>B8</b> – общата сума (SUM);</li><li><b>B9</b> – средната стойност (AVERAGE);</li><li><b>B10</b> – най-големите продажби (MAX);</li><li><b>B11</b> – най-малките (MIN).</li></ul>`,
+  phone:['Докоснете B8 → в лентата <b>Формули</b> → <b>Σ АвтоСума</b> (или напишете =SUM(B2:B7)).','За другите напишете функцията в лентата fx, напр. <b>=AVERAGE(B2:B7)</b>.'],
+  pc:['Щракнете B8 → <b>Начало</b> → <b>Σ АвтоСума</b> → <kbd>Enter</kbd>.','В B9 напишете <b>=AVERAGE(</b>, маркирайте B2:B7 с мишката, напишете <b>)</b> и <kbd>Enter</kbd>.','Същото за MAX и MIN.'],
+  sim:h=>xlSim(h,{data:[['Месец','Продажби (€)'],['Юни',1240],['Юли',1580],['Август',1920],['Септември',1310],['Октомври',1105],['Ноември',1460],['Общо'],['Средно'],['Най-много'],['Най-малко']],fname:'Продажби.xlsx',w:[110,120],cols:4,rows:12,fmt:{A1:{b:true},B1:{b:true},A8:{b:true},A9:{b:true},A10:{b:true},A11:{b:true}}}),
+  check:s=>{const e=[];[['B8','SUM',8615],['B9','AVERAGE',8615/6],['B10','MAX',1920],['B11','MIN',1105]].forEach(([k,f,v])=>{const r=s.raw(k).toUpperCase();if(!r.startsWith('='))e.push(`В ${k} няма формула.`);else if(!r.includes(f))e.push(`В ${k} използвайте функцията ${f}.`);else if(!near(s.val(k),v))e.push(`${k} дава грешен резултат – проверете областта (B2:B7).`)});return e}},
+ {id:'excel5',title:'Относителни и абсолютни адреси',plan:'Б2 2.10 – Видове адреси на клетки',
+  theory:`<ul><li><b>Относителен адрес</b> (B2) се сменя при копиране: B2 → B3 → B4.</li><li><b>Абсолютен адрес</b> (<b>$F$1</b>) не се сменя – винаги сочи същата клетка.</li><li>Използва се за обща стойност за всички редове: ставка на ДДС, курс, процент.</li><li>Знакът <b>$</b> се добавя с <kbd>F4</kbd> след адреса или се пише ръчно.</li></ul>`,
+  goal:`<p>Ставката на ДДС е в <b>F1</b> (20%).</p><ul><li>В <b>C2</b> пресметнете ДДС: <b>=B2*$F$1</b> и копирайте до C5.</li><li>В <b>D2</b> – цена с ДДС: <b>=B2+C2</b> и копирайте до D5.</li></ul>`,
+  phone:['Докоснете C2, напишете <b>=B2*$F$1</b> и ✓.','Маркирайте C2:C5 и попълнете надолу. Същото за D.'],
+  pc:['В C2 напишете <b>=B2*F1</b> и веднага натиснете <kbd>F4</kbd> – става <b>$F$1</b>. <kbd>Enter</kbd>.','Плъзнете квадратчето на C2 до C5.','В D2: <b>=B2+C2</b>, плъзнете до D5.'],
+  sim:h=>xlSim(h,{data:[['Услуга','Цена без ДДС','ДДС','Цена с ДДС','ДДС ставка:','20%'],['Ксерокопие',10],['Подвързване',25],['Ламиниране',8],['Сканиране',12,'','','','']],fname:'ДДС.xlsx',w:[110,100,70,90,90,60],cols:6,rows:9,fmt:{A1:{b:true},B1:{b:true},C1:{b:true},D1:{b:true},E1:{b:true},B2:{f:'eur'},B3:{f:'eur'},B4:{f:'eur'},B5:{f:'eur'},C2:{f:'eur'},C3:{f:'eur'},C4:{f:'eur'},C5:{f:'eur'},D2:{f:'eur'},D3:{f:'eur'},D4:{f:'eur'},D5:{f:'eur'}}}),
+  check:s=>{const e=[];const B={2:10,3:25,4:8,5:12};for(const r in B){if(!isF(s,'C'+r)||!near(s.val('C'+r),B[r]*0.2))e.push(`C${r} трябва да е формула за ДДС (резултат ${xfmtNum(B[r]*0.2,'n2')}).`);if(!isF(s,'D'+r)||!near(s.val('D'+r),B[r]*1.2))e.push(`D${r} трябва да е цена с ДДС (резултат ${xfmtNum(B[r]*1.2,'n2')}).`)}
+    if(!e.length)W(e,['C3','C4','C5'].every(k=>/\$F\$1/i.test(s.raw(k))),'Формулите в колона C трябва да използват абсолютния адрес $F$1.');return e}},
+ {id:'excel6',title:'Сортиране и филтриране',plan:'А3 1.3.6 – Сортиране и филтриране',
+  theory:`<ul><li><b>Сортиране</b> подрежда редовете: по азбука (А→Я) или по числа (от малко към голямо).</li><li>Щракнете в колоната, по която ще сортирате – Excel мести целите редове.</li><li><b>Филтър</b> скрива редовете, които не ви трябват. Данните не се трият.</li><li>Филтърът се пуска от <b>Данни → Филтър</b>; в заглавията се появяват бутони ▾. Номерата на филтрираните редове стават сини.</li></ul>`,
+  goal:`<ul><li>Сортирайте участниците по <b>Име</b> от А до Я.</li><li>С филтър покажете само участниците от <b>Чепинци</b>.</li></ul>`,
+  phone:['Докоснете клетка в колона „Име“.','Лентата → <b>Данни</b> (или <b>Начало</b>) → <b>Сортиране и филтриране</b> → <b>Възходящо</b>.','Пак там – <b>Покажи бутоните за филтриране</b>, после ▾ на „Населено място“.'],
+  pc:['Щракнете клетка в колона „Име“ → <b>Данни</b> → <b>А→Я</b>.','<b>Данни</b> → <b>Филтър</b>.','▾ на „Населено място“ → махнете „(Избери всички)“ → отметнете <b>Чепинци</b> → OK.'],
+  sim:h=>xlSim(h,{data:[['Име','Населено място','Възраст','Резултат'],['Стоян','Рудозем',24,82],['Айше','Чепинци',19,91],['Мария','Чепинци',31,76],['Георги','Елховец',22,68],['Емине','Рудозем',27,88],['Борис','Чепинци',35,73],['Даниела','Елховец',20,95],['Ахмед','Чепинци',26,80]],fname:'Участници.xlsx',w:[90,120,70,80],cols:5,rows:11,tools:['sort','filter'],fmt:{A1:{b:true},B1:{b:true},C1:{b:true},D1:{b:true}}}),
+  check:s=>{const e=[];const names=[2,3,4,5,6,7,8,9].map(r=>String(s.val('A'+r)));const sorted=[...names].sort((a,b)=>a.localeCompare(b,'bg'));W(e,names.join()===sorted.join(),'Имената не са подредени от А до Я.');
+    const f=s.filter;W(e,f&&f.crit[2]&&f.crit[2].size===1&&f.crit[2].has('Чепинци')&&Object.keys(f.crit).length===1,'Филтърът трябва да показва само „Чепинци“ в колона „Населено място“.');return e}},
+ {id:'excel7',title:'Диаграми',plan:'Б2 2.11 · А2 1.3.1 – Графично представяне на данни',
+  theory:`<ul><li>Диаграмата показва числата като картина – по-лесно се сравняват.</li><li><b>Стълбовидна</b> – сравнение между неща (месеци, градове).</li><li><b>Линейна</b> – развитие във времето.</li><li><b>Кръгова</b> – части от цялото (дялове в %).</li><li>Маркирайте данните <b>заедно със заглавията</b>, после <b>Вмъкване → Диаграма</b>.</li></ul>`,
+  goal:`<p>Маркирайте <b>A1:B6</b> (месеците и броя курсисти) и вмъкнете <b>стълбовидна</b> диаграма.</p>`,
+  phone:['Маркирайте A1:B6.','Лентата → <b>Вмъкване</b> → <b>Диаграма</b> → <b>Колона</b>.'],
+  pc:['Маркирайте A1:B6 с плъзгане.','<b>Вмъкване</b> → <b>Препоръчани диаграми</b> или иконата <b>Колонна диаграма</b>.'],
+  sim:h=>xlSim(h,{data:[['Месец','Курсисти'],['Юли',12],['Август',8],['Септември',15],['Октомври',22],['Ноември',18]],fname:'Курсисти.xlsx',w:[110,90],cols:4,rows:8,tools:['chart'],fmt:{A1:{b:true},B1:{b:true}}}),
+  check:s=>{const c=s.chart;if(!c)return['Още няма диаграма.'];const e=[];W(e,c.type==='bar','Диаграмата трябва да е стълбовидна.');W(e,c.values.length===5&&c.labels[0]==='Юли'&&c.labels[4]==='Ноември','Диаграмата трябва да включва и петте месеца (A1:B6).');return e}},
+ {id:'excel8',title:'Обобщена таблица и диаграма',plan:'Б2 2.11 – Pivot Table, Pivot Chart',
+  theory:`<ul><li><b>Обобщената таблица</b> (PivotTable) групира много редове и пресмята сборове – без формули.</li><li>Пример: 10 продажби в 3 града → таблица с по един ред за град и общата сума.</li><li>Избирате: <b>Редове</b> (по какво да групира) и <b>Стойности</b> (какво да пресметне – сума, брой, средно).</li><li><b>Обобщената диаграма</b> (PivotChart) рисува обобщената таблица.</li><li>На телефон обобщени таблици не се създават – само се преглеждат.</li></ul>`,
+  goal:`<p>Създайте обобщена таблица с <b>сумата</b> на продажбите <b>по град</b> (Редове: „Град“, Стойности: „Сума“, функция „Сума“). След това натиснете <b>Обобщена диаграма</b>.</p>`,
+  phone:'Обобщени таблици се създават в Excel за компютър. Упражнявайте в симулатора.',
+  pc:['Щракнете в таблицата → <b>Вмъкване</b> → <b>Обобщена таблица</b> → OK.','В панела вдясно плъзнете <b>Град</b> в „Редове“, а <b>Сума</b> в „Стойности“.','<b>Анализ на обобщена таблица</b> → <b>Обобщена диаграма</b>.'],
+  sim:h=>xlSim(h,{data:[['Дата','Град','Продукт','Сума'],['03.11.2026','Рудозем','Хартия',120],['04.11.2026','Смолян','Тонер',340],['05.11.2026','Чепинци','Папки',45],['06.11.2026','Рудозем','Тонер',310],['07.11.2026','Смолян','Хартия',95],['10.11.2026','Чепинци','Хартия',60],['11.11.2026','Рудозем','Папки',38],['12.11.2026','Смолян','Папки',52],['13.11.2026','Чепинци','Тонер',290],['14.11.2026','Рудозем','Хартия',130]],fname:'Продажби по градове.xlsx',w:[90,90,80,70],cols:5,rows:13,tools:['pivot'],fmt:{A1:{b:true},B1:{b:true},C1:{b:true},D1:{b:true}}}),
+  check:s=>{const p=s.pivot;if(!p)return['Още няма обобщена таблица.'];const e=[];W(e,p.row==='Град','В „Редове“ трябва да е „Град“.');W(e,p.val==='Сума'&&p.fn==='sum','Стойността трябва да е „Сума от Сума“ (функция Сума).');W(e,s.pivotChart,'Натиснете „Обобщена диаграма“.');return e}},
+ {id:'excel9',title:'Оформяне за печат',plan:'Б2 2.11 – Настройки на страницата, предпечатен изглед',
+  theory:`<ul><li>Преди печат винаги вижте <b>предпечатния преглед</b> – колко страници ще излязат.</li><li><b>Книжна</b> (вертикална) ориентация – за тесни таблици, <b>Албумна</b> (хоризонтална) – за широки.</li><li>Ако колоните не се побират, част от таблицата излиза на отделен лист.</li><li>Може и <b>Мащабиране → Побиране на всички колони на една страница</b>.</li></ul>`,
+  goal:`<p>Таблицата е широка и не се побира. Сменете ориентацията на <b>Албумна</b> и отворете <b>предпечатния преглед</b>, за да проверите, че всичко е на една страница.</p>`,
+  phone:['Менюто <b>⋯</b> или <b>Файл</b> → <b>Печат</b>.','В настройките изберете <b>Ориентация</b> → <b>Хоризонтална</b>.'],
+  pc:['<b>Оформление на страницата</b> → <b>Ориентация</b> → <b>Албумна</b>.','<b>Файл</b> → <b>Печат</b> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) – вдясно е прегледът.'],
+  sim:h=>xlSim(h,{data:[['№','Име','Населено място','Телефон','Ден 1','Ден 2'],[1,'Айше Мехмед','Чепинци','0888 111 222','да','да'],[2,'Борис Илиев','Рудозем','0877 333 444','да','не'],[3,'Даниела Пеева','Елховец','0899 555 666','да','да'],[4,'Стоян Колев','Рудозем','0886 777 888','не','да']],fname:'Присъствие.xlsx',w:[30,120,110,100,50,50],cols:6,rows:8,tools:['print'],fmt:{A1:{b:true},B1:{b:true},C1:{b:true},D1:{b:true},E1:{b:true},F1:{b:true}}}),
+  check:s=>{const e=[];W(e,s.orient==='landscape','Ориентацията не е Албумна.');W(e,s.previewedOrient==='landscape','Отворете предпечатния преглед (Печат), след като смените ориентацията.');return e}},
+ ]});
+
+/* ===== Модул: PowerPoint ===== */
+document.head.appendChild(Object.assign(document.createElement('style'),{textContent:`
+.pw{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;padding:10px;background:#e6e6e6}
+@media(max-width:700px){.pw{grid-template-columns:minmax(0,1fr)}.pthumbs{order:2;flex-direction:row!important;overflow-x:auto;max-height:none!important}.pthumbs .th{width:110px;flex:0 0 auto}}
+.pthumbs{display:flex;flex-direction:column;gap:8px;max-height:460px;overflow:auto}
+.pthumbs .th{display:flex;gap:4px;align-items:flex-start;cursor:pointer;font-size:11px;color:#555;background:none;border:0;padding:0;text-align:left}
+.pthumbs .th .sl{border:2px solid transparent;flex:1;pointer-events:none}
+.pthumbs .th.on .sl{border-color:#c43e1c}
+.pthumbs .add{border:1px dashed #999;background:#f6f6f6;border-radius:4px;padding:6px;font-size:12px;cursor:pointer}
+.sl{position:relative;aspect-ratio:16/9;container-type:inline-size;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.25);background:#fff;color:#222;font-family:Inter,Arial,sans-serif}
+.sl .ti,.sl .su,.sl .bo{position:absolute;outline:none;overflow:hidden;word-break:break-word}
+.sl.L-title .ti{left:8%;right:8%;top:28%;height:26%;font-size:6cqw;font-weight:700;text-align:center;display:flex;align-items:flex-end;justify-content:center}
+.sl.L-title .su{left:15%;right:15%;top:57%;height:16%;font-size:3cqw;text-align:center}
+.sl.L-content .ti,.sl.L-only .ti{left:6%;right:6%;top:6%;height:18%;font-size:4.4cqw;font-weight:700;display:flex;align-items:center}
+.sl.L-content .bo{left:6%;right:6%;top:27%;bottom:6%;font-size:2.9cqw;line-height:1.35}
+.sl .bo ul{margin:0;padding-left:1.2em}.sl .bo li{margin:.2em 0}
+.sl [contenteditable]{cursor:text}
+.sl [contenteditable]:empty:before{content:attr(data-ph);color:currentColor;opacity:.45;font-weight:400}
+.sl.ed .ti,.sl.ed .su,.sl.ed .bo{border:1px dashed rgba(127,127,127,.5)}
+.sl .ti.sel,.sl .su.sel,.sl .bo.sel{border:1.5px solid #c43e1c}
+.sl .sh{position:absolute;touch-action:none;cursor:move}
+.sl .sh svg,.sl .sh img{width:100%;height:100%;display:block;pointer-events:none}
+.sl .sh.sel{outline:1.5px solid #c43e1c;outline-offset:2px}
+.sl .acc{position:absolute;left:0;right:0;bottom:0;height:3%}
+.pmain{min-width:0}
+.pnotes{margin-top:8px;background:#fff;border:1px solid #ccc;border-radius:4px;min-height:54px;padding:6px 10px;font-size:14px;outline:none}
+.pnotes:empty:before{content:'Щракнете, за да добавите бележки към слайда';color:#999}
+.pnotes:focus{border-color:#c43e1c}
+.psw{display:inline-block;width:22px;height:22px;border-radius:4px;border:1px solid #999;vertical-align:middle}
+.pshow{position:fixed;inset:0;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pshow .sl{width:min(100vw,177.7vh);box-shadow:none}
+.pshow .hint{position:fixed;bottom:10px;left:0;right:0;text-align:center;color:#aaa;font-size:13px;pointer-events:none}
+.pshow .end{color:#fff;font-size:18px;text-align:center;padding:20px}
+.pshow .esc{position:fixed;top:10px;right:10px;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:6px;padding:8px 12px;cursor:pointer;z-index:2}
+@keyframes t-fade{from{opacity:0}}@keyframes t-push{from{transform:translateX(100%)}}@keyframes t-cover{from{transform:translateY(-100%)}}@keyframes t-zoom{from{transform:scale(.3);opacity:0}}
+@keyframes a-appear{from{opacity:0}to{opacity:1}}@keyframes a-fly{from{transform:translateY(120%);opacity:0}}
+.tr-fade{animation:t-fade .7s}.tr-push{animation:t-push .6s ease-out}.tr-cover{animation:t-cover .6s ease-out}.tr-zoom{animation:t-zoom .6s}
+.an-wait{visibility:hidden}.an-appear{animation:a-appear .05s}.an-fade{animation:t-fade .8s}.an-fly{animation:a-fly .7s ease-out}.an-zoom{animation:t-zoom .6s}
+`}));
+const PTHEMES={
+  office:{name:'Office',bg:'#ffffff',fg:'#222',acc:'#c43e1c',font:'Inter,Arial,sans-serif'},
+  ion:{name:'Йон',bg:'#1b5e6e',fg:'#ffffff',acc:'#f2b134',font:'Montserrat,Arial,sans-serif'},
+  retro:{name:'Ретро',bg:'#f4ecd8',fg:'#5a3e2b',acc:'#b5501f',font:'Georgia,serif'},
+  night:{name:'Нощ',bg:'linear-gradient(135deg,#1f2a44,#3b4d7a)',fg:'#f3f3f3',acc:'#7fd1ff',font:'Inter,Arial,sans-serif'},
+};
+const PSHAPES={
+  rect:'<svg viewBox="0 0 100 60" preserveAspectRatio="none"><rect x="1" y="1" width="98" height="58" fill="F" stroke="#00000033"/></svg>',
+  round:'<svg viewBox="0 0 100 60" preserveAspectRatio="none"><rect x="1" y="1" width="98" height="58" rx="12" fill="F" stroke="#00000033"/></svg>',
+  ellipse:'<svg viewBox="0 0 100 60" preserveAspectRatio="none"><ellipse cx="50" cy="30" rx="49" ry="29" fill="F" stroke="#00000033"/></svg>',
+  arrow:'<svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M1 18h62V2l36 28-36 28V42H1z" fill="F" stroke="#00000033"/></svg>',
+  star:'<svg viewBox="0 0 100 100"><path d="M50 3l14 30 33 4-24 23 6 33-29-16-29 16 6-33L3 37l33-4z" fill="F" stroke="#00000033"/></svg>',
+};
+const PSHN={rect:'Правоъгълник',round:'Заоблен правоъгълник',ellipse:'Елипса',arrow:'Стрелка',star:'Звезда'};
+const PCOLORS=['#4472c4','#ed7d31','#a5a5a5','#ffc000','#5b9bd5','#70ad47','#c00000','#7030a0','#ffffff','#000000'];
+const TRN={none:'Няма',fade:'Избледняване',push:'Изтласкване',cover:'Покриване',zoom:'Мащабиране'};
+const ANN={none:'Няма',appear:'Появяване',fade:'Избледняване',fly:'Влитане',zoom:'Мащабиране'};
+
+function pSlide(o){return Object.assign({layout:'content',title:'',sub:'',body:'',notes:'',shapes:[],trans:'none',anim:{}},o)}
+function pptSim(host,cfg){
+  const st={slides:(cfg.slides||[pSlide({layout:'title'})]).map(s=>pSlide(JSON.parse(JSON.stringify(s)))),cur:0,sel:null,theme:cfg.theme||'office',bg:null,showDone:false,showStarted:false,cfg};
+  const app=el('<div class="app"></div>');host.appendChild(app);
+  const S=()=>st.slides[st.cur];
+  let saved=null;
+  document.addEventListener('selectionchange',()=>{const s=getSelection();if(s.rangeCount&&app.contains(s.anchorNode)&&s.anchorNode.parentElement&&s.anchorNode.parentElement.closest('.sl [contenteditable]'))saved=s.getRangeAt(0).cloneRange()});
+  function exec(c){const e=saved&&saved.startContainer.parentElement&&saved.startContainer.parentElement.closest('[contenteditable]');if(!e){toast('Първо маркирайте текст на слайда.');return}e.focus();const s=getSelection();s.removeAllRanges();s.addRange(saved);document.execCommand(c);syncFrom(e)}
+  const menu=(b,title,items,fn,cols=1)=>{const p=popup(b,app,`<h5>${title}</h5><div class="grid" style="grid-template-columns:repeat(${cols},1fr)">${items.map(([k,n])=>`<button data-k="${k}">${n}</button>`).join('')}</div>`);$$('button',p).forEach(x=>x.onclick=()=>{p.remove();fn(x.dataset.k)})};
+  const LAY=[['title','Заглавен слайд'],['content','Заглавие и съдържание'],['only','Само заглавие'],['blank','Празен']];
+  const home=[
+    {id:'new',html:'<b>+</b> Нов слайд ▾',title:'Нов слайд',run:b=>menu(b,'Оформление на новия слайд',LAY,k=>{st.slides.splice(st.cur+1,0,pSlide({layout:k,trans:S().trans}));st.cur++;st.sel=null;draw()})},
+    {id:'lay',html:'Оформление ▾',title:'Оформление на слайда',run:b=>menu(b,'Оформление',LAY,k=>{S().layout=k;draw()})},'|',
+    {id:'b',html:'<span class="t">B</span>',title:'Удебелен',run:()=>exec('bold')},{id:'i',html:'<span class="t" style="font-style:italic">I</span>',title:'Курсив',run:()=>exec('italic')},{id:'u',html:'<span class="t" style="text-decoration:underline">U</span>',title:'Подчертан',run:()=>exec('underline')},'|',
+    {id:'fill',html:'<span class="psw" style="background:linear-gradient(135deg,#4472c4,#ffc000)"></span> Запълване ▾',title:'Запълване на фигура',run:b=>{const sh=selShape();if(!sh){toast('Първо изберете фигура на слайда.');return}menu(b,'Запълване на фигура',PCOLORS.map(c=>[c,`<span class="psw" style="background:${c}"></span>`]),c=>{sh.fill=c;draw()},5)}},
+    {id:'del',html:'✕ Изтрий',title:'Изтриване на избрания обект или слайд',run:()=>{const sh=selShape();if(sh){S().shapes=S().shapes.filter(x=>x!==sh);st.sel=null;draw()}else if(st.slides.length>1){st.slides.splice(st.cur,1);st.cur=Math.max(0,st.cur-1);draw();toast('Слайдът е изтрит.')}}}];
+  const ins=[
+    {id:'shape',html:'<svg viewBox="0 0 20 20"><rect x="2" y="9" width="8" height="8" fill="#4472c4"/><circle cx="13" cy="7" r="5" fill="#ed7d31"/></svg> Фигури ▾',title:'Фигури',run:b=>menu(b,'Фигури',Object.keys(PSHAPES).map(k=>[k,`<span style="display:inline-block;width:40px;height:24px">${PSHAPES[k].replace(/F/g,'#4472c4')}</span><br><small>${PSHN[k]}</small>`]),k=>addShape({type:k}),3)},
+    {id:'pic',html:'<svg viewBox="0 0 20 20"><rect x="2" y="3" width="16" height="14" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="8" r="1.8" fill="currentColor"/><path d="M3 16l5-5 3 3 3-4 4 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> Картини ▾',title:'Картини',run:b=>menu(b,'Вмъкване на картина',Object.keys(WPICS).map(k=>[k,`<img src="${WPICS[k]}" style="height:34px;display:block;margin:0 auto 3px">${k}`]),k=>addShape({type:'pic',pic:k}),3)}];
+  const design=Object.entries(PTHEMES).map(([k,t])=>({id:'th-'+k,html:`<span class="psw" style="background:${t.bg};border-color:${t.acc}"></span> ${t.name}`,title:'Тема '+t.name,run:()=>{st.theme=k;st.bg=null;draw();toast('Темата „'+t.name+'“ е приложена към всички слайдове.')},active:()=>st.theme===k}));
+  design.push('|',{id:'bgc',html:'Формат на фона ▾',title:'Формат на фона',run:b=>menu(b,'Цвят на фона (за всички слайдове)',['#ffffff','#fdf2e3','#e8f4ea','#e6eefb','#fbe7ee','#222831','#1b3a4b','#4a1942'].map(c=>[c,`<span class="psw" style="background:${c}"></span>`]),c=>{st.bg=c;draw()},4)});
+  const trans=Object.entries(TRN).map(([k,n])=>({id:'tr-'+k,html:n,title:'Преход: '+n,run:()=>{S().trans=k;draw();if(k!=='none')previewTrans()},active:()=>S().trans===k}));
+  trans.push('|',{id:'trall',html:'⧉ Приложи за всички',title:'Приложи този преход към всички слайдове',run:()=>{const t=S().trans;st.slides.forEach(s=>s.trans=t);draw();toast('Преходът „'+TRN[t]+'“ е приложен за всички слайдове.')}});
+  const anim=Object.entries(ANN).map(([k,n])=>({id:'an-'+k,html:n,title:'Анимация: '+n,run:()=>{if(!st.sel){toast('Първо щракнете обекта (заглавие, текст или фигура).');return}S().anim[st.sel]=k;draw();toast(k==='none'?'Анимацията е премахната.':'Анимация „'+n+'“ е добавена.')},active:()=>st.sel&&(S().anim[st.sel]||'none')===k}));
+  const show=[{id:'start',html:'▶ От началото',title:'Прожекция от началото (F5)',run:()=>slideShow(0)},{id:'startc',html:'▷ От текущия слайд',title:'От текущия слайд (Shift+F5)',run:()=>slideShow(st.cur)}];
+  const rb=ribbon(app,'#c43e1c',[{name:'Файл',tools:[]},{name:'Начало',tools:home},{name:'Вмъкване',tools:ins},{name:'Дизайн',tools:design},{name:'Преходи',tools:trans},{name:'Анимации',tools:anim},{name:'Прожекция',tools:show}],cfg.fname||'Презентация1.pptx',1);
+  const pw=el('<div class="pw"><div class="pthumbs"></div><div class="pmain"><div class="stage"></div><div class="pnotes" contenteditable="true"></div><div class="small" style="margin-top:4px" id="pinfo"></div></div></div>');
+  app.appendChild(pw);
+  const thumbs=$('.pthumbs',pw),stage=$('.stage',pw),notes=$('.pnotes',pw);
+  notes.addEventListener('input',()=>{S().notes=notes.innerText});
+  function selShape(){return S().shapes.find(x=>x.id===st.sel)}
+  function addShape(o){const id='s'+Math.random().toString(36).slice(2,7);S().shapes.push(Object.assign({id,x:60-(S().shapes.length%3)*22,y:55-(S().shapes.length%2)*12,w:o.type==='star'?14:22,h:o.type==='star'?25:20,fill:'#4472c4'},o));st.sel=id;draw();toast('Обектът е вмъкнат. Може да го преместите с плъзгане.')}
+  function slideHTML(s,ed){
+    const t=PTHEMES[st.theme];const bg=st.bg||t.bg;
+    const ce=(cls,f,ph)=>`<div class="${cls} ${ed&&st.sel===f?'sel':''}" data-f="${f}" ${ed?`contenteditable="true" data-ph="${ph}"`:''}>${s[f]}</div>`;
+    let h=`<div class="sl L-${s.layout} ${ed?'ed':''}" style="background:${bg};color:${t.fg};font-family:${t.font}">`;
+    if(s.layout!=='blank')h+=ce('ti','title','Щракнете, за да добавите заглавие');
+    if(s.layout==='title')h+=ce('su','sub','Щракнете, за да добавите подзаглавие');
+    if(s.layout==='content')h+=ce('bo','body','Щракнете, за да добавите текст');
+    s.shapes.forEach(x=>{const inner=x.type==='pic'?`<img src="${WPICS[x.pic]}" alt="${x.pic}">`:x.type==='text'?`<div style="font-size:2.6cqw;padding:2%;border:1px dashed currentColor;height:100%">${esc(x.text)}</div>`:PSHAPES[x.type].replace(/F/g,x.fill);
+      h+=`<div class="sh ${ed&&st.sel===x.id?'sel':''}" data-id="${x.id}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%">${inner}</div>`});
+    return h+`<div class="acc" style="background:${t.acc}"></div></div>`;
+  }
+  function draw(){
+    thumbs.innerHTML='';
+    st.slides.forEach((s,i)=>{const b=el(`<button class="th ${i===st.cur?'on':''}"><span>${i+1}${s.trans!=='none'?'<br>★':''}</span>${slideHTML(s,false)}</button>`);b.onclick=()=>{st.cur=i;st.sel=null;draw()};thumbs.appendChild(b)});
+    const add=el('<button class="add">+ Нов слайд</button>');add.onclick=()=>{st.slides.splice(st.cur+1,0,pSlide({layout:'content',trans:S().trans}));st.cur++;st.sel=null;draw()};thumbs.appendChild(add);
+    stage.innerHTML=slideHTML(S(),true);
+    const sl=$('.sl',stage);
+    if(S().layout==='content'){const bo=$('.bo',sl);if(!bo.innerHTML.trim())bo.innerHTML='';}
+    $$('[contenteditable]',sl).forEach(e=>{
+      e.addEventListener('focus',()=>{st.sel=e.dataset.f;$$('.sel',sl).forEach(x=>x!==e&&x.classList.remove('sel'));e.classList.add('sel');rb.refresh()});
+      e.addEventListener('input',()=>syncFrom(e));
+      if(e.dataset.f==='body')e.addEventListener('input',()=>{if(e.querySelector('ul')||!e.textContent.trim())return;const lines=[];e.childNodes.forEach(n=>{const t=n.textContent;if(t.trim())lines.push(t)});e.innerHTML='<ul>'+lines.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>';const r=document.createRange();r.selectNodeContents(e.querySelector('li:last-child'));r.collapse(false);const s=getSelection();s.removeAllRanges();s.addRange(r);syncFrom(e)});
+    });
+    $$('.sh',sl).forEach(d=>{
+      d.addEventListener('pointerdown',ev=>{ev.preventDefault();st.sel=d.dataset.id;$$('.sel',sl).forEach(x=>x.classList.remove('sel'));d.classList.add('sel');rb.refresh();
+        const sh=selShape(),r=sl.getBoundingClientRect(),sx=ev.clientX,sy=ev.clientY,ox=sh.x,oy=sh.y;d.setPointerCapture(ev.pointerId);
+        d.onpointermove=m=>{sh.x=Math.max(-10,Math.min(95,ox+(m.clientX-sx)/r.width*100));sh.y=Math.max(-10,Math.min(95,oy+(m.clientY-sy)/r.height*100));d.style.left=sh.x+'%';d.style.top=sh.y+'%'};
+        d.onpointerup=()=>{d.onpointermove=null;drawThumbs()}});
+    });
+    sl.addEventListener('pointerdown',e=>{if(e.target===sl){st.sel=null;$$('.sel',sl).forEach(x=>x.classList.remove('sel'));rb.refresh()}});
+    if(document.activeElement!==notes)notes.innerText=S().notes;
+    const an=Object.entries(S().anim).filter(([k,v])=>v!=='none');
+    $('#pinfo',pw).textContent=`Слайд ${st.cur+1} от ${st.slides.length} · Тема: ${PTHEMES[st.theme].name} · Преход: ${TRN[S().trans]}${an.length?' · Анимации: '+an.length:''}`;
+    rb.refresh();
+  }
+  function drawThumbs(){$$('.th',thumbs).forEach((b,i)=>{const s=st.slides[i];const o=$('.sl',b);if(o)o.outerHTML=slideHTML(s,false)})}
+  function syncFrom(e){S()[e.dataset.f]=e.innerHTML;clearTimeout(st._t);st._t=setTimeout(drawThumbs,300)}
+  function previewTrans(){const sl=$('.sl',stage);sl.classList.add('tr-'+S().trans);setTimeout(()=>sl.classList.remove('tr-'+S().trans),800)}
+  // ---- прожекция ----
+  function slideShow(from){
+    st.showStarted=true;let i=from,step=0;const ov=el('<div class="pshow"><button class="esc">Изход (Esc)</button><div class="hold"></div><div class="hint">Щракнете или натиснете →, за да продължите</div></div>');document.body.appendChild(ov);
+    const hold=$('.hold',ov);let order=[];
+    function render(withTrans){
+      if(i>=st.slides.length){hold.innerHTML='<div class="end">Край на прожекцията.<br><small>Щракнете за изход.</small></div>';st.showDone=st.showDone||from===0;return}
+      const s=st.slides[i];hold.innerHTML=slideHTML(s,false);const sl=$('.sl',hold);
+      if(withTrans&&s.trans!=='none')sl.classList.add('tr-'+s.trans);
+      order=Object.entries(s.anim).filter(([k,v])=>v!=='none');step=0;
+      order.forEach(([k])=>{const t=k==='title'?$('.ti',sl):k==='sub'?$('.su',sl):k==='body'?$('.bo',sl):$(`.sh[data-id="${k}"]`,sl);if(t)t.classList.add('an-wait')});
+    }
+    function next(){
+      if(i>=st.slides.length){close();return}
+      if(step<order.length){const [k,v]=order[step++];const sl=$('.sl',hold);const t=k==='title'?$('.ti',sl):k==='sub'?$('.su',sl):k==='body'?$('.bo',sl):$(`.sh[data-id="${k}"]`,sl);if(t){t.classList.remove('an-wait');t.classList.add('an-'+v)}return}
+      i++;render(true);
+    }
+    function close(){ov.remove();document.removeEventListener('keydown',key)}
+    function key(e){if(e.key==='Escape')close();else if(['ArrowRight',' ','Enter','PageDown'].includes(e.key)){e.preventDefault();next()}else if(e.key==='ArrowLeft'&&i>0){i--;render(false)}}
+    ov.onclick=e=>{if(e.target.classList.contains('esc'))return close();next()};
+    document.addEventListener('keydown',key);
+    render(true);
+  }
+  app.addEventListener('keydown',e=>{if(e.key==='F5'){e.preventDefault();slideShow(e.shiftKey?st.cur:0)}if((e.key==='Delete')&&selShape()&&!e.target.closest('[contenteditable]')){S().shapes=S().shapes.filter(x=>x.id!==st.sel);st.sel=null;draw()}});
+  app.tabIndex=-1;
+  draw();
+  return st;
+}
+const pTxt=h=>{const d=document.createElement('div');d.innerHTML=h||'';return d.innerText.replace(/ /g,' ').trim()};
+const pLis=h=>{const d=document.createElement('div');d.innerHTML=h||'';const li=$$('li',d).map(x=>x.textContent.trim()).filter(Boolean);return li.length?li:[...d.childNodes].map(x=>x.textContent.trim()).filter(Boolean)};
+const DECK=()=>[pSlide({layout:'title',title:'Нашата фирма',sub:'Мария Петрова, офис администратор'}),pSlide({layout:'content',title:'Нашите услуги',body:'<ul><li>Ксерокопиране и сканиране</li><li>Попълване на документи</li><li>Подаване на заявления онлайн</li></ul>'}),pSlide({layout:'content',title:'Контакти',body:'<ul><li>с. Чепинци, читалището</li><li>Телефон: 0888 123 456</li></ul>'})];
+
+addModule({id:'ppt',name:'PowerPoint',sub:'Презентации',letter:'P',color:'#c43e1c',
+ intro:'Слайдове, оформления, теми, картини и фигури, преходи, анимации и прожекция.',
+ lessons:[
+ {id:'ppt1',title:'Първи слайд – заглавие',plan:'Б2 2.12 – Работен прозорец, въвеждане на текст',
+  theory:`<ul><li>Презентацията се състои от <b>слайдове</b>. Вляво (на телефона – долу) са умалените им изгледи.</li><li>Първият слайд е <b>заглавен</b>: заглавие и подзаглавие (кой представя).</li><li>Щракнете в полето „Щракнете, за да добавите заглавие“ и пишете.</li><li>На един слайд – малко текст, едри букви. Слайдът помага на говорещия, не го замества.</li></ul>`,
+  goal:`<p>На първия слайд напишете заглавие <b>Нашата фирма</b>, а в подзаглавието – <b>вашето име</b>.</p>`,
+  phone:['Докоснете два пъти полето за заглавие и пишете.','Докоснете полето за подзаглавие и напишете името си.'],
+  pc:['Щракнете в полето „Щракнете, за да добавите заглавие“.','Напишете заглавието, после щракнете в подзаглавието.'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx'}),
+  check:s=>{const e=[];W(e,/нашата фирма/i.test(pTxt(s.slides[0].title)),'Заглавието на първия слайд трябва да е „Нашата фирма“.');W(e,pTxt(s.slides[0].sub).length>=3,'Напишете името си в подзаглавието.');return e}},
+ {id:'ppt2',title:'Нов слайд и оформление',plan:'Б2 2.12 – Вмъкване на слайд, схеми на слайд',
+  theory:`<ul><li><b>Начало → Нов слайд</b> добавя слайд след текущия.</li><li><b>Оформлението</b> определя полетата: <i>Заглавен</i>, <i>Заглавие и съдържание</i>, <i>Само заглавие</i>, <i>Празен</i>.</li><li>В полето за съдържание всеки ред става точка от списък (<kbd>Enter</kbd> – нов ред).</li><li>Правило: до 5–6 реда на слайд, кратки фрази.</li></ul>`,
+  goal:`<p>Добавете нов слайд с оформление <b>Заглавие и съдържание</b>. Заглавие: <b>Нашите услуги</b>. В съдържанието напишете поне <b>3 реда</b> (услуги).</p>`,
+  phone:['Докоснете иконата <b>+</b> (нов слайд) долу или лентата → <b>Начало</b> → <b>Нов слайд</b>.','Изберете <b>Заглавие и съдържание</b>.','Докоснете полетата и пишете. Нов ред – <b>Enter</b>.'],
+  pc:['<b>Начало</b> → стрелката под <b>Нов слайд</b> → <b>Заглавие и съдържание</b>.','Щракнете в полетата и пишете.'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx',slides:[DECK()[0]]}),
+  check:s=>{const sl=s.slides.find(x=>x.layout==='content'&&/услуги/i.test(pTxt(x.title)));if(!sl)return['Няма слайд с оформление „Заглавие и съдържание“ и заглавие „Нашите услуги“.'];return pLis(sl.body).length>=3?[]:['В съдържанието има по-малко от 3 реда.']}},
+ {id:'ppt3',title:'Бележки към слайда',plan:'Б2 2.12 – Бележки към слайд',
+  theory:`<ul><li><b>Бележките</b> са под слайда – там пишете какво ще кажете.</li><li>По време на прожекция публиката не ги вижда, а вие ги виждате в <b>Изглед на представящия</b>.</li><li>Така не се налага да четете от слайда.</li></ul>`,
+  goal:`<p>Към слайд <b>2</b> („Нашите услуги“) добавете бележка поне от няколко думи, напр. <i>„Да кажа, че услугите са безплатни за възрастни хора.“</i></p>`,
+  phone:['Отворете слайд 2.','Натиснете <b>Бележки</b> в долната лента и пишете.'],
+  pc:['Изберете слайд 2 вляво.','Щракнете в полето под слайда „Щракнете, за да добавите бележки“ (ако го няма – <b>Изглед</b> → <b>Бележки</b>).'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx',slides:DECK()}),
+  check:s=>s.slides[1].notes.trim().split(/\s+/).length>=3?[]:['Добавете бележка (поне 3 думи) към слайд 2.']},
+ {id:'ppt4',title:'Тема на дизайна, фон и форматиране на текст',plan:'Б2 2.13 · Б2 2.16 – Шаблони за дизайн, цветови схеми, фон',
+  theory:`<ul><li><b>Темата</b> (Дизайн → Теми) сменя наведнъж цветовете, шрифтовете и фона на всички слайдове.</li><li><b>Формат на фона</b> сменя само цвета на фона.</li><li>Текстът трябва да се чете: тъмен текст на светъл фон или обратно.</li><li>Текстът на слайда се форматира като в Word: маркирате → <b>B</b>, <i>I</i>, <u>U</u>.</li></ul>`,
+  goal:`<ul><li>Приложете темата <b>Йон</b>.</li><li>На първия слайд направете подзаглавието <b>курсив</b>.</li></ul>`,
+  phone:['Лентата → <b>Дизайн</b> → <b>Теми</b> → изберете темата.','Маркирайте подзаглавието → <b>Начало</b> → <b>I</b>.'],
+  pc:['<b>Дизайн</b> → щракнете темата.','Маркирайте подзаглавието → <kbd>Ctrl</kbd>+<kbd>I</kbd>.'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx',slides:DECK()}),
+  check:s=>{const e=[];W(e,s.theme==='ion','Темата не е „Йон“.');W(e,/<i>|<em>|italic/i.test(s.slides[0].sub),'Подзаглавието на слайд 1 не е в курсив.');return e}},
+ {id:'ppt5',title:'Графични обекти – фигури и картини',plan:'Б2 2.14 – Вмъкване и форматиране на графични обекти',
+  theory:`<ul><li><b>Вмъкване → Фигури</b>: правоъгълник, кръг, стрелка, звезда…</li><li><b>Вмъкване → Картини</b>: снимка или лого.</li><li>Обектът се мести с плъзгане. Избраният обект има рамка.</li><li><b>Запълване на фигура</b> сменя цвета ѝ.</li></ul>`,
+  goal:`<p>На слайд <b>3</b> („Контакти“):</p><ul><li>вмъкнете картината <b>Телефон</b>;</li><li>вмъкнете фигура <b>Стрелка</b> и я оцветете в <b>зелено</b>.</li></ul>`,
+  phone:['Отворете слайд 3. Лентата → <b>Вмъкване</b> → <b>Фигури</b> / <b>Картини</b>.','Изберете фигурата → <b>Фигура</b> → <b>Запълване</b> → цвят.'],
+  pc:['Изберете слайд 3. <b>Вмъкване</b> → <b>Картини</b> → <b>Това устройство</b>.','<b>Вмъкване</b> → <b>Фигури</b> → стрелка; начертайте я на слайда.','С избрана фигура: <b>Формат на фигура</b> → <b>Запълване на фигура</b> → зелено. (В симулатора: <b>Начало → Запълване</b>.)'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx',slides:DECK()}),
+  check:s=>{const e=[],sh=s.slides[2].shapes;W(e,sh.some(x=>x.type==='pic'&&x.pic==='Телефон'),'На слайд 3 няма картина „Телефон“.');const a=sh.find(x=>x.type==='arrow');W(e,!!a,'На слайд 3 няма стрелка.');if(a)W(e,a.fill==='#70ad47','Стрелката не е зелена.');return e}},
+ {id:'ppt6',title:'Преходи между слайдовете',plan:'Б2 2.15 – Преход на слайдовете',
+  theory:`<ul><li><b>Преходът</b> е ефектът, с който се сменя един слайд с друг.</li><li>Изберете слайд → <b>Преходи</b> → ефект. Звездичка до слайда показва, че има преход.</li><li><b>Приложи за всички</b> слага същия преход на всички слайдове.</li><li>Използвайте един и същ спокоен преход – твърде много ефекти разсейват.</li></ul>`,
+  goal:`<p>Сложете преход <b>Избледняване</b> на <b>всички</b> слайдове.</p>`,
+  phone:['Лентата → <b>Преходи</b> → <b>Ефект на прехода</b> → <b>Избледняване</b>.','<b>Приложи към всички</b>.'],
+  pc:['<b>Преходи</b> → <b>Избледняване</b>.','<b>Приложи за всички</b>.'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx',slides:DECK()}),
+  check:s=>s.slides.every(x=>x.trans==='fade')?[]:['Не всички слайдове са с преход „Избледняване“ (използвайте „Приложи за всички“).']},
+ {id:'ppt7',title:'Анимации на обекти',plan:'Б2 2.15 – Анимационни схеми, потребителска анимация',
+  theory:`<ul><li><b>Анимацията</b> е ефект за обект на слайда – заглавие, текст, картина.</li><li>Първо изберете обекта, после <b>Анимации</b> → ефект.</li><li>При прожекция анимираните обекти се появяват с щракване, един след друг.</li><li><b>Преход</b> = между слайдове; <b>анимация</b> = за обект в слайда.</li></ul>`,
+  goal:`<p>На слайд <b>2</b> сложете анимация <b>Влитане</b> на текста със списъка и анимация <b>Избледняване</b> на заглавието.</p>`,
+  phone:['Докоснете обекта на слайда.','Лентата → <b>Анимации</b> → <b>Ефекти при влизане</b> → ефект.'],
+  pc:['Щракнете рамката на текста.','<b>Анимации</b> → <b>Влитане</b>.','Щракнете заглавието → <b>Избледняване</b>.'],
+  sim:h=>pptSim(h,{fname:'Нашата фирма.pptx',slides:DECK()}),
+  check:s=>{const a=s.slides[1].anim,e=[];W(e,a.body==='fly','Текстът на слайд 2 няма анимация „Влитане“.');W(e,a.title==='fade','Заглавието на слайд 2 няма анимация „Избледняване“.');return e}},
+ {id:'ppt8',title:'Прожекция на презентацията',plan:'А3 1.3.7 – Създаване на презентации',
+  theory:`<ul><li><b>Прожекция → От началото</b> (<kbd>F5</kbd>) показва презентацията на цял екран.</li><li>Напред: щракване, <kbd>→</kbd> или интервал. Назад: <kbd>←</kbd>. Изход: <kbd>Esc</kbd>.</li><li>Преди представяне винаги пуснете прожекцията веднъж, за да проверите текста, преходите и анимациите.</li></ul>`,
+  goal:`<p>Пуснете прожекцията <b>от началото</b> и я изгледайте <b>до края</b> (до черния екран „Край на прожекцията“).</p>`,
+  phone:['Натиснете бутона ▶ горе (Прожекция).','Плъзгайте наляво за следващ слайд.'],
+  pc:['<b>Прожекция</b> → <b>От началото</b> или <kbd>F5</kbd>.','Щраквайте, докато стигнете края. <kbd>Esc</kbd> – изход.'],
+  sim:h=>{const d=DECK();d.forEach(s=>s.trans='fade');d[1].anim={title:'fade',body:'fly'};return pptSim(h,{fname:'Нашата фирма.pptx',slides:d,theme:'ion'})},
+  check:s=>s.showDone?[]:[s.showStarted?'Прожекцията не е изгледана до края (или не е пусната от началото).':'Прожекцията още не е пусната.']},
+ ]});
+
+route();
+if('serviceWorker' in navigator&&location.protocol==='https:'){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+</script>
+</body>
+</html>
